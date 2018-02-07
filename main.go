@@ -13,9 +13,6 @@ func YourHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("<html><body><h1>Golang test!\n</body></html>"))
 }
 
-import (
-        
-)
 
 type Person struct {
         Name string
