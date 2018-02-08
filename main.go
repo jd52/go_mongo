@@ -13,7 +13,7 @@ import (
 func YourHandler(w http.ResponseWriter, r *http.Request) {
 
 	name := mux.Vars(r)
-
+	fmt.Println(name)
 	session, err := mgo.Dial("10.132.0.5")
 	if err != nil {
 		panic(err)
