@@ -37,7 +37,7 @@ func YourHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	fmt.Println("Phone:", result.Phone)
-	w.Write([]byte("<html><body><h1>Golang test!\n result.Phone\n</body></html>"))
+	w.Write([]byte("<html><body><h1>Golang test!\n "result.Phone"\n</body></html>"))
 }
 
 type Person struct {
