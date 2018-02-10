@@ -37,7 +37,7 @@ func YourHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	fmt.Println("IP Address:", result.IPAdress)
-	webString := "<html><body><h1>Golang test!\n" + result.Hostname + " = " + result.IPAdress + " " + result.DeviceType + "\n</body></html>"
+	webString := "<html><body><h1>Golang test!\n" + result.IPAdress + " " + result.DeviceType + "\n</body></html>"
 	w.Write([]byte(webString))
 }
 
