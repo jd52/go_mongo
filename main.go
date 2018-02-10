@@ -37,7 +37,7 @@ func YourHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	fmt.Println("IP Address:", result.IPAdress)
-	webString := "<html><body><h1>Golang test!\n" + result.IPAdress + result.DeviceType + "\n</body></html>"
+	webString := "<html><body><h1>Golang test!\n" + result.IPAdress + " " + result.DeviceType + "\n</body></html>"
 	w.Write([]byte(webString))
 }
 
@@ -56,7 +56,7 @@ func main() {
 
 	r := mux.NewRouter()
 	// Routes consist of a path and a handler function.
-	r.HandleFunc("/{hostname}", YourHandler)
+	r.HandleFunc("/device/{hostname}", YourHandler)
 
 	// Bind to a port and pass our router in
 	log.Fatal(http.ListenAndServe(":80", r))
