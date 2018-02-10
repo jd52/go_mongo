@@ -56,7 +56,7 @@ func main() {
 
 	r := mux.NewRouter()
 	// Routes consist of a path and a handler function.
-	r.HandleFunc("/device/{hostname}", YourHandler)
+	r.HandleFunc("/{hostname}", YourHandler)
 
 	// Bind to a port and pass our router in
 	log.Fatal(http.ListenAndServe(":80", r))
