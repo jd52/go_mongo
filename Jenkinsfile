@@ -17,4 +17,8 @@ pipeline {
       }
     }
   }
+  environment {
+    GOPATH = '/home/goproject'
+    GOBIN = '/home/goproject/bin'
+  }
 }
