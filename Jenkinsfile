@@ -8,18 +8,12 @@ pipeline {
   stages {
     stage('git pull') {
       steps {
-        dir(path: '/home/goproject/src/go_mongo') {
-          sh 'git pull'
-        }
-        
+        sh 'cd /home/goproject/src/go_mongo && git pull'
       }
     }
     stage('go install') {
       steps {
-        dir(path: '/home/goproject/src/go_mongo') {
-          sh 'go install'
-        }
-        
+        sh 'cd /home/goproject/src/go_mongo && go install'
       }
     }
   }
