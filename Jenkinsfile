@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('Init') {
       steps {
-        tool 'go'
+        tool(name: 'go', type: 'go')
       }
     }
     stage('git pull') {
