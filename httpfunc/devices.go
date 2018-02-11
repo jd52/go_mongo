@@ -14,9 +14,9 @@ func DeviceHandler(res http.ResponseWriter, req *http.Request) {
 	rh := req.Method
 	if rh == "GET" {
 
-		deviceList := database.ListDevice(res, req)
+		//deviceList := database.ListDevice(res, req)
 
-		err := tpl.ExecuteTemplate(res, "device.gohtml", deviceList)
+		err := tpl.ExecuteTemplate(res, "device.gohtml", nil)
 		if err != nil {
 			log.Fatalln(err)
 		}
