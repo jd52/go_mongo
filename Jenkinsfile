@@ -1,20 +1,30 @@
 pipeline {
-  agent any
+  agent none
   stages {
     stage('Init') {
       steps {
-        echo 'Test message'
+        tool 'go'
       }
     }
     stage('git pull') {
       steps {
-        sh 'cd /home/goproject/src/go_mongo &&  git pull'
+        dir(path: '/home/goproject/src/go_mongo') {
+          sh 'git pull'
+        }
+        
       }
     }
     stage('go install') {
       steps {
-        sh 'cd /home/goproject/src/go_mongo && go install'
+        dir(path: '/home/goproject/src/go_mongo') {
+          sh 'go install'
+        }
+        
       }
     }
+  }
+  environment {
+    GOPATH = '/home/goproject'
+    GOBIN = '/home/goproject/bin'
   }
 }
