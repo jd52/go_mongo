@@ -13,10 +13,7 @@ pipeline {
     }
     stage('go install') {
       steps {
-        sh '''#!/bin/bash
-
-cd /home/goproject/src/go_mongo 
-sudo -t go install'''
+        sh 'cd /home/goproject/src/go_mongo && go install'
       }
     }
   }
