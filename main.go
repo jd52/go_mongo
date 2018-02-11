@@ -59,5 +59,5 @@ func main() {
 	r.HandleFunc("/device/{hostname}", YourHandler)
 
 	// Bind to a port and pass our router in
-	log.Fatal(http.ListenAndServe(":80", r))
+	log.Fatal(http.ListenAndServe(":8080", r))
 }
