@@ -6,14 +6,9 @@ pipeline {
         echo 'Test message'
       }
     }
-    stage('git pull') {
+    stage('run local script') {
       steps {
-        sh 'cd /home/goproject/src/go_mongo && git pull'
-      }
-    }
-    stage('go install') {
-      steps {
-        sh 'cd /home/goproject/src/go_mongo && go install'
+        sh 'cd /home/goproject && sudo ./jenkins_script.sh'
       }
     }
   }
