@@ -8,7 +8,7 @@ pipeline {
     }
     stage('run local script') {
       steps {
-        sh 'cd /home/goproject && sudo ./jenkins_script.sh'
+        sh 'cd /home/goproject &&  ./jenkins_script.sh'
       }
     }
   }
