@@ -18,6 +18,7 @@ func init() {
 func main() {
 
 	r := mux.NewRouter()
+	//r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir(dir))))
 	// Routes consist of a path and a handler function.
 	r.HandleFunc("/", httpfunc.IndexHandler)
 	r.HandleFunc("/index", httpfunc.IndexHandler)

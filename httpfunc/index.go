@@ -1,9 +1,16 @@
 package httpfunc
 
 import (
+	"html/template"
 	"log"
 	"net/http"
 )
+
+var tpl *template.Template
+
+func init() {
+	tpl = template.Must(template.ParseGlob("templates/*.gohtml"))
+}
 
 //IndexHandler calls the index.gohmtl. URL is localhost/index
 func IndexHandler(res http.ResponseWriter, req *http.Request) {
