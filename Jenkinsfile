@@ -8,8 +8,7 @@ pipeline {
   stages {
     stage('git pull') {
       steps {
-        sh '''cd /home/goproject/src/go_mongo 
-&& git pull'''
+        sh 'cd /home/goproject/src/go_mongo && git pull'
       }
     }
     stage('go install') {
