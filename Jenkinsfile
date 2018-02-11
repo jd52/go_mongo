@@ -29,7 +29,7 @@ pipeline {
     }
   }
   environment {
-    GOPATH = '/home/goproject'
-    GOBIN = '/home/goproject/bin'
+    GOPATH = '/var/jenkins_home/tools/org.jenkinsci.plugins.golang.GolangInstallation/go'
+    GOBIN = '/var/jenkins_home/tools/org.jenkinsci.plugins.golang.GolangInstallation/go/bin'
   }
 }
