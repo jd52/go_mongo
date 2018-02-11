@@ -1,13 +1,19 @@
 package main
 
 import (
+	"go_mongo/httpfunc"
+	"html/template"
 	"log"
 	"net/http"
 
-	"go_mongo/httpfunc"
-
 	"github.com/gorilla/mux"
 )
+
+var tpl *template.Template
+
+func init() {
+	tpl = template.Must(template.ParseGlob("templates/*.gohtml"))
+}
 
 func main() {
 
