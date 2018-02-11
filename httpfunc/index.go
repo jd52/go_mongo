@@ -1,7 +1,6 @@
 package httpfunc
 
 import (
-	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -15,7 +14,7 @@ func init() {
 
 //IndexHandler calls the index.gohmtl. URL is localhost/index
 func IndexHandler(res http.ResponseWriter, req *http.Request) {
-	fmt.Println("IndexHandler called")
+	//fmt.Println("IndexHandler called")
 	rh := req.Method
 	if rh == "GET" {
 

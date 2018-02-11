@@ -21,7 +21,7 @@ type Device struct {
 //AddDeviceHandler opens a session to the mongoDB database and adds a type
 //Device.
 func AddDeviceHandler(a Device, w http.ResponseWriter, r *http.Request) {
-	fmt.Println("AddDeviceHandler called")
+	//fmt.Println("AddDeviceHandler called")
 	vars := mux.Vars(r)
 	fmt.Println(vars["hostname"])
 	session, err := mgo.Dial("10.132.0.5")
@@ -44,7 +44,7 @@ func AddDeviceHandler(a Device, w http.ResponseWriter, r *http.Request) {
 //ListDevice returns all hostnames from the Device Collection
 func ListDevice(w http.ResponseWriter, r *http.Request) {
 
-	fmt.Println("ListDevice called")
+	//fmt.Println("ListDevice called")
 	session, err := mgo.Dial("10.132.0.5")
 	if err != nil {
 		panic(err)

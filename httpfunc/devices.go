@@ -1,7 +1,6 @@
 package httpfunc
 
 import (
-	"fmt"
 	"go_mongo/database"
 	"log"
 	"net/http"
@@ -10,7 +9,7 @@ import (
 //DeviceHandler calls the device.gohtml.  URL is localhost/device.
 //This page allows the creation of new items to the MongoDB "Device" Collection.
 func DeviceHandler(res http.ResponseWriter, req *http.Request) {
-	fmt.Println("DeviceHandler called")
+	//fmt.Println("DeviceHandler called")
 	rh := req.Method
 	if rh == "GET" {
 
