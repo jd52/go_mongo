@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/jd52/go_mongo/database"
+	"go_mongo/database"
 )
 
 //DeviceHandler calls the device.gohtml.  URL is localhost/device.

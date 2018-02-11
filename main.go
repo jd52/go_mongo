@@ -4,8 +4,9 @@ import (
 	"log"
 	"net/http"
 
+	"go_mongo/httpfunc"
+
 	"github.com/gorilla/mux"
-	"github.com/jd52/go_mongo/httpfunc"
 )
 
 func main() {
