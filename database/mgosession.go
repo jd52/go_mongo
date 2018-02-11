@@ -38,6 +38,7 @@ func AddDeviceHandler(a Device, w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
+	fmt.Println("Device added")
 }
 
 //ListDevice returns all hostnames from the Device Collection
