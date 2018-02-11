@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{{template "header"}}
+
+<body>
+
+<div id="atf">
+    <main>
+        <h1>Go MongoDB Homepage</h1>
+
+        <form method="POST" action="/device">
+            <div id="credentials">
+            <input type="text" id="un" name="username" placeholder="username">
+            <input type="password" id="pw" name="normalPw" placeholder="password">
+            </div>
+            <select name="grabConfigAnswer">
+                <option value="yes" id="grabconfyes" onclick="toggleVis()">yes</option>
+                <option value="no" id="grabconfno" onclick="toggleVis()">no</option>
+            </select>
+            <input type="submit" value="Submit">
+        </form>
+
+    </main>
+</div>
+
+<script>
+    // document.getElementById("grabconfno").addEventListener("click",function () { document.getElementById("credentials").="true" })
+    // document.getElementById("grabconfyes").addEventListener("click",function () { document.getElementById("credentials").hidden="false" })
+    function toggleVis() {
+        var x = document.getElementById("credentials");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+</script>
+
+</body>
+</html>

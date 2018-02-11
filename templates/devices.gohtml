@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{{template "header"}}
+
+<body>
+
+<div id="atf">
+    <main>
+        <h1>Devices</h1>
+        <h2>Add new device</h2>
+        <form method="POST" action="/device">
+            <div id="addDevice">
+            <input type="text" name="hostname" placeholder="Hostname">
+            <input type="text" name="ipAddress" placeholder="IP Address">
+            <input type="text" name="deviceType" placeholder="Device Type"><br>
+            </div>
+            <input type="submit" value="Submit">
+        </form>
+<h2>Devices</h2>
+{{range .}}
+<li>{{.}}</li>
+{{end}}
+    </main>
+</div>
+
+</body>
+</html>
