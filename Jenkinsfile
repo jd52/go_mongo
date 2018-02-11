@@ -11,7 +11,7 @@ pipeline {
         sh '''#!/bin/bash
 
 cd /home/goproject/src/go_mongo 
-sudo git pull'''
+sudo -t git pull'''
       }
     }
     stage('go install') {
@@ -19,7 +19,7 @@ sudo git pull'''
         sh '''#!/bin/bash
 
 cd /home/goproject/src/go_mongo 
-sudo go install'''
+sudo -t go install'''
       }
     }
   }
