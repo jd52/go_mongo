@@ -19,7 +19,7 @@
         </form>
 <h2>Routers </h2>
     {{range .}}
-     if {{.DeviceType}} == "router"
+     {{if .DeviceType == "router"}}
       <h2>{{.Hostname}}</h2>
     {{end}}
     </main>
