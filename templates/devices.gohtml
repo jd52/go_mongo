@@ -49,6 +49,22 @@ tr:nth-child(even) {
                 {{end}}
             {{end}}
         </table>
+        <table>
+        <tr>
+            <th>Hostname</th>
+            <th>IP Address</th>
+            <th>Device Type</th>
+        </tr>
+            {{range .}}
+                {{if (eq .DeviceType "switch")}}
+                    <tr>
+                    <td>{{.Hostname}}</td>
+                    <td>{{.IPAddress}}</td>
+                    <td>{{.DeviceType}}</td>
+                    </tr>
+                {{end}}
+            {{end}}
+        </table>
         <h2>Routers </h2>
             <ul>
             {{range .}}
