@@ -3,6 +3,7 @@ package database
 import (
 	"fmt"
 	"log"
+	"net"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -14,7 +15,7 @@ import (
 //to added new devices to the database
 type Device struct {
 	Hostname   string
-	IPAddress  string
+	IPAddress  net.IP
 	DeviceType string
 }
 
