@@ -3,7 +3,6 @@ package httpfunc
 import (
 	"go_mongo/database"
 	"log"
-	"net"
 	"net/http"
 )
 
@@ -30,7 +29,7 @@ func DeviceHandler(res http.ResponseWriter, req *http.Request) {
 
 		addD := database.Device{
 			Hostname:   req.FormValue("hostname"),
-			IPAddress:  req.FormValue(net.IP("ipAddress")),
+			IPAddress:  req.FormValue("ipAddress"),
 			DeviceType: req.FormValue("deviceType"),
 		}
 
