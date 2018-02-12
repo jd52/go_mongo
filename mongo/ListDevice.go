@@ -23,9 +23,11 @@ func ListDevice(qy string, w http.ResponseWriter, r *http.Request) []Device {
 	session.SetMode(mgo.Monotonic, true)
 
 	result := []Device{}
-
-	err = deviceCollect.Find(bson.M{"hostname": qy}).All(&result)
-
+	if qy != "" {
+		err = deviceCollect.Find(bson.M{"hostname": qy}).All(&result)
+	} else {
+		err = deviceCollect.Find(bson.M{}).All(&result)
+	}
 	if err != nil {
 		log.Fatal(err)
 	}
