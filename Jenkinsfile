@@ -20,7 +20,8 @@ pipeline {
       steps {
         sh '''cd /home/goproject/src/go_mongo
 sudo pkill -f go_mongo
-sudo -t nohup ./go_mongo &'''
+sudo
+nohup ./go_mongo &'''
       }
     }
   }
