@@ -23,6 +23,12 @@
       <h2>{{.Hostname}}</h2>
       {{end}}
     {{end}}
+    <h2>Switches </h2>
+        {{range .}}
+         {{if (eq .DeviceType "switch")}}
+          <h2>{{.Hostname}}</h2>
+          {{end}}
+        {{end}}
     </main>
 </div>
 
