@@ -42,7 +42,7 @@ func AddDeviceHandler(a Device, w http.ResponseWriter, r *http.Request) {
 }
 
 //ListDevice returns all hostnames from the Device Collection
-func ListDevice(w http.ResponseWriter, r *http.Request) {
+func ListDevice(w http.ResponseWriter, r *http.Request) []Device {
 
 	//fmt.Println("ListDevice called")
 	session, err := mgo.Dial("10.132.0.5")
@@ -60,5 +60,6 @@ func ListDevice(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
+	return result
 
 }

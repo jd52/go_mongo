@@ -13,10 +13,10 @@ func DeviceHandler(res http.ResponseWriter, req *http.Request) {
 	rh := req.Method
 	if rh == "GET" {
 
-		//deviceList := database.ListDevice(res, req)
+		deviceList := database.ListDevice(res, req)
 		//fmt.Println(deviceList)
 		//fmt.Printf("deviceList is of type %T\n", deviceList)
-		err := tpl.ExecuteTemplate(res, "devices.gohtml", nil)
+		err := tpl.ExecuteTemplate(res, "devices.gohtml", deviceList)
 		if err != nil {
 			log.Fatalln(err)
 		}
@@ -34,7 +34,8 @@ func DeviceHandler(res http.ResponseWriter, req *http.Request) {
 		}
 
 		database.AddDeviceHandler(addD, res, req)
-		err = tpl.ExecuteTemplate(res, "devices.gohtml", nil)
+		deviceList := database.ListDevice(res, req)
+		err = tpl.ExecuteTemplate(res, "devices.gohtml", deviceList)
 		if err != nil {
 			log.Fatalln(err)
 		}
