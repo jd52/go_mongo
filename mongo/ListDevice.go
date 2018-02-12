@@ -10,7 +10,7 @@ import (
 )
 
 //ListDevice returns all hostnames from the Device Collection
-func ListDevice(w http.ResponseWriter, r *http.Request) []Device {
+func ListDevice(qy string, w http.ResponseWriter, r *http.Request) []Device {
 
 	session, err := mgo.Dial("10.132.0.5")
 	if err != nil {
@@ -23,7 +23,9 @@ func ListDevice(w http.ResponseWriter, r *http.Request) []Device {
 	session.SetMode(mgo.Monotonic, true)
 
 	result := []Device{}
-	err = deviceCollect.Find(bson.M{}).All(&result)
+
+	err = deviceCollect.Find(bson.M{"hostname": qy}).All(&result)
+
 	if err != nil {
 		log.Fatal(err)
 	}

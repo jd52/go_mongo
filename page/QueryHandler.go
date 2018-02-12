@@ -13,7 +13,7 @@ func QueryHandler(res http.ResponseWriter, req *http.Request) {
 	rh := req.Method
 	if rh == "GET" {
 
-		deviceList := mongo.ListDevice(res, req)
+		deviceList := mongo.ListDevice("", res, req)
 		//fmt.Println(deviceList)
 		//fmt.Printf("deviceList is of type %T\n", deviceList)
 		err := tpl.ExecuteTemplate(res, "query.gohtml", deviceList)
@@ -26,7 +26,10 @@ func QueryHandler(res http.ResponseWriter, req *http.Request) {
 		if err != nil {
 			log.Fatalln(err)
 		}
-		deviceList := mongo.ListDevice(res, req)
+
+		queryString := req.FormValue("hostname")
+
+		deviceList := mongo.ListDevice(queryString, res, req)
 		err = tpl.ExecuteTemplate(res, "query.gohtml", deviceList)
 		if err != nil {
 			log.Fatalln(err)
