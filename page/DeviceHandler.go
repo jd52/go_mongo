@@ -18,7 +18,11 @@ func DeviceHandler(res http.ResponseWriter, req *http.Request) {
 			log.Fatalln(err)
 		}
 
-	} else if rh == "POST" {
+	} else {
+		err := req.ParseForm()
+		if err != nil {
+			log.Fatalln(err)
+		}
 
 		addD := mongo.Device{
 			Hostname:   req.FormValue("hostname"),
@@ -26,14 +30,9 @@ func DeviceHandler(res http.ResponseWriter, req *http.Request) {
 			DeviceType: req.FormValue("deviceType"),
 		}
 
-		mongo.AddDeviceHandler(addD, res, req)
-		err := tpl.ExecuteTemplate(res, "devices.gohtml", deviceList)
-		if err != nil {
-			log.Fatalln(err)
-
-		}
-	} else {
-		err := req.ParseForm()
+		mongo.AddDevice(addD, res, req)
+		deviceList := mongo.ListDevice(res, req)
+		err = tpl.ExecuteTemplate(res, "devices.gohtml", deviceList)
 		if err != nil {
 			log.Fatalln(err)
 		}
