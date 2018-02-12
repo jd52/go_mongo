@@ -2,7 +2,23 @@
 <html lang="en">
 
 {{template "header"}}
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
 
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
 <body>
 
 <div id="atf">
@@ -17,6 +33,21 @@
             </div>
             <input type="submit" value="Submit">
         </form>
+        <table>
+        <tr>
+            <th>Hostname</th>
+            <th>IP Address</th>
+            <th>Device Type</th>
+        </tr>
+        <tr>
+            {{range .}}
+            {{if (eq .DeviceType "router")}}
+                <td>{{.Hostname}}</td>
+                <td>{{.IPAddress}}</td>
+                <td>{{.DeviceType}}</td>
+            {{end}}
+        </tr>
+        </table>
         <h2>Routers </h2>
             <ul>
             {{range .}}
