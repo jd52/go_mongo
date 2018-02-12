@@ -40,7 +40,7 @@ func AddDeviceHandler(a Device, w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	r == "GET"
+	r = "GET"
 	fmt.Println("Device added")
 	httpfunc.DeviceHandler(w, r)
 }
