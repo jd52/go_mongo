@@ -1,7 +1,7 @@
-package httpfunc
+package page
 
 import (
-	"go_mongo/database"
+	"go_mongo/mongo"
 	"log"
 	"net/http"
 )
@@ -9,13 +9,10 @@ import (
 //DeviceHandler calls the device.gohtml.  URL is localhost/device.
 //This page allows the creation of new items to the MongoDB "Device" Collection.
 func DeviceHandler(res http.ResponseWriter, req *http.Request) {
-	//fmt.Println("DeviceHandler called")
 	rh := req.Method
 	if rh == "GET" {
 
-		deviceList := database.ListDevice(res, req)
-		//fmt.Println(deviceList)
-		//fmt.Printf("deviceList is of type %T\n", deviceList)
+		deviceList := mongo.ListDevice(res, req)
 		err := tpl.ExecuteTemplate(res, "devices.gohtml", deviceList)
 		if err != nil {
 			log.Fatalln(err)
@@ -27,14 +24,14 @@ func DeviceHandler(res http.ResponseWriter, req *http.Request) {
 			log.Fatalln(err)
 		}
 
-		addD := database.Device{
+		addD := mongo.Device{
 			Hostname:   req.FormValue("hostname"),
 			IPAddress:  req.FormValue("ipAddress"),
 			DeviceType: req.FormValue("deviceType"),
 		}
 
-		database.AddDeviceHandler(addD, res, req)
-		deviceList := database.ListDevice(res, req)
+		mongo.AddDeviceHandler(addD, res, req)
+		deviceList := mongo.ListDevice(res, req)
 		err = tpl.ExecuteTemplate(res, "devices.gohtml", deviceList)
 		if err != nil {
 			log.Fatalln(err)

@@ -1,4 +1,4 @@
-package httpfunc
+package page
 
 import (
 	"html/template"
