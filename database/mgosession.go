@@ -5,8 +5,6 @@ import (
 	"log"
 	"net/http"
 
-	"go_mongo/httpfunc"
-
 	"github.com/gorilla/mux"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
@@ -40,9 +38,7 @@ func AddDeviceHandler(a Device, w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	r = "GET"
 	fmt.Println("Device added")
-	httpfunc.DeviceHandler(w, r)
 }
 
 //ListDevice returns all hostnames from the Device Collection
