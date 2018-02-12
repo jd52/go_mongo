@@ -17,16 +17,16 @@
             </div>
             <input type="submit" value="Submit">
         </form>
-<h2>Routers </h2>
+<ul>Routers </ul>
     {{range .}}
      {{if (eq .DeviceType "router")}}
-      <h2>{{.Hostname}}</h2>
+      <li>{{.Hostname}}</li>
       {{end}}
     {{end}}
-    <h2>Switches </h2>
+    <ul>Switches </ul>
         {{range .}}
          {{if (eq .DeviceType "switch")}}
-          <h2>{{.Hostname}}</h2>
+          <li>{{.Hostname}}</li>
           {{end}}
         {{end}}
     </main>
