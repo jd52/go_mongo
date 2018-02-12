@@ -55,7 +55,7 @@ func ListDevice(w http.ResponseWriter, r *http.Request) {
 
 	session.SetMode(mgo.Monotonic, true)
 
-	result := Device{}
+	result := []Device{}
 	err = deviceCollect.Find(bson.M{}).All(&result)
 	if err != nil {
 		log.Fatal(err)
