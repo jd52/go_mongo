@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('run local jenkins script') {
       steps {
-        sh '/home/goproject/jenkins_script.sh'
+        sh 'sudo /home/goproject/jenkins_script.sh'
       }
     }
   }
