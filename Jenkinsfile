@@ -16,9 +16,14 @@ pipeline {
         sh 'cd /home/goproject/src/go_mongo && go build'
       }
     }
-    stage('stop start program') {
+    stage('stop program') {
       steps {
-        sh '''cd /home/goproject/src/go_mongo && sudo pkill -f go_mongo && sudo
+        sh 'cd /home/goproject/src/go_mongo && sudo pkill -f go_mongo'
+      }
+    }
+    stage('start program') {
+      steps {
+        sh '''sudo
 nohup ./go_mongo &'''
       }
     }
