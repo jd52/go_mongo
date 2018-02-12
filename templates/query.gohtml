@@ -6,7 +6,7 @@
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
-    width: 100%;
+    width: 75%;
 }
 
 td, th {
@@ -58,22 +58,6 @@ tr:nth-child(even) {
                 {{end}}
             {{end}}
         </table>
-        <h2>Routers </h2>
-            <ul>
-            {{range .}}
-                {{if (eq .DeviceType "router")}}
-                    <li>{{.Hostname}}</li>
-                {{end}}
-            {{end}}
-            </ul>
-        <h2>Switches </h2>
-             <ul>                         
-            {{range .}}
-                {{if (eq .DeviceType "switch")}}
-                    <li>{{.Hostname}}</li>
-                {{end}}
-            {{end}}
-             </ul>
     </main>
 </div>
 
