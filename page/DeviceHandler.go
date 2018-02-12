@@ -31,7 +31,7 @@ func DeviceHandler(res http.ResponseWriter, req *http.Request) {
 		}
 
 		mongo.AddDevice(addD, res, req)
-		deviceList := mongo.ListDevice("", res, req)
+		deviceList := mongo.ListDevice("*", res, req)
 		err = tpl.ExecuteTemplate(res, "devices.gohtml", deviceList)
 		if err != nil {
 			log.Fatalln(err)
