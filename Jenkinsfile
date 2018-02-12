@@ -6,17 +6,7 @@ pipeline {
     
   }
   stages {
-    stage('git pull') {
-      steps {
-        sh 'cd /home/goproject/src/go_mongo && git pull'
-      }
-    }
-    stage('go build') {
-      steps {
-        sh 'cd /home/goproject/src/go_mongo && go build'
-      }
-    }
-    stage('stop start program') {
+    stage('run local jenkins script') {
       steps {
         sh '/home/goproject/jenkins_script.sh'
       }
