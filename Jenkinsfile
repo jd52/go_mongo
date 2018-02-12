@@ -30,7 +30,7 @@ fi'''
     stage('start program') {
       steps {
         sh '''sudo
-nohup ./go_mongo &'''
+./go_mongo &'''
       }
     }
   }
