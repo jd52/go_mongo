@@ -29,7 +29,7 @@ fi'''
     }
     stage('start program') {
       steps {
-        sh '''sudo
+        sh '''cd /home/goproject/src/go_mongo && sudo
 ./go_mongo &'''
       }
     }
