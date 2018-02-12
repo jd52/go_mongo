@@ -21,6 +21,13 @@ func DeviceHandler(res http.ResponseWriter, req *http.Request) {
 			log.Fatalln(err)
 		}
 
+	} else if rh == "QUERY" {
+		deviceList := database.ListDevice(res, req)
+		err := tpl.ExecuteTemplate(res, "query.gohtml", deviceList)
+		if err != nil {
+			log.Fatalln(err)
+		}
+
 	} else {
 		err := req.ParseForm()
 		if err != nil {
