@@ -18,7 +18,13 @@ pipeline {
     }
     stage('stop program') {
       steps {
-        sh 'cd /home/goproject/src/go_mongo && sudo pkill -f go_mongo && echo success  '
+        sh '''cd /home/goproject/src/go_mongo
+go_mongo_pid = ps -aef | grep \'go_mongo\' | grep -v grep | awk \'{print $2}\'
+if ![ -z "$go_mongo_pid" ]; then
+	kill -9 $go_mongo_pid
+else
+	echo not running
+fi'''
       }
     }
     stage('start program') {
