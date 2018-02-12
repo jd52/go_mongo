@@ -16,7 +16,7 @@ func main() {
 	r.HandleFunc("/", httpfunc.IndexHandler)
 	r.HandleFunc("/index", httpfunc.IndexHandler)
 	r.HandleFunc("/devices", httpfunc.DeviceHandler)
-	r.HandleFunc("/query", httpfunc.DeviceHandler)
+	r.HandleFunc("/query", httpfunc.QueryHandler)
 
 	// Bind to a port and pass our router in
 	log.Fatal(http.ListenAndServe(":8080", r))
