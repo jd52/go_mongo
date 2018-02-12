@@ -18,9 +18,7 @@ pipeline {
     }
     stage('stop start program') {
       steps {
-        sh '''cd /home/goproject/src/go_mongo
-sudo pkill -f go_mongo
-sudo
+        sh '''cd /home/goproject/src/go_mongo && sudo pkill -f go_mongo && sudo
 nohup ./go_mongo &'''
       }
     }
