@@ -30,7 +30,7 @@ fi'''
     }
     stage('start program') {
       steps {
-        sh 'cd /home/goproject/src/go_mongo && ./go_mongo &'
+        sh 'cd /home/goproject/src/go_mongo && ./go_mongo disown &'
       }
     }
   }
