@@ -34,6 +34,10 @@ func DeviceHandler(res http.ResponseWriter, req *http.Request) {
 		}
 
 		database.AddDeviceHandler(addD, res, req)
+		err = tpl.ExecuteTemplate(res, "devices.gohtml", nil)
+		if err != nil {
+			log.Fatalln(err)
+		}
 	}
 
 }
