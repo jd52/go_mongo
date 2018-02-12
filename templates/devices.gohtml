@@ -39,15 +39,15 @@ tr:nth-child(even) {
             <th>IP Address</th>
             <th>Device Type</th>
         </tr>
-        <tr>
             {{range .}}
                 {{if (eq .DeviceType "router")}}
+                    <tr>
                     <td>{{.Hostname}}</td>
                     <td>{{.IPAddress}}</td>
                     <td>{{.DeviceType}}</td>
+                    </tr>
                 {{end}}
             {{end}}
-        </tr>
         </table>
         <h2>Routers </h2>
             <ul>
