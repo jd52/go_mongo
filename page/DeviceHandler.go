@@ -18,11 +18,24 @@ func DeviceHandler(res http.ResponseWriter, req *http.Request) {
 			log.Fatalln(err)
 		}
 
-	} else {
-		err := req.ParseForm()
-		if err != nil {
-			log.Fatalln(err)
+	} else if rh == "POST" {
+
+		addD := mongo.Device{
+			Hostname:   req.FormValue("hostname"),
+			IPAddress:  req.FormValue("ipAddress"),
+			DeviceType: req.FormValue("deviceType"),
 		}
+
+		mongo.AddDeviceHandler(addD, res, req)
+
+	}
+}
+
+/* else {
+			err := req.ParseForm()
+			if err != nil {
+				log.Fatalln(err)
+			}
 
 		addD := mongo.Device{
 			Hostname:   req.FormValue("hostname"),
@@ -38,4 +51,6 @@ func DeviceHandler(res http.ResponseWriter, req *http.Request) {
 		}
 	}
 
+
 }
+*/
