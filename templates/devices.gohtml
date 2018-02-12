@@ -41,10 +41,11 @@ tr:nth-child(even) {
         </tr>
         <tr>
             {{range .}}
-            {{if (eq .DeviceType "router")}}
-                <td>{{.Hostname}}</td>
-                <td>{{.IPAddress}}</td>
-                <td>{{.DeviceType}}</td>
+                {{if (eq .DeviceType "router")}}
+                    <td>{{.Hostname}}</td>
+                    <td>{{.IPAddress}}</td>
+                    <td>{{.DeviceType}}</td>
+                {{end}}
             {{end}}
         </tr>
         </table>
