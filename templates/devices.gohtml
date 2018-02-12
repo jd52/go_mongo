@@ -17,8 +17,11 @@
             </div>
             <input type="submit" value="Submit">
         </form>
-<h2>Devices</h2>
-    {{.}}
+<h2>Routers </h2>
+    {{range .}}
+     if .DeviceType == "router"
+      <h2>.Hostname</h2>
+    {{end}}
     </main>
 </div>
 
