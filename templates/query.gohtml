@@ -2,61 +2,10 @@
 <html lang="en">
 
 {{template "header"}}
-<style>
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 50%;
-}
 
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-}
-
-th {
-    font-size:120%;
-}
-
-tr:nth-child(even) {
-    background-color: #dddddd;
-}
-
-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-}
-
-nav li {
-    float: left;
-}
-
-nav li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-nav li a:hover:not(.queryActive) {
-    background-color: #111;
-}
-
-nav .queryActive {
-    background-color: #4CAF50;
-}
-div#atf {
-    margin-top: 50px;
-}
-</style>
 <body>
 
-<div id="atf">
+<div id="query">
     <main>
         <h2>Enter hostname to find.</h2>
          <form method="POST" action="/query">
