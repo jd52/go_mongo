@@ -17,6 +17,7 @@ func main() {
 	r.HandleFunc("/index", page.IndexHandler)
 	r.HandleFunc("/devices", page.DeviceHandler)
 	r.HandleFunc("/query", page.QueryHandler)
+	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("css"))))
 
 	// Bind to a port and pass our router in
 	log.Fatal(http.ListenAndServe(":8080", r))
