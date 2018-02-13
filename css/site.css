@@ -19,52 +19,31 @@ nav li a {
     text-decoration: none;
 }
 
-div#devices nav li a:hover:not(.devicesActive) {
+nav li a:hover:not(.devicesActive) {
     background-color: #111;
 }
 
-div#devices nav .devicesActive {
+nav .devicesActive {
     background-color: #4CAF50;
 }
 
-div#query nav li a:hover:not(.queryActive) {
+nav li a:hover:not(.queryActive) {
     background-color: #111;
 }
 
-div#query nav .queryActive {
+nav .queryActive {
     background-color: #4CAF50;
 }
-div#query {
-    margin-top: 50px;
-}
 
-div#index nav li a:hover:not(.indexActive) {
+
+nav li a:hover:not(.indexActive) {
     background-color: #111;
 }
 
-div#index nav .indexActive {
+nav .indexActive {
     background-color: #4CAF50;
 }
 
-div#index nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-}
-
-div#index nav li {
-    float: left;
-}
-
-div#index nav li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
 /* END For Header Navigation Menu */
 
 /* BEGIN For index.gohtml */
@@ -72,6 +51,11 @@ div#index nav li a {
 /* END For index.gohtml */
 
 /* BEGIN For query.gohtml */
+
+div#query {
+    margin-top: 50px;
+}
+
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
