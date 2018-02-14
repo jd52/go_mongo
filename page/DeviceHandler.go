@@ -34,7 +34,7 @@ func DeviceHandler(res http.ResponseWriter, req *http.Request) {
 		}
 		//Sends the received input and sends it to mongo.AddDevice to add a new
 		//entry into the mongoDB database.
-		mongo.AddDevice(addD, res, req)
+		mongo.AddDevice(&addD, res, req)
 		deviceList := mongo.ListDevice(&addD, res, req)
 		err = tpl.ExecuteTemplate(res, "devices.gohtml", deviceList)
 		if err != nil {

@@ -20,7 +20,7 @@ type Device struct {
 
 //AddDevice opens a session to the mongoDB database and adds a type
 //Device.
-func AddDevice(a Device, w http.ResponseWriter, r *http.Request) {
+func AddDevice(a *Device, w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	fmt.Println(vars["hostname"])
 	session, err := mgo.Dial("10.132.0.5")
