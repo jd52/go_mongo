@@ -19,30 +19,6 @@ nav li a {
     text-decoration: none;
 }
 
-nav li a:hover:not(.devicesActive) {
-    background-color: #111;
-}
-
-nav .devicesActive {
-    background-color: #4CAF50;
-}
-
-nav li a:hover:not(.queryActive) {
-    background-color: #111;
-}
-
-nav .queryActive {
-    background-color: #4CAF50;
-}
-
-
-nav li a:hover:not(.indexActive) {
-    background-color: #111;
-}
-
-nav .indexActive {
-    background-color: #4CAF50;
-}
 
 /* END For Header Navigation Menu */
 
