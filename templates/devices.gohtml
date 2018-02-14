@@ -24,7 +24,7 @@ nav .devicesActive {
             <input type="text" name="ipAddress" placeholder="IP Address">
             <input type="text" name="deviceType" placeholder="Device Type"><br>
             </div>
-            <input type="submit" value="Submit">
+            <input type="submit" value="Add">
         </form>
 
         <h2>Routers </h2>
@@ -36,7 +36,7 @@ nav .devicesActive {
             {{end}}
             </ul>
         <h2>Switches </h2>
-             <ul>                         
+             <ul>
             {{range .}}
                 {{if (eq .DeviceType "switch")}}
                     <li>{{.Hostname}}</li>
