@@ -31,13 +31,6 @@ div#query {
     margin-top: 50px;
 }
 
-/* END For query.gohtml */
-
-/* BEGIN For devices.gohtml */
-
-/* END For devices.gohtml */
-
-/* Begin table styling section */
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
@@ -57,4 +50,10 @@ th {
 tr:nth-child(even) {
     background-color: #dddddd;
 }
-/* End table styling section */
+
+/* END For query.gohtml */
+
+/* BEGIN For devices.gohtml */
+
+/* END For devices.gohtml */
+
