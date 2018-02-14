@@ -28,8 +28,6 @@ func QueryHandler(res http.ResponseWriter, req *http.Request) {
 			log.Fatalln(err)
 		}
 
-		queryString := req.FormValue("hostname")
-
 		queryDevice := mongo.Device{
 			Hostname:   req.FormValue("hostname"),
 			IPAddress:  req.FormValue("ipAddress"),
