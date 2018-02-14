@@ -1,6 +1,7 @@
 package page
 
 import (
+	"encoding/json"
 	"log"
 	"net/http"
 
@@ -29,7 +30,15 @@ func QueryHandler(res http.ResponseWriter, req *http.Request) {
 
 		queryString := req.FormValue("hostname")
 
-		deviceList := mongo.ListDevice(queryString, res, req)
+		queryDevice := mongo.Device{
+			Hostname:   req.FormValue("hostname"),
+			IPAddress:  req.FormValue("ipAddress"),
+			DeviceType: req.FormValue("deviceType"),
+		}
+
+		queryJson, _ := json.Marshal(&queryDevice)
+
+		deviceList := mongo.ListDevice(queryJson, res, req)
 		err = tpl.ExecuteTemplate(res, "query.gohtml", deviceList)
 		if err != nil {
 			log.Fatalln(err)
