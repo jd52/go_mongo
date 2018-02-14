@@ -24,7 +24,7 @@ func ListDevice(qy string, w http.ResponseWriter, r *http.Request) []Device {
 
 	result := []Device{}
 
-	if qy != "" {
+	if qy == "" {
 		err = deviceCollect.Find(bson.M{}).All(&result)
 	} else {
 		err = deviceCollect.Find(bson.M{"hostname": qy}).All(&result)
