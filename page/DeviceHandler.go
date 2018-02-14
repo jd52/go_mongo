@@ -11,10 +11,10 @@ import (
 func DeviceHandler(res http.ResponseWriter, req *http.Request) {
 	rh := req.Method
 
-	addD := mongo.Device{}
+	empty := mongo.Device{}
 
-	//Passing the empty addD struct into mongo.ListDevice returns the whole list.
-	deviceList := mongo.ListDevice(&addD, res, req)
+	//Passing the empty struct into mongo.ListDevice returns the whole list.
+	deviceList := mongo.ListDevice(&empty, res, req)
 	if rh == "GET" {
 		err := tpl.ExecuteTemplate(res, "devices.gohtml", deviceList)
 		if err != nil {
@@ -27,7 +27,7 @@ func DeviceHandler(res http.ResponseWriter, req *http.Request) {
 			log.Fatalln(err)
 		}
 		//Received input from the devices.gohtml template and updates addD.
-		addD = mongo.Device{
+		addD := mongo.Device{
 			Hostname:   req.FormValue("hostname"),
 			IPAddress:  req.FormValue("ipAddress"),
 			DeviceType: req.FormValue("deviceType"),
@@ -35,7 +35,7 @@ func DeviceHandler(res http.ResponseWriter, req *http.Request) {
 		//Sends the received input and sends it to mongo.AddDevice to add a new
 		//entry into the mongoDB database.
 		mongo.AddDevice(&addD, res, req)
-		deviceList := mongo.ListDevice(&addD, res, req)
+		deviceList := mongo.ListDevice(&empty, res, req)
 		err = tpl.ExecuteTemplate(res, "devices.gohtml", deviceList)
 		if err != nil {
 			log.Fatalln(err)
