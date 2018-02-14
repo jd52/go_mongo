@@ -1,9 +1,10 @@
 package page
 
 import (
-	"encoding/json"
 	"log"
 	"net/http"
+
+	"gopkg.in/mgo.v2/bson"
 
 	"go_mongo/mongo"
 )
@@ -34,9 +35,9 @@ func QueryHandler(res http.ResponseWriter, req *http.Request) {
 			DeviceType: req.FormValue("deviceType"),
 		}
 
-		queryJson, _ := json.Marshal(&queryDevice)
+		bQuery, err := bson.Marshal(queryDevice)
 
-		deviceList := mongo.ListDevice(queryJson, res, req)
+		deviceList := mongo.ListDevice(bQuery, res, req)
 		err = tpl.ExecuteTemplate(res, "query.gohtml", deviceList)
 		if err != nil {
 			log.Fatalln(err)
