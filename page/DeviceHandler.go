@@ -10,7 +10,7 @@ import (
 //This page allows the creation of new items to the MongoDB "Device" Collection.
 func DeviceHandler(res http.ResponseWriter, req *http.Request) {
 	rh := req.Method
-	deviceList := mongo.ListDevice(nil, res, req)
+	deviceList := mongo.ListDevice("", res, req)
 
 	if rh == "GET" {
 		err := tpl.ExecuteTemplate(res, "devices.gohtml", deviceList)
@@ -31,7 +31,7 @@ func DeviceHandler(res http.ResponseWriter, req *http.Request) {
 		}
 
 		mongo.AddDevice(addD, res, req)
-		deviceList := mongo.ListDevice(nil, res, req)
+		deviceList := mongo.ListDevice("", res, req)
 		err = tpl.ExecuteTemplate(res, "devices.gohtml", deviceList)
 		if err != nil {
 			log.Fatalln(err)

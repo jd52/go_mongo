@@ -33,7 +33,7 @@ func QueryHandler(res http.ResponseWriter, req *http.Request) {
 			DeviceType: req.FormValue("deviceType"),
 		}
 
-		deviceList := mongo.ListDevice(&queryDevice, res, req)
+		deviceList := mongo.ListDevice(queryDevice.Hostname, res, req)
 		err = tpl.ExecuteTemplate(res, "query.gohtml", deviceList)
 		if err != nil {
 			log.Fatalln(err)
