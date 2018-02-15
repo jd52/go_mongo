@@ -9,6 +9,10 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
+type dInt interface {
+	makeMap() map[string]string
+}
+
 //ListDevice returns all hostnames from the Device Collection
 func ListDevice(qy *Device, w http.ResponseWriter, r *http.Request) []Device {
 
@@ -27,11 +31,15 @@ func ListDevice(qy *Device, w http.ResponseWriter, r *http.Request) []Device {
 	if qy.Hostname == "" {
 		err = deviceCollect.Find(bson.M{}).All(&result)
 	} else {
-		err = deviceCollect.Find(bson.M{"hostname": qy.Hostname}).All(&result)
+		err = deviceCollect.Find(qy).All(&result)
 	}
 	if err != nil {
 		log.Fatal(err)
 	}
 	return result
+
+}
+
+func (d *Device) makeMap() {
 
 }
