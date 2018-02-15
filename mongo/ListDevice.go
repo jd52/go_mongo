@@ -1,6 +1,7 @@
 package mongo
 
 import (
+	"fmt"
 	"log"
 
 	"net/http"
@@ -32,6 +33,7 @@ func ListDevice(qy *Device, w http.ResponseWriter, r *http.Request) []Device {
 		err = deviceCollect.Find(bson.M{}).All(&result)
 	} else {
 		err = deviceCollect.Find(qy).All(&result)
+		fmt.Println(qy)
 	}
 	if err != nil {
 		log.Fatal(err)
