@@ -32,8 +32,8 @@ func ListDevice(qy *Device, w http.ResponseWriter, r *http.Request) []Device {
 	if qy.Hostname == "" {
 		err = deviceCollect.Find(bson.M{}).All(&result)
 	} else {
-		hostN, _, _ := qy.makeMongoString()
-		err = deviceCollect.Find(hostN).All(&result)
+		_, ipA, _ := qy.makeMongoString()
+		err = deviceCollect.Find(ipA).All(&result)
 		fmt.Println(qy)
 	}
 	if err != nil {
