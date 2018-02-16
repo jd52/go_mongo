@@ -11,7 +11,7 @@ import (
 func DeviceHandler(res http.ResponseWriter, req *http.Request) {
 	rh := req.Method
 
-	empty := mongo.Device{}
+	empty := mongo.MdbDevice{}
 
 	//Passing the empty struct into mongo.ListDevice returns the whole list.
 	deviceList := mongo.ListDevice(&empty, res, req)
@@ -27,7 +27,7 @@ func DeviceHandler(res http.ResponseWriter, req *http.Request) {
 			log.Fatalln(err)
 		}
 		//Received input from the devices.gohtml template and updates addD.
-		addD := mongo.Device{
+		addD := mongo.MdbDevice{
 			Hostname:   req.FormValue("hostname"),
 			IPAddress:  req.FormValue("ipAddress"),
 			DeviceType: req.FormValue("deviceType"),
