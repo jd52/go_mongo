@@ -33,14 +33,14 @@ func ListDevice(qy *MdbDevice, w http.ResponseWriter, r *http.Request) []Device 
 	deviceCollect := session.DB("test").C("device")
 
 	session.SetMode(mgo.Monotonic, true)
-
+	search, _ := bson.Marshal(qy)
 	result := []Device{}
 	//mongoMap := qy.makeMongoString()
 	if qy.Hostname+qy.DeviceType+qy.IPAddress == "" {
 		err = deviceCollect.Find(bson.M{}).All(&result)
 	} else {
 
-		err = deviceCollect.Find(bson.M{"hostname": qy.Hostname}).All(&result)
+		err = deviceCollect.Find(search).All(&result)
 		fmt.Println(qy)
 	}
 	if err != nil {
