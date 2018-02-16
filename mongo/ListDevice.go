@@ -14,15 +14,8 @@ type dInt interface {
 	makeMap() map[string]string
 }
 
-//MdbDevice struct
-type MdbDevice struct {
-	Hostname   string `bson:"hostname"`
-	IPAddress  string `bson:"ipaddress"`
-	DeviceType string `bson:"devicetype"`
-}
-
 //ListDevice returns all hostnames from the Device Collection
-func ListDevice(qy *MdbDevice, w http.ResponseWriter, r *http.Request) []Device {
+func ListDevice(qy *Device, w http.ResponseWriter, r *http.Request) []Device {
 
 	session, err := mgo.Dial("10.132.0.5")
 	if err != nil {
@@ -40,11 +33,7 @@ func ListDevice(qy *MdbDevice, w http.ResponseWriter, r *http.Request) []Device 
 		err = deviceCollect.Find(bson.M{}).All(&result)
 	} else {
 
-<<<<<<< HEAD
 		err = deviceCollect.Find(qy.Hostname).All(&result)
-=======
-		err = deviceCollect.Find(mongoMap).All(&result)
->>>>>>> parent of 6524eb8... same
 		fmt.Println(qy)
 	}
 	if err != nil {

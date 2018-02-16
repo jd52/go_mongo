@@ -27,7 +27,7 @@ func QueryHandler(res http.ResponseWriter, req *http.Request) {
 			log.Fatalln(err)
 		}
 
-		queryDevice := mongo.MdbDevice{
+		queryDevice := mongo.Device{
 			Hostname:   req.FormValue("hostname"),
 			IPAddress:  req.FormValue("ipAddress"),
 			DeviceType: req.FormValue("deviceType"),
