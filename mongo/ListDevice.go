@@ -14,8 +14,15 @@ type dInt interface {
 	makeMap() map[string]string
 }
 
+//MongoDevice struct
+type MdbDevice struct {
+	Hostname   string `json:"hostname"`
+	IPAddress  string `json:"ipaddress"`
+	DeviceType string `json:"devicetype"`
+}
+
 //ListDevice returns all hostnames from the Device Collection
-func ListDevice(qy *Device, w http.ResponseWriter, r *http.Request) []Device {
+func ListDevice(qy *MdbDevice, w http.ResponseWriter, r *http.Request) []Device {
 
 	session, err := mgo.Dial("10.132.0.5")
 	if err != nil {
@@ -28,12 +35,12 @@ func ListDevice(qy *Device, w http.ResponseWriter, r *http.Request) []Device {
 	session.SetMode(mgo.Monotonic, true)
 
 	result := []Device{}
-	mongoMap := qy.makeMongoString()
+	//mongoMap := qy.makeMongoString()
 	if qy.Hostname+qy.DeviceType+qy.IPAddress == "" {
 		err = deviceCollect.Find(bson.M{}).All(&result)
 	} else {
 
-		err = deviceCollect.Find(mongoMap.Hostname).All(&result)
+		err = deviceCollect.Find(string(qy.Hostname)).All(&result)
 		fmt.Println(qy)
 	}
 	if err != nil {
@@ -43,7 +50,7 @@ func ListDevice(qy *Device, w http.ResponseWriter, r *http.Request) []Device {
 
 }
 
-func (d *Device) makeMongoString() mongoDevice {
+/*func (d *Device) makeMongoString() mongoDevice {
 	newDev := mongoDevice{
 		Hostname:   map[string]string{"hostname": d.Hostname},
 		IPAddress:  map[string]string{"ipaddress": d.IPAddress},
@@ -57,4 +64,4 @@ type mongoDevice struct {
 	Hostname   map[string]string `bson:"hostname"`
 	IPAddress  map[string]string `bson:"ipaddress"`
 	DeviceType map[string]string `bson:"devicetype"`
-}
+}*/
