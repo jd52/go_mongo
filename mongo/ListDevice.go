@@ -33,16 +33,15 @@ func ListDevice(qy *MdbDevice, w http.ResponseWriter, r *http.Request) []Device 
 	deviceCollect := session.DB("test").C("device")
 
 	session.SetMode(mgo.Monotonic, true)
-	search, _ := bson.Marshal(*qy)
+
 	result := []Device{}
 	//mongoMap := qy.makeMongoString()
 	if qy.Hostname+qy.DeviceType+qy.IPAddress == "" {
 		err = deviceCollect.Find(bson.M{}).All(&result)
 	} else {
-		fmt.Println("This is with the string convert", string(search))
-		fmt.Println("This is without the convert", search)
-		err = deviceCollect.Find(string(search)).All(&result)
-		//fmt.Println(qy)
+
+		err = deviceCollect.Find(qy.Hostname).All(&result)
+		fmt.Println(qy)
 	}
 	if err != nil {
 		log.Fatal(err)
@@ -51,7 +50,7 @@ func ListDevice(qy *MdbDevice, w http.ResponseWriter, r *http.Request) []Device 
 
 }
 
-/*func (d *Device) makeMongoString() mongoDevice {
+func (d *Device) makeMongoString() mongoDevice {
 	newDev := mongoDevice{
 		Hostname:   map[string]string{"hostname": d.Hostname},
 		IPAddress:  map[string]string{"ipaddress": d.IPAddress},
@@ -65,4 +64,4 @@ type mongoDevice struct {
 	Hostname   map[string]string `bson:"hostname"`
 	IPAddress  map[string]string `bson:"ipaddress"`
 	DeviceType map[string]string `bson:"devicetype"`
-}*/
+}
