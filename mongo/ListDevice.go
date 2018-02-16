@@ -16,9 +16,9 @@ type dInt interface {
 
 //MdbDevice struct
 type MdbDevice struct {
-	Hostname   string `json:"hostname"`
-	IPAddress  string `json:"ipaddress"`
-	DeviceType string `json:"devicetype"`
+	Hostname   string `bson:"hostname"`
+	IPAddress  string `bson:"ipaddress"`
+	DeviceType string `bson:"devicetype"`
 }
 
 //ListDevice returns all hostnames from the Device Collection
@@ -40,7 +40,7 @@ func ListDevice(qy *MdbDevice, w http.ResponseWriter, r *http.Request) []Device 
 		err = deviceCollect.Find(bson.M{}).All(&result)
 	} else {
 
-		err = deviceCollect.Find(qy.Hostname).All(&result)
+		err = deviceCollect.Find(bson.M{"hostname": qy.Hostname}).All(&result)
 		fmt.Println(qy)
 	}
 	if err != nil {
