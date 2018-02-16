@@ -40,7 +40,7 @@ func ListDevice(qy *MdbDevice, w http.ResponseWriter, r *http.Request) []Device 
 		err = deviceCollect.Find(bson.M{}).All(&result)
 	} else {
 
-		err = deviceCollect.Find(string(qy.Hostname)).All(&result)
+		err = deviceCollect.Find(qy.Hostname).All(&result)
 		fmt.Println(qy)
 	}
 	if err != nil {
