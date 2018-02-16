@@ -14,7 +14,7 @@ type dInt interface {
 	makeMap() map[string]string
 }
 
-//MongoDevice struct
+//MdbDevice struct
 type MdbDevice struct {
 	Hostname   string `json:"hostname"`
 	IPAddress  string `json:"ipaddress"`
