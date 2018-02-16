@@ -39,9 +39,10 @@ func ListDevice(qy *MdbDevice, w http.ResponseWriter, r *http.Request) []Device 
 	if qy.Hostname+qy.DeviceType+qy.IPAddress == "" {
 		err = deviceCollect.Find(bson.M{}).All(&result)
 	} else {
-
+		fmt.Println("This is with the string convert", string(search))
+		fmt.Println("This is without the convert", search)
 		err = deviceCollect.Find(string(search)).All(&result)
-		fmt.Println(qy)
+		//fmt.Println(qy)
 	}
 	if err != nil {
 		log.Fatal(err)
