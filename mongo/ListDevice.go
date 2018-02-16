@@ -28,12 +28,12 @@ func ListDevice(qy *Device, w http.ResponseWriter, r *http.Request) []Device {
 	session.SetMode(mgo.Monotonic, true)
 
 	result := []Device{}
-	_, _, devT := qy.makeMongoString()
+	_, ipA, _ := qy.makeMongoString()
 	if qy.Hostname+qy.DeviceType+qy.IPAddress == "" {
 		err = deviceCollect.Find(bson.M{}).All(&result)
 	} else {
 
-		err = deviceCollect.Find(devT).All(&result)
+		err = deviceCollect.Find(ipA).All(&result)
 		fmt.Println(qy)
 	}
 	if err != nil {
