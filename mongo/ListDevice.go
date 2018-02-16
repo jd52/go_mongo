@@ -40,7 +40,11 @@ func ListDevice(qy *MdbDevice, w http.ResponseWriter, r *http.Request) []Device 
 		err = deviceCollect.Find(bson.M{}).All(&result)
 	} else {
 
+<<<<<<< HEAD
 		err = deviceCollect.Find(qy.Hostname).All(&result)
+=======
+		err = deviceCollect.Find(mongoMap).All(&result)
+>>>>>>> parent of 6524eb8... same
 		fmt.Println(qy)
 	}
 	if err != nil {
