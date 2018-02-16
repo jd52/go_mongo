@@ -28,12 +28,12 @@ func ListDevice(qy *Device, w http.ResponseWriter, r *http.Request) []Device {
 	session.SetMode(mgo.Monotonic, true)
 
 	result := []Device{}
-	_, ipA, _ := qy.makeMongoString()
+	mongoMap := qy.makeMongoString()
 	if qy.Hostname+qy.DeviceType+qy.IPAddress == "" {
 		err = deviceCollect.Find(bson.M{}).All(&result)
 	} else {
 
-		err = deviceCollect.Find(ipA).All(&result)
+		err = deviceCollect.Find(mongoMap).All(&result)
 		fmt.Println(qy)
 	}
 	if err != nil {
@@ -43,10 +43,10 @@ func ListDevice(qy *Device, w http.ResponseWriter, r *http.Request) []Device {
 
 }
 
-func (d *Device) makeMongoString() (map[string]string, map[string]string, map[string]string) {
-	hostN := map[string]string{"hostname": d.Hostname}
-	ipA := map[string]string{"ipaddress": d.IPAddress}
-	devT := map[string]string{"devicetype": d.DeviceType}
+func (d *Device) makeMongoString() map[string]string {
+	newMap := map[string]string{"hostname": d.Hostname}
+	newMap["ipaddress"] = d.IPAddress
+	newMap["devicetype"] = d.DeviceType
 
-	return hostN, ipA, devT
+	return newMap
 }
