@@ -1,6 +1,7 @@
 package mongo
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 
@@ -28,7 +29,7 @@ func ListDevice(qy *Device, w http.ResponseWriter, r *http.Request) []Device {
 	if qy.Hostname+qy.DeviceType+qy.IPAddress == "" {
 		err = deviceCollect.Find(bson.M{}).All(&result)
 	} else {
-		bsO, _ := bson.Marshal(&qy)
+		bsO, _ := json.Marshal(&qy)
 		fmt.Println(bsO)
 		err = deviceCollect.Find(bsO).All(&result)
 		fmt.Println(qy)
