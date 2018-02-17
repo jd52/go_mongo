@@ -11,7 +11,7 @@ import (
 )
 
 //ListDevice returns all hostnames from the Device Collection
-func ListDevice(qy *Device, w http.ResponseWriter, r *http.Request) []Device {
+func ListDevice(qy *Device, andOr *string, w http.ResponseWriter, r *http.Request) []Device {
 
 	session, err := mgo.Dial("10.132.0.5")
 	if err != nil {

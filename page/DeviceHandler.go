@@ -12,9 +12,9 @@ func DeviceHandler(res http.ResponseWriter, req *http.Request) {
 	rh := req.Method
 
 	empty := mongo.Device{}
-
+	andOr := "or"
 	//Passing the empty struct into mongo.ListDevice returns the whole list.
-	deviceList := mongo.ListDevice(&empty, res, req)
+	deviceList := mongo.ListDevice(&empty, &andOr, res, req)
 	if rh == "GET" {
 		err := tpl.ExecuteTemplate(res, "devices.gohtml", deviceList)
 		if err != nil {
@@ -35,7 +35,7 @@ func DeviceHandler(res http.ResponseWriter, req *http.Request) {
 		//Sends the received input and sends it to mongo.AddDevice to add a new
 		//entry into the mongoDB database.
 		mongo.AddDevice(&addD, res, req)
-		deviceList := mongo.ListDevice(&empty, res, req)
+		deviceList := mongo.ListDevice(&empty, &andOr, res, req)
 		err = tpl.ExecuteTemplate(res, "devices.gohtml", deviceList)
 		if err != nil {
 			log.Fatalln(err)

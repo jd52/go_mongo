@@ -26,14 +26,14 @@ func QueryHandler(res http.ResponseWriter, req *http.Request) {
 		if err != nil {
 			log.Fatalln(err)
 		}
-
+		andOr := req.FormValue("anyOr")
 		queryDevice := mongo.Device{
 			Hostname:   req.FormValue("hostname"),
 			IPAddress:  req.FormValue("ipAddress"),
 			DeviceType: req.FormValue("deviceType"),
 		}
 		//
-		deviceList := mongo.ListDevice(&queryDevice, res, req)
+		deviceList := mongo.ListDevice(&queryDevice, &andOr, res, req)
 		err = tpl.ExecuteTemplate(res, "query.gohtml", deviceList)
 		if err != nil {
 			log.Fatalln(err)
