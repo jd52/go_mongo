@@ -8,6 +8,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"gopkg.in/mgo.v2"
+	"gopkg.in/mgo.v2/bson"
 )
 
 //Device takes three strings, "Hostname", "IPAddress", and "Device".  Used
@@ -37,4 +38,32 @@ func AddDevice(a *Device, w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
+}
+
+//ValidateAdd is used to determind if an entry already exist in the database.
+func ValidateAdd(a *Device, w http.ResponseWriter, r *http.Request) bool {
+
+	session, err := mgo.Dial("10.132.0.5")
+	if err != nil {
+		panic(err)
+	}
+	defer session.Close()
+
+	deviceCollect := session.DB("test").C("device")
+
+	session.SetMode(mgo.Monotonic, true)
+
+	result := []Device{}
+
+	err = deviceCollect.Find(bson.M{"hostname": a.Hostname, "ipaddress": a.IPAddress, "devicetype": a.DeviceType}).All(&result)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+	if len(result) > 0 {
+		return false
+	}
+
+	return true
+
 }
