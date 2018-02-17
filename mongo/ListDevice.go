@@ -28,9 +28,8 @@ func ListDevice(qy *Device, w http.ResponseWriter, r *http.Request) []Device {
 	if qy.Hostname+qy.DeviceType+qy.IPAddress == "" {
 		err = deviceCollect.Find(bson.M{}).All(&result)
 	} else {
-		bsO, _ := bson.Marshal(&qy)
-		fmt.Println(string(bsO))
-		err = deviceCollect.Find(bsO).All(&result)
+
+		err = deviceCollect.Find(bson.M{"hostname": qy.Hostname}).All(&result)
 		fmt.Println(qy)
 	}
 	if err != nil {
