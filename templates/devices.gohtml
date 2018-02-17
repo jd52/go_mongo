@@ -26,8 +26,10 @@ nav .devicesActive {
             </div>
             <input type="submit" value="Add">
         </form>
-        {{if (eq .)}}
-            <h3>Your device has been added</h3>
+        {{if .}}
+            <h3>Your device has been added.</h3>
+            {{else}}
+            <h3>The 'hostname' or 'IP Address' you entered already exist in the Database!</h3>
         {{end}}
         <h2>Routers </h2>
             <ul>
