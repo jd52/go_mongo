@@ -52,13 +52,7 @@ tr:nth-child(even) {
     background-color: #dddddd;
 }
 
-#failed {
-    color: red
-}
 
-#added {
-    color: green
-}
 
 /* END For query.gohtml */
 
