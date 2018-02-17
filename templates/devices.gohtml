@@ -26,9 +26,9 @@ nav .devicesActive {
             </div>
             <input type="submit" value="Add">
         </form>
-        {{if . }}
+        {{if (eq . 1 }}
             <h3 style="color:green;">Your device has been added.</h3>
-            {{else}}
+            {{else if (eq . 2)}}
             <h3 style="color:red;">The 'hostname' or 'IP Address' you entered already exist in the Database!</h3>
         {{end}}
 
