@@ -29,6 +29,7 @@ func ListDevice(qy *Device, w http.ResponseWriter, r *http.Request) []Device {
 		err = deviceCollect.Find(bson.M{}).All(&result)
 	} else {
 		bsO, _ := bson.Marshal(&mongoMap)
+		fmt.Println(bsO)
 		err = deviceCollect.Find(bsO).All(&result)
 		fmt.Println(qy)
 	}
