@@ -11,12 +11,12 @@ import (
 func DeviceHandler(res http.ResponseWriter, req *http.Request) {
 	rh := req.Method
 
-	empty := mongo.Device{}
-	andOr := "or"
+	//empty := mongo.Device{}
+	//andOr := "or"
 	//Passing the empty struct into mongo.ListDevice returns the whole list.
-	deviceList := mongo.ListDevice(&empty, &andOr, res, req)
+	//deviceList := mongo.ListDevice(&empty, &andOr, res, req)
 	if rh == "GET" {
-		err := tpl.ExecuteTemplate(res, "devices.gohtml", deviceList)
+		err := tpl.ExecuteTemplate(res, "devices.gohtml", nil)
 		if err != nil {
 			log.Fatalln(err)
 		}

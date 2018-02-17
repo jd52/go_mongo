@@ -52,6 +52,10 @@ tr:nth-child(even) {
     background-color: #dddddd;
 }
 
+#failed {
+    color: "red"
+}
+
 /* END For query.gohtml */
 
 /* BEGIN For devices.gohtml */
