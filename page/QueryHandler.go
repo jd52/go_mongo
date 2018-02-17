@@ -32,7 +32,7 @@ func QueryHandler(res http.ResponseWriter, req *http.Request) {
 			IPAddress:  req.FormValue("ipAddress"),
 			DeviceType: req.FormValue("deviceType"),
 		}
-
+		//
 		deviceList := mongo.ListDevice(&queryDevice, res, req)
 		err = tpl.ExecuteTemplate(res, "query.gohtml", deviceList)
 		if err != nil {
