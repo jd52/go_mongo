@@ -31,7 +31,7 @@ nav .devicesActive {
             <ul>
             {{range .}}
                 {{if (eq .DeviceType "router")}}
-                    <li>{{.Hostname}}</li>
+                    <li>{{.Hostname}}  {{.IPAddress}}</li>
                 {{end}}
             {{end}}
             </ul>
@@ -39,7 +39,7 @@ nav .devicesActive {
              <ul>
             {{range .}}
                 {{if (eq .DeviceType "switch")}}
-                    <li>{{.Hostname}}</li>
+                    <li>{{.Hostname}}  {{.IPAddress}}</li>
                 {{end}}
             {{end}}
              </ul>
