@@ -53,14 +53,21 @@ func ValidateAdd(qy *Device, w http.ResponseWriter, r *http.Request) bool {
 
 	session.SetMode(mgo.Monotonic, true)
 
-	result := []Device{}
+	resultH := []Device{}
+	resultIP := []Device{}
 
-	err = deviceCollect.Find(bson.M{"hostname": qy.Hostname, "ipaddress": qy.IPAddress, "devicetype": qy.DeviceType}).All(&result)
+	err = deviceCollect.Find(bson.M{"hostname": qy.Hostname}).All(&resultH)
 
 	if err != nil {
 		log.Fatal(err)
 	}
-	if len(result) > 0 {
+
+	err = deviceCollect.Find(bson.M{"ipaddress": qy.IPAddress}).All(&resultIP)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+	if len(resultH) > 0 || len(resultIP) > 0 {
 		return false
 	}
 
