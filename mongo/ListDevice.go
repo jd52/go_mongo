@@ -10,10 +10,6 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
-type dInt interface {
-	makeMap() map[string]string
-}
-
 //ListDevice returns all hostnames from the Device Collection
 func ListDevice(qy *Device, w http.ResponseWriter, r *http.Request) []Device {
 
@@ -33,7 +29,7 @@ func ListDevice(qy *Device, w http.ResponseWriter, r *http.Request) []Device {
 		err = deviceCollect.Find(bson.M{}).All(&result)
 	} else {
 
-		err = deviceCollect.Find(mongoMap.Hostname).All(&result)
+		err = deviceCollect.Find(mongoMap).All(&result)
 		fmt.Println(qy)
 	}
 	if err != nil {
@@ -57,4 +53,8 @@ type mongoDevice struct {
 	Hostname   map[string]string `bson:"hostname"`
 	IPAddress  map[string]string `bson:"ipaddress"`
 	DeviceType map[string]string `bson:"devicetype"`
+}
+
+type mdInt interface {
+	makeMongoString() mongoDevice
 }
