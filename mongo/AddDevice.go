@@ -13,9 +13,9 @@ import (
 //Device takes three strings, "Hostname", "IPAddress", and "Device".  Used
 //to added new devices to the database
 type Device struct {
-	Hostname   string `bson:"hostname"`
-	IPAddress  string `bson:"ipaddress"`
-	DeviceType string `bson:"devicetype"`
+	Hostname   string `bson:"hostname,omitempty"`
+	IPAddress  string `bson:"ipaddress,omitempty"`
+	DeviceType string `bson:"devicetype,omitempty"`
 }
 
 //AddDevice opens a session to the mongoDB database and adds a type
