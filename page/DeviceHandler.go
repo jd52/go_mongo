@@ -39,8 +39,8 @@ func DeviceHandler(res http.ResponseWriter, req *http.Request) {
 		if validate {
 			mongo.AddDevice(&addD, res, req)
 		}
-		deviceList := mongo.ListDevice(&empty, &andOr, res, req)
-		err = tpl.ExecuteTemplate(res, "devices.gohtml", deviceList)
+		//deviceList := mongo.ListDevice(&empty, &andOr, res, req)
+		err = tpl.ExecuteTemplate(res, "devices.gohtml", validate)
 		if err != nil {
 			log.Fatalln(err)
 		}

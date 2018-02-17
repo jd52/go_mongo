@@ -26,7 +26,9 @@ nav .devicesActive {
             </div>
             <input type="submit" value="Add">
         </form>
-
+        {{if (eq .)}}
+            <h3>Your device has been added</h3>
+        {{end}}
         <h2>Routers </h2>
             <ul>
             {{range .}}
