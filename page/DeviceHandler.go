@@ -36,7 +36,7 @@ func DeviceHandler(res http.ResponseWriter, req *http.Request) {
 		//entry into the mongoDB database.
 		validate := mongo.ValidateAdd(&addD, res, req)
 
-		if validate == 1 {
+		if validate == false {
 			mongo.AddDevice(&addD, res, req)
 		}
 		//deviceList := mongo.ListDevice(&empty, &andOr, res, req)

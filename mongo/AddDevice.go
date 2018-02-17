@@ -41,7 +41,7 @@ func AddDevice(a *Device, w http.ResponseWriter, r *http.Request) {
 }
 
 //ValidateAdd is used to determind if an entry already exist in the database.
-func ValidateAdd(qy *Device, w http.ResponseWriter, r *http.Request) int {
+func ValidateAdd(qy *Device, w http.ResponseWriter, r *http.Request) bool {
 
 	session, err := mgo.Dial("10.132.0.5")
 	if err != nil {
@@ -68,9 +68,9 @@ func ValidateAdd(qy *Device, w http.ResponseWriter, r *http.Request) int {
 		log.Fatal(err)
 	}
 	if len(resultH) > 0 || len(resultIP) > 0 {
-		return 2
+		return true
 	}
 
-	return 1
+	return false
 
 }
