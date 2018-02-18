@@ -35,7 +35,7 @@ func DeviceHandler(res http.ResponseWriter, req *http.Request) {
 		}
 		f, _, fileErr := req.FormFile("bulkfile")
 		if fileErr == nil {
-			fmt.Println("in devicehandler else")
+			fmt.Println("in devicehandler if")
 			mongo.ParseCSV(f)
 		} else {
 
