@@ -72,7 +72,10 @@ nav .queryActive {
         function instantDTQuery(n) {
 
         var xhttp;
-      
+        if (str.length == 0) { 
+        document.getElementById("txtHint").innerHTML = "";
+        return;
+        }
         xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
@@ -87,7 +90,10 @@ nav .queryActive {
         function instantIPAQuery(n) {
 
         var xhttp;
-      
+        if (str.length == 0) { 
+        document.getElementById("txtHint").innerHTML = "";
+        return;
+        }
         xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
@@ -102,7 +108,10 @@ nav .queryActive {
         function instantHNQuery(n) {
 
         var xhttp;
-      
+        if (str.length == 0) { 
+        document.getElementById("txtHint").innerHTML = "";
+        return;
+        }
         xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
