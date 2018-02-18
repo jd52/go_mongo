@@ -34,11 +34,11 @@ func DeviceHandler(res http.ResponseWriter, req *http.Request) {
 			DeviceType: req.FormValue("deviceType"),
 		}
 		f, _, fileErr := req.FormFile("bulkfile")
-		if fileErr == nil {
+		if fileErr != nil {
 			fmt.Println("in devicehandler if")
-			mongo.ParseCSV(f)
+			fmt.Println(fileErr)
 		} else {
-
+			mongo.ParseCSV(f)
 			fmt.Println("in devicehandler else")
 		}
 		//Sends the received input and sends it to mongo.AddDevice to add a new
