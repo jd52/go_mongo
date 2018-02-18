@@ -20,9 +20,9 @@ nav .queryActive {
         <h2>Search</h2>
          <form method="POST" action="/query">
             <div id="queryDevice">
-            <input type="text" name="hostname" id="fHostname" placeholder="Find Hostname" onkeyup="instantQuery()">
-            <input type="text" name="ipAddress" id="fipAddress" placeholder="Find IP Address" onkeyup="instantQuery()">
-            <input type="text" name="deviceType" id="fDevicetype" placeholder="Find Type" onkeyup="instantQuery()">
+            <input type="text" name="hostname" id="fHostname" placeholder="Find Hostname" onkeyup="instantQuery(n)">
+            <input type="text" name="ipAddress" id="fipAddress" placeholder="Find IP Address" onkeyup="instantQuery(n)">
+            <input type="text" name="deviceType" id="fDevicetype" placeholder="Find Type" onkeyup="instantQuery(n)">
             <input type="radio" name="anyOr" value="or" checked> Match Any
             <input type="radio" name="anyOr" value="and"> Match All
             </div>
@@ -69,7 +69,7 @@ nav .queryActive {
     </main>
 </div>
     <script>
-        function instantQuery() {
+        function instantQuery(n) {
         var hostnamevalue=encodeURIComponent(document.getElementById("fHostname").value)
         var ipAvalue=encodeURIComponent(document.getElementById("fipAddress").value)
         var devTavalue=encodeURIComponent(document.getElementById("fdevicetype").value)
