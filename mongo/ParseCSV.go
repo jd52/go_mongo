@@ -7,11 +7,11 @@ import (
 	"fmt"
 	"io"
 	"log"
-	"os"
+	"mime/multipart"
 )
 
-func ParseCSV() {
-	csvFile, _ := os.Open("people.csv")
+func ParseCSV(mf multipart.File) {
+	csvFile := mf
 	reader := csv.NewReader(bufio.NewReader(csvFile))
 	var devices []Device
 	for {

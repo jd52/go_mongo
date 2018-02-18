@@ -32,6 +32,10 @@ func DeviceHandler(res http.ResponseWriter, req *http.Request) {
 			IPAddress:  req.FormValue("ipAddress"),
 			DeviceType: req.FormValue("deviceType"),
 		}
+		f, _, fileErr := req.FormFile("bulkfile")
+		if fileErr == nil {
+			mongo.ParseCSV(f)
+		}
 		//Sends the received input and sends it to mongo.AddDevice to add a new
 		//entry into the mongoDB database.
 		validate := mongo.ValidateAdd(&addD, res, req)
