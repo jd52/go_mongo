@@ -82,6 +82,7 @@ nav .queryActive {
             }
         };
         xhttp.open("POST", "/query", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
         xhttp.send("hostname="+str);
         }
     </script>
