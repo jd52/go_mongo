@@ -69,10 +69,10 @@ nav .queryActive {
     </main>
 </div>
     <script>
-        function instantDTQuery(v) {
+        function instantDTQuery(DT) {
 
         var xhttp;
-        if (v.length == 0) { 
+        if (DT.length == 0) { 
         document.getElementById("txtHint").innerHTML = "";
         return;
         }
@@ -84,13 +84,13 @@ nav .queryActive {
         };
         xhttp.open("POST", "/queryresponse", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-        var params = "devicetype="+v
+        var params = "devicetype="+DT
         xhttp.send(params);
         }
-        function instantIPAQuery(v) {
+        function instantIPAQuery(IPA) {
 
         var xhttp;
-        if (v.length == 0) { 
+        if (IPA.length == 0) { 
         document.getElementById("txtHint").innerHTML = "";
         return;
         }
@@ -102,13 +102,13 @@ nav .queryActive {
         };
         xhttp.open("POST", "/queryresponse", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-        var params = "ipaddress="+v
+        var params = "ipaddress="+IPA
         xhttp.send(params);
         }
-        function instantHNQuery(v) {
+        function instantHNQuery(HN) {
 
         var xhttp;
-        if (v.length == 0) { 
+        if (HN.length == 0) { 
         document.getElementById("txtHint").innerHTML = "";
         return;
         }
@@ -120,7 +120,7 @@ nav .queryActive {
         };
         xhttp.open("POST", "/queryresponse", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-        var params = "hostname="+v
+        var params = "hostname="+HN
         xhttp.send(params);
         }
     </script>
