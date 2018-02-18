@@ -25,9 +25,7 @@ func ListDevice(qy *Device, andOr *string, w http.ResponseWriter, r *http.Reques
 
 	result := []Device{}
 
-	if qy.Hostname+qy.DeviceType+qy.IPAddress == "" {
-		err = deviceCollect.Find(bson.M{}).All(&result)
-	} else if *andOr == "and" {
+	if *andOr == "and" {
 
 		err = deviceCollect.Find(bson.M{"$and": []bson.M{bson.M{"hostname": qy.Hostname}, bson.M{"ipaddress": qy.IPAddress}, bson.M{"devicetype": qy.DeviceType}}}).All(&result)
 		fmt.Println(qy)
