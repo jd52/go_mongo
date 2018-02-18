@@ -20,7 +20,7 @@ nav .queryActive {
         <h2>Search</h2>
          <form method="POST" action="/query">
             <div id="queryDevice">
-            <input type="text" name="hostname" placeholder="Find Hostname">
+            <input type="text" name="hostname" placeholder="Find Hostname" onkeyup="instantQuery(this.value)">
             <input type="text" name="ipAddress" placeholder="Find IP Address">
             <input type="text" name="deviceType" placeholder="Find Type">
             <input type="radio" name="anyOr" value="or" checked> Match Any
@@ -67,6 +67,23 @@ nav .queryActive {
         </table>
     </main>
 </div>
-
+    <script>
+        function instantQuery(str) {
+        var xhttp;
+        if (str.length == 0) { 
+            document.getElementById("txtHint").innerHTML = "";
+            return;
+        }
+        xhttp = new XMLHttpRequest();
+        xhttp.responseText = str
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+            
+            }
+        };
+        xhttp.open("POST", "/query", true);
+        xhttp.send("hostname="+str);
+        }
+    </script>
 </body>
 </html>
