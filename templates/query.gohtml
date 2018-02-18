@@ -74,10 +74,7 @@ nav .queryActive {
         var ipAvalue=document.getElementById("fipAddress").innerHTML.value
         var devTavalue=document.getElementById("fdevicetype").innerHTML.value
         var xhttp;
-        if (str.length == 0) { 
-            document.getElementById("txtHint").innerHTML = "";
-            return;
-        }
+      
         xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
