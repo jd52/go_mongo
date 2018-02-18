@@ -17,7 +17,7 @@ func main() {
 	r.HandleFunc("/index", page.IndexHandler)
 	r.HandleFunc("/devices", page.DeviceHandler)
 	r.HandleFunc("/query", page.QueryHandler)
-	r.HandleFunc("/queryresponse", QueryResponseHandler).Methods("POST")
+	r.HandleFunc("/queryresponse", page.QueryResponseHandler).Methods("POST")
 	//PathPrefix allows local files to be served
 	r.PathPrefix("/css/").Handler(http.StripPrefix("/css/", http.FileServer(http.Dir("css"))))
 
