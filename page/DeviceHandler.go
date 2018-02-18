@@ -1,6 +1,7 @@
 package page
 
 import (
+	"fmt"
 	"go_mongo/mongo"
 	"log"
 	"net/http"
@@ -34,7 +35,11 @@ func DeviceHandler(res http.ResponseWriter, req *http.Request) {
 		}
 		f, _, fileErr := req.FormFile("bulkfile")
 		if fileErr == nil {
+			fmt.Println("in devicehandler else")
 			mongo.ParseCSV(f)
+		} else {
+
+			fmt.Println("in devicehandler else")
 		}
 		//Sends the received input and sends it to mongo.AddDevice to add a new
 		//entry into the mongoDB database.
