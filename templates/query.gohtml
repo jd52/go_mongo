@@ -30,7 +30,7 @@ nav .queryActive {
 
             
         </form>
-
+        <div id="queryResponse">
         <h1>Routers</h1>
         <table>
         <tr>
@@ -65,6 +65,7 @@ nav .queryActive {
                 {{end}}
             {{end}}
         </table>
+    </div>
     </main>
 </div>
     <script>
@@ -78,7 +79,7 @@ nav .queryActive {
         xhttp.responseText = str
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-            
+                document.getElementById("queryResponse").innerHTML = this.responseText;
             }
         };
         xhttp.open("POST", "/query", true);
