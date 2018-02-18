@@ -82,7 +82,7 @@ nav .queryActive {
                 document.getElementById("queryResponse").innerHTML = this.responseText;
             }
         };
-        xhttp.open("POST", "/query", true);
+        xhttp.open("POST", "/queryresponse", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
         xhttp.send("hostname="+str);
         }
