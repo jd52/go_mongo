@@ -29,6 +29,9 @@ nav .devicesActive {
         {{if . }}
             <h3 style="color:red;">The 'hostname' or 'IP Address' you entered already exist in the Database!</h3>
         {{end}}
+        <br>
+        <br>
+        <h2>Use the file upload to select a CSV file for bulk upload.</h2>
         <form method="POST" action="/devices" enctype="multipart/form-data">
             <div id="bulkUpload">
             <input type="file" name="bulkFile" id="bulkFile">
