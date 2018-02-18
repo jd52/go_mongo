@@ -20,9 +20,9 @@ nav .queryActive {
         <h2>Search</h2>
          <form method="POST" action="/query">
             <div id="queryDevice">
-            <input type="text" name="hostname" id="fHostname" placeholder="Find Hostname" onkeyup="instantQuery(this.value)">
-            <input type="text" name="ipAddress" id="fipAddress" placeholder="Find IP Address" onkeyup="instantQuery(this.value)">
-            <input type="text" name="deviceType" id="fDevicetype" placeholder="Find Type" onkeyup="instantQuery(this.value)">
+            <input type="text" name="hostname" id="fHostname" placeholder="Find Hostname" onkeyup="instantHNQuery(this.value)">
+            <input type="text" name="ipAddress" id="fipAddress" placeholder="Find IP Address" onkeyup="instantIPAQuery(this.value)">
+            <input type="text" name="deviceType" id="fDevicetype" placeholder="Find Type" onkeyup="instantDTQuery(this.value)">
             <input type="radio" name="anyOr" value="or" checked> Match Any
             <input type="radio" name="anyOr" value="and"> Match All
             </div>
@@ -69,10 +69,8 @@ nav .queryActive {
     </main>
 </div>
     <script>
-        function instantQuery(n) {
-        var hostnamevalue=document.getElementById("fHostname").innerHTML.value
-        var ipAvalue=document.getElementById("fipAddress").innerHTML.value
-        var devTavalue=document.getElementById("fdevicetype").innerHTML.value
+        function instantDTQuery(n) {
+
         var xhttp;
       
         xhttp = new XMLHttpRequest();
@@ -83,7 +81,37 @@ nav .queryActive {
         };
         xhttp.open("POST", "/queryresponse", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-        var params = "hostname="+hostnamevalue&"ipaddress="+ipAvalue&"devicetype="+devTavalue
+        var params = "hostname="+n
+        xhttp.send(params);
+        }
+        function instantIPAQuery(n) {
+
+        var xhttp;
+      
+        xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("queryResponse").innerHTML = this.responseText;
+            }
+        };
+        xhttp.open("POST", "/queryresponse", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+        var params = "hostname="+n
+        xhttp.send(params);
+        }
+        function instantHNQuery(n) {
+
+        var xhttp;
+      
+        xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("queryResponse").innerHTML = this.responseText;
+            }
+        };
+        xhttp.open("POST", "/queryresponse", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+        var params = "hostname="+n
         xhttp.send(params);
         }
     </script>
