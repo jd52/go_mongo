@@ -10,7 +10,7 @@ import (
 	"mime/multipart"
 )
 
-func ParseCSV(mf multipart.File) {
+func ParseCSV(mf multipart.File) []Device {
 	fmt.Println("in parse CSV")
 	csvFile := mf
 	reader := csv.NewReader(bufio.NewReader(csvFile))
@@ -30,4 +30,6 @@ func ParseCSV(mf multipart.File) {
 	}
 	devicesJSON, _ := json.Marshal(devices)
 	fmt.Println(string(devicesJSON))
+
+	return devices
 }

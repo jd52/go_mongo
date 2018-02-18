@@ -38,7 +38,10 @@ func DeviceHandler(res http.ResponseWriter, req *http.Request) {
 			fmt.Println("in devicehandler if")
 			fmt.Println(fileErr)
 		} else {
-			mongo.ParseCSV(f)
+			ad := mongo.ParseCSV(f)
+			for _, d := range ad {
+				mongo.AddDevice(&d, res, req)
+			}
 			fmt.Println("in devicehandler else")
 		}
 		//Sends the received input and sends it to mongo.AddDevice to add a new
