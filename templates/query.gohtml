@@ -20,9 +20,9 @@ nav .queryActive {
         <h2>Search</h2>
          <form method="POST" action="/query">
             <div id="queryDevice">
-            <input type="text" name="hostname" placeholder="Find Hostname" onkeyup="instantQuery(this.value)">
-            <input type="text" name="ipAddress" placeholder="Find IP Address">
-            <input type="text" name="deviceType" placeholder="Find Type">
+            <input type="text" name="hostname" id="fHostname" placeholder="Find Hostname" onkeyup="instantQuery()">
+            <input type="text" name="ipAddress" id="fipAddress" placeholder="Find IP Address" onkeyup="instantQuery()">
+            <input type="text" name="deviceType" id="fDevicetype" placeholder="Find Type" onkeyup="instantQuery()">
             <input type="radio" name="anyOr" value="or" checked> Match Any
             <input type="radio" name="anyOr" value="and"> Match All
             </div>
@@ -69,14 +69,16 @@ nav .queryActive {
     </main>
 </div>
     <script>
-        function instantQuery(str) {
+        function instantQuery() {
+        var hostnamevalue=encodeURIComponent(document.getElementById("fHostname").value)
+        var ipAvalue=encodeURIComponent(document.getElementById("fipAddress").value)
+        var devTavalue=encodeURIComponent(document.getElementById("fdevicetype").value)
         var xhttp;
         if (str.length == 0) { 
             document.getElementById("txtHint").innerHTML = "";
             return;
         }
         xhttp = new XMLHttpRequest();
-        xhttp.responseText = str
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 document.getElementById("queryResponse").innerHTML = this.responseText;
@@ -84,7 +86,8 @@ nav .queryActive {
         };
         xhttp.open("POST", "/queryresponse", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-        xhttp.send("hostname="+str);
+        var params = "hostname="+hostnamevalue&"ipaddress="+ipAvalue&"devicetype="+devTavalue
+        xhttp.send(params);
         }
     </script>
 </body>
