@@ -81,7 +81,7 @@ nav .queryActive {
         };
         xhttp.open("POST", "/queryresponse", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-        var params = "hostname="+n
+        var params = "devicetype="+n
         xhttp.send(params);
         }
         function instantIPAQuery(n) {
@@ -96,7 +96,7 @@ nav .queryActive {
         };
         xhttp.open("POST", "/queryresponse", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-        var params = "hostname="+n
+        var params = "ipaddress="+n
         xhttp.send(params);
         }
         function instantHNQuery(n) {
