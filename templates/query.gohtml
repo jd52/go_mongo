@@ -85,7 +85,7 @@ nav .queryActive {
         xhttpDT.open("POST", "/queryresponse", true);
         xhttpDT.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
         
-        xhttpDT.send("devicetype="+DT);
+        xhttpDT.send("deviceType="+DT);
         }
 
         function instantIPAQuery(IPA) {
@@ -104,7 +104,7 @@ nav .queryActive {
         xhttpIPA.open("POST", "/queryresponse", true);
         xhttpIPA.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
         
-        xhttpIPA.send("ipaddress="+IPA);
+        xhttpIPA.send("ipAddress="+IPA);
         }
         
         function instantHNQuery(HN) {
