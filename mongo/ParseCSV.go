@@ -11,6 +11,7 @@ import (
 )
 
 func ParseCSV(mf multipart.File) {
+	fmt.Println("in parse CSV")
 	csvFile := mf
 	reader := csv.NewReader(bufio.NewReader(csvFile))
 	var devices []Device
