@@ -29,8 +29,12 @@ nav .devicesActive {
         {{if . }}
             <h3 style="color:red;">The 'hostname' or 'IP Address' you entered already exist in the Database!</h3>
         {{end}}
-
-             </ul>
+        <form method="POST" action="/devices" enctype="multipart/form-data">
+            <div id="bulkUpload">
+            <input type="file" name="bulkFile" id="bulkFile">
+            </div>
+            <input type="submit" value="Add">
+        </form>
     </main>
 </div>
 
