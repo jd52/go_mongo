@@ -71,57 +71,59 @@ nav .queryActive {
     <script>
         function instantDTQuery(DT) {
 
-        var xhttp;
+        var xhttpDT;
         if (DT.length == 0) { 
         document.getElementById("txtHint").innerHTML = "";
         return;
         }
-        xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
+        xhttpDT = new XMLHttpRequest();
+        xhttpDT.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 document.getElementById("queryResponse").innerHTML = this.responseText;
             }
         };
-        xhttp.open("POST", "/queryresponse", true);
-        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-        var params = "devicetype="+DT
-        xhttp.send(params);
+        xhttpDT.open("POST", "/queryresponse", true);
+        xhttpDT.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+        
+        xhttpDT.send("devicetype="+DT);
         }
+
         function instantIPAQuery(IPA) {
 
-        var xhttp;
+        var xhttpIPA;
         if (IPA.length == 0) { 
         document.getElementById("txtHint").innerHTML = "";
         return;
         }
-        xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
+        xhttpIPA = new XMLHttpRequest();
+        xhttpIPA.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 document.getElementById("queryResponse").innerHTML = this.responseText;
             }
         };
-        xhttp.open("POST", "/queryresponse", true);
-        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-        var params = "ipaddress="+IPA
-        xhttp.send(params);
+        xhttpIPA.open("POST", "/queryresponse", true);
+        xhttpIPA.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+        
+        xhttpIPA.send("ipaddress="+IPA);
         }
+        
         function instantHNQuery(HN) {
 
-        var xhttp;
+        var xhttpHN;
         if (HN.length == 0) { 
         document.getElementById("txtHint").innerHTML = "";
         return;
         }
-        xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
+        xhttpHN = new XMLHttpRequest();
+        xhttpHN.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 document.getElementById("queryResponse").innerHTML = this.responseText;
             }
         };
-        xhttp.open("POST", "/queryresponse", true);
-        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-        var params = "hostname="+HN
-        xhttp.send(params);
+        xhttpHN.open("POST", "/queryresponse", true);
+        xhttpHN.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+        
+        xhttpHN.send("hostname="+HN);
         }
     </script>
 </body>
