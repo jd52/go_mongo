@@ -70,9 +70,9 @@ nav .queryActive {
 </div>
     <script>
         function instantQuery(n) {
-        var hostnamevalue=encodeURIComponent(document.getElementById("fHostname").value)
-        var ipAvalue=encodeURIComponent(document.getElementById("fipAddress").value)
-        var devTavalue=encodeURIComponent(document.getElementById("fdevicetype").value)
+        var hostnamevalue=document.getElementById("fHostname").value
+        var ipAvalue=document.getElementById("fipAddress").value
+        var devTavalue=document.getElementById("fdevicetype").value
         var xhttp;
         if (str.length == 0) { 
             document.getElementById("txtHint").innerHTML = "";
