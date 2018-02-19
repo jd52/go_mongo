@@ -1,6 +1,7 @@
 package mongo
 
 import (
+	"fmt"
 	"log"
 
 	"net/http"
@@ -32,10 +33,13 @@ func ListDevice(qy *Device, andOr *string, w http.ResponseWriter, r *http.Reques
 		var hn, ipa, dt string
 		if qy.Hostname != "" {
 			hn = "'" + qy.Hostname + "'"
+			fmt.Println("set hostname var")
 		} else if qy.IPAddress != "" {
 			ipa = "'" + qy.IPAddress + "'"
+			fmt.Println("set ipaddress var")
 		} else if qy.DeviceType != "" {
 			dt = "'" + qy.DeviceType + "'"
+			fmt.Println("set devicetype var")
 		}
 		err = deviceCollect.Find(bson.M{"$or": []bson.M{
 			bson.M{"hostname": bson.M{`$regex`: hn}},
