@@ -35,6 +35,7 @@ func ListDevice(qy *Device, andOr *string, w http.ResponseWriter, r *http.Reques
 
 			fmt.Println("set hostname var")
 			err = deviceCollect.Find(bson.M{"hostname": "/" + qy.Hostname + "/"}).All(&result)
+			fmt.Println(bson.M{"hostname": "/" + qy.Hostname + "/"})
 		}
 		if qy.IPAddress != "" {
 
