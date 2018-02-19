@@ -25,23 +25,15 @@ func ListDevice(qy *Device, andOr *string, w http.ResponseWriter, r *http.Reques
 	session.SetMode(mgo.Monotonic, true)
 
 	result := []Device{}
-
-	if *andOr == "and" {
+if *andOr == "and" {
 
 		err = deviceCollect.Find(bson.M{"$and": []bson.M{bson.M{"hostname": qy.Hostname}, bson.M{"ipaddress": qy.IPAddress}, bson.M{"devicetype": qy.DeviceType}}}).All(&result)
 		fmt.Println(qy)
 	} else {
 
-<<<<<<< HEAD
-		err = deviceCollect.Find(bson.M{"$or": []bson.M{bson.M{"Hostname": qy.Hostname}, bson.M{"ipaddress": qy.IPAddress}, bson.M{"devicetype": qy.DeviceType}}}).All(&result)
-		fmt.Println(err)
-		fmt.Println(bson.M{"Hostname": qy.Hostname})
-		fmt.Println("Print of result", result)
-=======
 		err = deviceCollect.Find(bson.M{"$or": []bson.M{bson.M{"hostname": qy.Hostname}, bson.M{"ipaddress": qy.IPAddress}, bson.M{"devicetype": qy.DeviceType}}}).All(&result)
 		fmt.Println(qy)
->>>>>>> parent of 4bb81f2... modified list device query
-	}
+}
 	if err != nil {
 		log.Fatal(err)
 	}
