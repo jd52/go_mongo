@@ -26,10 +26,10 @@ nav .queryActive {
             <input type="text" name="hostname" id="fHostname" placeholder="Find Hostname" onfocusout="(this.value = '')" onkeyup="instantHNQuery(this.value)">
             <input type="text" name="ipAddress" id="fipAddress" placeholder="Find IP Address" onfocusout="(this.value = '')" onkeyup="instantIPAQuery(this.value)">
             <input type="text" name="deviceType" id="fDevicetype" placeholder="Find Type" onfocusout="(this.value = '')" onkeyup="instantDTQuery(this.value)">
-            <input type="radio" name="anyOr" value="or" checked> Match Any
-            <div style="display: none ">
-            <input type="radio" name="anyOr" value="and" > Match All
-            </div>
+                <div style="display: none ">
+                    <input type="radio" name="anyOr" value="or" checked> Match Any
+                    <input type="radio" name="anyOr" value="and" > Match All
+                </div>
             </div>
             <input type="submit" value="Search" style="display: none ">
 
