@@ -1,7 +1,6 @@
 package mongo
 
 import (
-	"fmt"
 	"log"
 
 	"net/http"
@@ -30,16 +29,18 @@ func ListDevice(qy *Device, andOr *string, w http.ResponseWriter, r *http.Reques
 		err = deviceCollect.Find(bson.M{"$and": []bson.M{bson.M{"hostname": qy.Hostname}, bson.M{"ipaddress": qy.IPAddress}, bson.M{"devicetype": qy.DeviceType}}}).All(&result)
 
 	} else {
-
-		fmt.Println(bson.M{"$or": []bson.M{
-			bson.M{"hostname": bson.M{`$regex`: "'" + qy.Hostname + "'"}},
-			bson.M{"ipaddress": bson.M{`$regex`: "'" + qy.IPAddress + "'"}},
-			bson.M{"devicetype": bson.M{`$regex`: "'" + qy.DeviceType + "'"}}}})
-
+		var hn, ipa, dt string
+		if qy.Hostname != "" {
+			hn = "'" + qy.Hostname + "'"
+		} else if qy.IPAddress != "" {
+			ipa = "'" + qy.IPAddress + "'"
+		} else if qy.DeviceType != "" {
+			dt = "'" + qy.DeviceType + "'"
+		}
 		err = deviceCollect.Find(bson.M{"$or": []bson.M{
-			bson.M{"hostname": bson.M{`$regex`: "'" + qy.Hostname + "'"}},
-			bson.M{"ipaddress": bson.M{`$regex`: "'" + qy.IPAddress + "'"}},
-			bson.M{"devicetype": bson.M{`$regex`: "'" + qy.DeviceType + "'"}}}}).All(&result)
+			bson.M{"hostname": bson.M{`$regex`: hn}},
+			bson.M{"ipaddress": bson.M{`$regex`: ipa}},
+			bson.M{"devicetype": bson.M{`$regex`: dt}}}}).All(&result)
 
 	}
 	if err != nil {
