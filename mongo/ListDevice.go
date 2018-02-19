@@ -28,28 +28,13 @@ func ListDevice(qy *Device, andOr *string, w http.ResponseWriter, r *http.Reques
 	if *andOr == "and" {
 
 		err = deviceCollect.Find(bson.M{"$and": []bson.M{bson.M{"hostname": qy.Hostname}, bson.M{"ipaddress": qy.IPAddress}, bson.M{"devicetype": qy.DeviceType}}}).All(&result)
-
+		fmt.Println(qy)
 	} else {
 
-		if qy.Hostname != "" {
-
-			fmt.Println("set hostname var")
-			err = deviceCollect.Find(bson.M{"hostname": "/R/"}).All(&result)
-			fmt.Println(bson.M{"hostname": "/" + qy.Hostname + "/"})
-		}
-		if qy.IPAddress != "" {
-
-			fmt.Println("set ipaddress var")
-			err = deviceCollect.Find(bson.M{"ipaddress": "/" + qy.IPAddress + "/"}).All(&result)
-		}
-		if qy.DeviceType != "" {
-
-			fmt.Println("set devicetype var")
-			err = deviceCollect.Find(bson.M{"devicetype": "/" + qy.DeviceType + "/"}).All(&result)
-		}
-
-		fmt.Println(result)
+		err = deviceCollect.Find(bson.M{"$or": []bson.M{bson.M{"hostname": qy.Hostname}, bson.M{"ipaddress": qy.IPAddress}, bson.M{"devicetype": qy.DeviceType}}}).All(&result)
+		fmt.Println(qy)
 	}
+
 	if err != nil {
 		log.Print(err)
 	}
