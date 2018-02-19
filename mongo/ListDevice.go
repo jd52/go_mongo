@@ -30,8 +30,16 @@ func ListDevice(qy *Device, andOr *string, w http.ResponseWriter, r *http.Reques
 		err = deviceCollect.Find(bson.M{"$and": []bson.M{bson.M{"hostname": qy.Hostname}, bson.M{"ipaddress": qy.IPAddress}, bson.M{"devicetype": qy.DeviceType}}}).All(&result)
 		fmt.Println(qy)
 	} else {
+		if qy.Hostname != "" {
+			err = deviceCollect.Find(bson.M{"hostname": bson.RegEx{Pattern: qy.Hostname, Options: "i"}}).All(&result)
+		}
+		if qy.IPAddress != "" {
+			err = deviceCollect.Find(bson.M{"ipaddress": bson.RegEx{Pattern: qy.IPAddress, Options: "i"}}).All(&result)
+		}
+		if qy.DeviceType != "" {
+			err = deviceCollect.Find(bson.M{"devicetype": bson.RegEx{Pattern: qy.DeviceType, Options: "i"}}).All(&result)
+		}
 
-		err = deviceCollect.Find(bson.M{"hostname": bson.RegEx{Pattern: qy.Hostname, Options: "i"}}).All(&result)
 		fmt.Println(qy)
 	}
 	if err != nil {
