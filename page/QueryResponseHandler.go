@@ -7,10 +7,13 @@ import (
 	"go_mongo/mongo"
 )
 
+//QueryResponseHandler is used for query.
 func QueryResponseHandler(res http.ResponseWriter, req *http.Request) {
 	err := req.ParseForm()
 	if err != nil {
-		log.Fatalln(err)
+		errR := err
+		req.Method = "POST"
+		err = tpl.ExecuteTemplate(res, "error.gohtml", errR)
 	}
 	andOr := req.FormValue("anyOr")
 	queryDevice := mongo.Device{
