@@ -48,6 +48,10 @@ func ListDevice(qy *Device, andOr *string, w http.ResponseWriter, r *http.Reques
 			bson.M{"ipaddress": ipa},
 			bson.M{"devicetype": dt}}}).All(&result)
 
+		fmt.Println(bson.M{"$or": []bson.M{
+			bson.M{"hostname": hn},
+			bson.M{"ipaddress": ipa},
+			bson.M{"devicetype": dt}}})
 	}
 	if err != nil {
 		log.Fatal(err)
