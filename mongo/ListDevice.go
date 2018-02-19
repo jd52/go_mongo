@@ -31,7 +31,7 @@ func ListDevice(qy *Device, andOr *string, w http.ResponseWriter, r *http.Reques
 		fmt.Println(qy)
 	} else {
 
-		err = deviceCollect.Find(bson.M{"hostname": bson.RegEx{Pattern: "^" + qy.Hostname, Options: ""}}).All(&result)
+		err = deviceCollect.Find(bson.M{"hostname": bson.RegEx{Pattern: "^" + qy.Hostname, Options: "i"}}).All(&result)
 		fmt.Println(qy)
 	}
 	if err != nil {
