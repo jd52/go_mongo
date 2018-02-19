@@ -31,13 +31,13 @@ func ListDevice(qy *Device, andOr *string, w http.ResponseWriter, r *http.Reques
 		fmt.Println(qy)
 	} else {
 
-		err = deviceCollect.Find(bson.M{"$or": []bson.M{bson.M{"hostname": bson.RegEx{"$regex:/" + qy.Hostname + "/", ""}}, bson.M{"ipaddress": qy.IPAddress}, bson.M{"devicetype": qy.DeviceType}}}).All(&result)
+		err = deviceCollect.Find(bson.M{"$or": []bson.M{bson.M{"hostname": bson.M{"$regex": bson.RegEx{Pattern: "/" + qy.Hostname + "/", Options: ""}}}, bson.M{"ipaddress": qy.IPAddress}, bson.M{"devicetype": qy.DeviceType}}}).All(&result)
 		fmt.Println(qy)
 	}
 	if err != nil {
 		log.Fatal(err)
 	}
 	fmt.Println("Printing Results: ", result)
-	fmt.Println(bson.M{"hostname": bson.RegEx{"$regex:/" + qy.Hostname + "/", ""}})
+	fmt.Println(bson.M{"hostname": bson.M{"$regex": bson.RegEx{Pattern: "/" + qy.Hostname + "/", Options: ""}}})
 	return result
 }
