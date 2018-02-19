@@ -34,17 +34,17 @@ func ListDevice(qy *Device, andOr *string, w http.ResponseWriter, r *http.Reques
 		if qy.Hostname != "" {
 
 			fmt.Println("set hostname var")
-			err = deviceCollect.Find(bson.M{"hostname": bson.M{"$regex": "'" + qy.Hostname + "'"}}).All(&result)
+			err = deviceCollect.Find(bson.M{"hostname": "'" + qy.Hostname + "'"}).All(&result)
 		}
 		if qy.IPAddress != "" {
 
 			fmt.Println("set ipaddress var")
-			err = deviceCollect.Find(bson.M{"ipaddress": bson.M{"$regex": "'" + qy.IPAddress + "'"}}).All(&result)
+			err = deviceCollect.Find(bson.M{"ipaddress": "'" + qy.IPAddress + "'"}).All(&result)
 		}
 		if qy.DeviceType != "" {
 
 			fmt.Println("set devicetype var")
-			err = deviceCollect.Find(bson.M{"devicetype": bson.M{"$regex": "'" + qy.DeviceType + "'"}}).All(&result)
+			err = deviceCollect.Find(bson.M{"devicetype": "'" + qy.DeviceType + "'"}).All(&result)
 		}
 
 		fmt.Println(result)
