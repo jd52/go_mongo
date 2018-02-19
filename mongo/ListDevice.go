@@ -30,21 +30,22 @@ func ListDevice(qy *Device, andOr *string, w http.ResponseWriter, r *http.Reques
 		err = deviceCollect.Find(bson.M{"$and": []bson.M{bson.M{"hostname": qy.Hostname}, bson.M{"ipaddress": qy.IPAddress}, bson.M{"devicetype": qy.DeviceType}}}).All(&result)
 
 	} else {
-		var hn, ipa, dt string
+		var hn, ipa, dt bson.M
 		if qy.Hostname != "" {
-			hn = "'" + qy.Hostname + "'"
+			hn = bson.M{`$regex`: "'" + qy.Hostname + "'"}
 			fmt.Println("set hostname var")
 		} else if qy.IPAddress != "" {
-			ipa = "'" + qy.IPAddress + "'"
+			ipa = bson.M{`$regex`: "'" + qy.IPAddress + "'"}
 			fmt.Println("set ipaddress var")
 		} else if qy.DeviceType != "" {
-			dt = "'" + qy.DeviceType + "'"
+			dt = bson.M{`$regex`: "'" + qy.DeviceType + "'"}
+
 			fmt.Println("set devicetype var")
 		}
 		err = deviceCollect.Find(bson.M{"$or": []bson.M{
-			bson.M{"hostname": bson.M{`$regex`: hn}},
-			bson.M{"ipaddress": bson.M{`$regex`: ipa}},
-			bson.M{"devicetype": bson.M{`$regex`: dt}}}}).All(&result)
+			bson.M{"hostname": hn},
+			bson.M{"ipaddress": ipa},
+			bson.M{"devicetype": dt}}}).All(&result)
 
 	}
 	if err != nil {
