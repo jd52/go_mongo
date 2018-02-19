@@ -48,7 +48,7 @@ func ListDevice(qy *Device, andOr *string, w http.ResponseWriter, r *http.Reques
 			err = deviceCollect.Find(bson.M{"devicetype": "/" + qy.DeviceType + "/"}).All(&result)
 		}
 
-		fmt.Println(result[0])
+		fmt.Println(result)
 	}
 	if err != nil {
 		log.Print(err)
