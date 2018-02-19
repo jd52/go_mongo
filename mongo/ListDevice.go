@@ -34,7 +34,7 @@ func ListDevice(qy *Device, andOr *string, w http.ResponseWriter, r *http.Reques
 		rH := map[string]string{"$regex": "/" + qy.Hostname + "/"}
 		err = deviceCollect.Find(bson.M{"$or": []bson.M{bson.M{"hostname": rH}, bson.M{"ipaddress": qy.IPAddress}, bson.M{"devicetype": qy.DeviceType}}}).All(&result)
 		fmt.Println(err)
-		fmt.Println(bson.M{"hostname": rH})
+		fmt.Println(bson.Marshal(qy))
 		fmt.Println("Print of result", result)
 	}
 	if err != nil {
