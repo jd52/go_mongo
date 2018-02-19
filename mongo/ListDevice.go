@@ -30,12 +30,16 @@ func ListDevice(qy *Device, andOr *string, w http.ResponseWriter, r *http.Reques
 		err = deviceCollect.Find(bson.M{"$and": []bson.M{bson.M{"hostname": qy.Hostname}, bson.M{"ipaddress": qy.IPAddress}, bson.M{"devicetype": qy.DeviceType}}}).All(&result)
 
 	} else {
-		fmt.Println(map[string]map[string]string{"hostname": {"$regex": "/" + qy.Hostname + "/"}})
+		fmt.Println(bson.M{"$or": []bson.M{
+			bson.M{"hostname": map[string]string{`$regex`: "/" + qy.Hostname + "/"}},
+			bson.M{"ipaddress": map[string]string{`$regex`: "/" + qy.IPAddress + "/"}},
+			bson.M{"devicetype": map[string]string{`$regex`: "/" + qy.DeviceType + "/"}}},
+		})
 		hn := "/" + qy.Hostname + "/"
 		err = deviceCollect.Find(bson.M{"$or": []bson.M{
-			bson.M{"hostname": bson.M{`$regex`: hn}},
-			bson.M{"ipaddress": bson.M{`$regex`: "/" + qy.IPAddress + "/"}},
-			bson.M{"devicetype": bson.M{`$regex`: "/" + qy.DeviceType + "/"}}},
+			bson.M{"hostname": map[string]string{`$regex`: hn}},
+			bson.M{"ipaddress": map[string]string{`$regex`: "/" + qy.IPAddress + "/"}},
+			bson.M{"devicetype": map[string]string{`$regex`: "/" + qy.DeviceType + "/"}}},
 		}).All(&result)
 
 	}
