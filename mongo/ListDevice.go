@@ -6,8 +6,9 @@ import (
 
 	"net/http"
 
-	"gopkg.in/mgo.v2"
-	"gopkg.in/mgo.v2/bson"
+	"github.com/globalsign/mgo/bson"
+
+	"github.com/globalsign/mgo"
 )
 
 //ListDevice returns all hostnames from the Device Collection

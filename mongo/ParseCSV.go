@@ -10,6 +10,7 @@ import (
 	"mime/multipart"
 )
 
+//ParseCSV is used to imort a CSV file.
 func ParseCSV(mf multipart.File) []Device {
 	fmt.Println("in parse CSV")
 	csvFile := mf

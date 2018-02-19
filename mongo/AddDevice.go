@@ -6,9 +6,11 @@ import (
 
 	"net/http"
 
+	"github.com/globalsign/mgo/bson"
+
+	"github.com/globalsign/mgo"
+
 	"github.com/gorilla/mux"
-	"gopkg.in/mgo.v2"
-	"gopkg.in/mgo.v2/bson"
 )
 
 //Device takes three strings, "Hostname", "IPAddress", and "Device".  Used
