@@ -11,9 +11,7 @@ import (
 func QueryResponseHandler(res http.ResponseWriter, req *http.Request) {
 	err := req.ParseForm()
 	if err != nil {
-		errR := err
-		req.Method = "POST"
-		err = tpl.ExecuteTemplate(res, "error.gohtml", errR)
+		log.Fatalln(err)
 	}
 	andOr := req.FormValue("anyOr")
 	queryDevice := mongo.Device{
