@@ -38,6 +38,6 @@ func ListDevice(qy *Device, andOr *string, w http.ResponseWriter, r *http.Reques
 		log.Fatal(err)
 	}
 	fmt.Println("Printing Results: ", result)
-	fmt.Println(bson.M{"hostname": bson.RegEx{"/" + qy.Hostname + "/", ""}})
+	fmt.Println(bson.M{"hostname": bson.RegEx{"$regex:/" + qy.Hostname + "/", ""}})
 	return result
 }
