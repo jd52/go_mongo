@@ -34,7 +34,12 @@ func DevicePostHandler(res http.ResponseWriter, req *http.Request) {
 	}
 	//Sends the received input and sends it to mongo.AddDevice to add a new
 	//entry into the mongoDB database.
-	validate := mongo.ValidateAdd(&addD, res, req)
+	validate, error := mongo.ValidateAdd(&addD, res, req)
+
+	if error != nil {
+		ErrorHandler(error, res, req)
+		return
+	}
 
 	if validate == false {
 		mongo.AddDevice(&addD, res, req)
