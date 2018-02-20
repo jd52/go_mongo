@@ -7,7 +7,7 @@ import (
 	"go_mongo/mongo"
 )
 
-//QueryPostHandler calls the query.gohtml.  URL is localhost/query.
+//QueryPostHandler calls the query.gohtml after recieving a post. URL is localhost/query.
 func QueryPostHandler(res http.ResponseWriter, req *http.Request) {
 
 	err := req.ParseForm()
