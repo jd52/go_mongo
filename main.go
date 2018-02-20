@@ -15,7 +15,8 @@ func main() {
 	// Routes consist of a path and a handler function.
 	r.HandleFunc("/", page.IndexHandler)
 	r.HandleFunc("/index", page.IndexHandler)
-	r.HandleFunc("/devices", page.DeviceHandler)
+	r.HandleFunc("/devices", page.DeviceGetHandler).Methods("GET")
+	r.HandleFunc("/devices", page.DevicePostHandler).Methods("POST")
 	r.HandleFunc("/query", page.QueryHandler)
 	r.HandleFunc("/queryresponse", page.QueryResponseHandler).Methods("POST")
 	//r.HandleFunc("/error", page.ErrorHandler)
