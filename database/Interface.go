@@ -6,6 +6,7 @@ type Crud interface {
 	Read() []Device
 	Update()
 	Delete()
+	Validate() (bool, error)
 }
 
 //Device struct is used as a return vaule for necessary Database device converstions.
@@ -21,7 +22,7 @@ func StorageCreate(i Crud) {
 }
 
 //StorageRead  takes an argument of type Crud and runs the Read() method.
-func StorageRead(i Crud, andOr *string) []Device {
+func StorageRead(i Crud) []Device {
 	return i.Read()
 }
 
@@ -33,4 +34,9 @@ func StorageUpdate(i Crud) {
 //StorageDelete  takes an argument of type Crud and runs the Delete() method.
 func StorageDelete(i Crud) {
 	i.Delete()
+}
+
+//StorageValidate  takes an argument of type Crud and runs the Delete() method.
+func StorageValidate(i Crud) (bool, error) {
+	return i.Validate()
 }
