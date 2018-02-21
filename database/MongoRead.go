@@ -11,10 +11,12 @@ import (
 //Read returns all hostnames from the Device Collection
 func (md *MongoDevice) Read() []Device {
 
-	session, err := mgo.Dial("10.132.0.5")
-	if err != nil {
-		panic(err)
-	}
+	var err error
+	// session, err := mgo.Dial("10.132.0.5")
+	// if err != nil {
+	// 	panic(err)
+	// }
+	session := MongoSession()
 	defer session.Close()
 
 	deviceCollect := session.DB("test").C("device")
@@ -26,6 +28,7 @@ func (md *MongoDevice) Read() []Device {
 
 	// 	err = deviceCollect.Find(bson.M{"$and": []bson.M{bson.M{"hostname": md.Hostname}, bson.M{"ipaddress": md.IPAddress}, bson.M{"devicetype": md.DeviceType}}}).All(&result)
 	// } else {
+
 	if md.Hostname != "" {
 		err = deviceCollect.Find(bson.M{"hostname": bson.RegEx{Pattern: md.Hostname, Options: "i"}}).All(&result)
 	}
