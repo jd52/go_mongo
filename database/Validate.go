@@ -11,10 +11,12 @@ import (
 //Validate is used to determind if an entry already exist in the database.
 func (md *MongoDevice) Validate() (bool, error) {
 
-	session, err := mgo.Dial("10.132.0.5")
-	if err != nil {
-		return true, err
-	}
+	var err error
+	// session, err := mgo.Dial("10.132.0.5")
+	// if err != nil {
+	// 	return true, err
+	// }
+	session := MongoSession()
 	defer session.Close()
 
 	deviceCollect := session.DB("test").C("device")
