@@ -12,10 +12,7 @@ import (
 func (md *MongoDevice) Validate() (bool, error) {
 
 	var err error
-	// session, err := mgo.Dial("10.132.0.5")
-	// if err != nil {
-	// 	return true, err
-	// }
+
 	session := MongoSession()
 	defer session.Close()
 

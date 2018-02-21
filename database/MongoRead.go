@@ -12,10 +12,6 @@ import (
 func (md *MongoDevice) Read() []Device {
 
 	var err error
-	// session, err := mgo.Dial("10.132.0.5")
-	// if err != nil {
-	// 	panic(err)
-	// }
 	session := MongoSession()
 	defer session.Close()
 

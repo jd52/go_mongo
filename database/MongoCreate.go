@@ -20,10 +20,7 @@ func (md *MongoDevice) Create() {
 	var err error
 	//vars := mux.Vars(r)
 	//fmt.Println(vars["hostname"])
-	// session, err := mgo.Dial("10.132.0.5")
-	// if err != nil {
-	// 	panic(err)
-	// }
+
 	session := MongoSession()
 	defer session.Close()
 
