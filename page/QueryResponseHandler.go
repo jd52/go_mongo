@@ -1,10 +1,9 @@
 package page
 
 import (
+	"go_mongo/database"
 	"log"
 	"net/http"
-
-	"go_mongo/mongo"
 )
 
 //QueryResponseHandler is used for query.
@@ -13,14 +12,14 @@ func QueryResponseHandler(res http.ResponseWriter, req *http.Request) {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	andOr := req.FormValue("anyOr")
-	queryDevice := mongo.Device{
+	//andOr := req.FormValue("anyOr")
+	queryDevice := database.MongoDevice{
 		Hostname:   req.FormValue("hostname"),
 		IPAddress:  req.FormValue("ipAddress"),
 		DeviceType: req.FormValue("deviceType"),
 	}
 	//
-	deviceList := mongo.ListDevice(&queryDevice, &andOr, res, req)
+	deviceList := database.StorageRead(&queryDevice)
 	err = tpl.ExecuteTemplate(res, "queryResponse.gohtml", deviceList)
 	if err != nil {
 		log.Fatalln(err)
