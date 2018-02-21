@@ -2,7 +2,7 @@ package page
 
 import (
 	"fmt"
-	"go_mongo/mongo"
+	"go_mongo/database"
 	"log"
 	"net/http"
 )
@@ -16,7 +16,7 @@ func DevicePostHandler(res http.ResponseWriter, req *http.Request) {
 		log.Fatalln(err)
 	}
 	//Received input from the devices.gohtml template and updates addD.
-	addD := mongo.Device{
+	addD := database.MongoDevice{
 		Hostname:   req.FormValue("hostname"),
 		IPAddress:  req.FormValue("ipAddress"),
 		DeviceType: req.FormValue("deviceType"),
@@ -26,15 +26,15 @@ func DevicePostHandler(res http.ResponseWriter, req *http.Request) {
 		fmt.Println("in devicehandler if")
 		fmt.Println(fileErr)
 	} else {
-		ad := mongo.ParseCSV(f)
+		ad := database.ParseCSV(f)
 		for _, d := range ad {
-			mongo.AddDevice(&d, res, req)
+			database.Create(&d, res, req)
 		}
 		fmt.Println("in devicehandler else")
 	}
 	//Sends the received input and sends it to mongo.AddDevice to add a new
 	//entry into the mongoDB database.
-	validate, error := mongo.ValidateAdd(&addD, res, req)
+	validate, error := database.ValidateCreate(&addD, res, req)
 
 	if error != nil {
 		ErrorHandler(error, res, req)
@@ -42,7 +42,7 @@ func DevicePostHandler(res http.ResponseWriter, req *http.Request) {
 	}
 
 	if validate == false {
-		mongo.AddDevice(&addD, res, req)
+		database.Create(&addD, res, req)
 	}
 	//deviceList := mongo.ListDevice(&empty, &andOr, res, req)
 	err = tpl.ExecuteTemplate(res, "devices.gohtml", validate)

@@ -1,4 +1,4 @@
-package mongo
+package database
 
 import (
 	"fmt"
@@ -11,8 +11,8 @@ import (
 	"github.com/globalsign/mgo"
 )
 
-//ListDevice returns all hostnames from the Device Collection
-func ListDevice(qy *Device, andOr *string, w http.ResponseWriter, r *http.Request) []Device {
+//Read returns all hostnames from the Device Collection
+func Read(qy *MongoDevice, andOr *string, w http.ResponseWriter, r *http.Request) []MongoDevice {
 
 	session, err := mgo.Dial("10.132.0.5")
 	if err != nil {
@@ -24,7 +24,7 @@ func ListDevice(qy *Device, andOr *string, w http.ResponseWriter, r *http.Reques
 
 	session.SetMode(mgo.Monotonic, true)
 
-	result := []Device{}
+	result := []MongoDevice{}
 	if *andOr == "and" {
 
 		err = deviceCollect.Find(bson.M{"$and": []bson.M{bson.M{"hostname": qy.Hostname}, bson.M{"ipaddress": qy.IPAddress}, bson.M{"devicetype": qy.DeviceType}}}).All(&result)

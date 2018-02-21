@@ -1,4 +1,4 @@
-package mongo
+package database
 
 import (
 	"fmt"
@@ -15,15 +15,15 @@ import (
 
 //Device takes three strings, "Hostname", "IPAddress", and "Device".  Used
 //to added new devices to the database
-type Device struct {
+type MongoDevice struct {
 	Hostname   string `bson:"hostname,omitempty"`
 	IPAddress  string `bson:"ipaddress,omitempty"`
 	DeviceType string `bson:"devicetype,omitempty"`
 }
 
-//AddDevice opens a session to the mongoDB database and adds a type
+//Create opens a session to the mongoDB database and adds a type
 //Device.
-func AddDevice(a *Device, w http.ResponseWriter, r *http.Request) {
+func Create(c *MongoDevice, w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	fmt.Println(vars["hostname"])
 	session, err := mgo.Dial("10.132.0.5")
@@ -36,14 +36,14 @@ func AddDevice(a *Device, w http.ResponseWriter, r *http.Request) {
 	session.SetMode(mgo.Monotonic, true)
 
 	device := session.DB("test").C("device")
-	err = device.Insert(a)
+	err = device.Insert(c)
 	if err != nil {
 		log.Fatal(err)
 	}
 }
 
-//ValidateAdd is used to determind if an entry already exist in the database.
-func ValidateAdd(qy *Device, w http.ResponseWriter, r *http.Request) (bool, error) {
+//ValidateCreate is used to determind if an entry already exist in the database.
+func ValidateCreate(qy *MongoDevice, w http.ResponseWriter, r *http.Request) (bool, error) {
 
 	session, err := mgo.Dial("10.132.0.5")
 	if err != nil {
@@ -55,8 +55,8 @@ func ValidateAdd(qy *Device, w http.ResponseWriter, r *http.Request) (bool, erro
 
 	session.SetMode(mgo.Monotonic, true)
 
-	resultH := []Device{}
-	resultIP := []Device{}
+	resultH := []MongoDevice{}
+	resultIP := []MongoDevice{}
 
 	err = deviceCollect.Find(bson.M{"hostname": qy.Hostname}).All(&resultH)
 
