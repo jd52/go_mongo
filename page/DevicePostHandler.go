@@ -28,13 +28,13 @@ func DevicePostHandler(res http.ResponseWriter, req *http.Request) {
 	} else {
 		ad := database.ParseCSV(f)
 		for _, d := range ad {
-			database.Create(&d, res, req)
+			database.StorageCreate(&d)
 		}
 		fmt.Println("in devicehandler else")
 	}
 	//Sends the received input and sends it to mongo.AddDevice to add a new
 	//entry into the mongoDB database.
-	validate, error := database.ValidateCreate(&addD, res, req)
+	validate, error := database.ValidateCreate(&addD)
 
 	if error != nil {
 		ErrorHandler(error, res, req)
@@ -42,7 +42,7 @@ func DevicePostHandler(res http.ResponseWriter, req *http.Request) {
 	}
 
 	if validate == false {
-		database.Create(&addD, res, req)
+		database.StorageCreate(&addD)
 	}
 	//deviceList := mongo.ListDevice(&empty, &andOr, res, req)
 	err = tpl.ExecuteTemplate(res, "devices.gohtml", validate)

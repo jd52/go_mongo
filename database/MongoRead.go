@@ -1,10 +1,7 @@
 package database
 
 import (
-	"fmt"
 	"log"
-
-	"net/http"
 
 	"github.com/globalsign/mgo/bson"
 
@@ -12,7 +9,7 @@ import (
 )
 
 //Read returns all hostnames from the Device Collection
-func Read(qy *MongoDevice, andOr *string, w http.ResponseWriter, r *http.Request) []MongoDevice {
+func (md *MongoDevice) Read(andOr *string) []Device {
 
 	session, err := mgo.Dial("10.132.0.5")
 	if err != nil {
@@ -24,27 +21,23 @@ func Read(qy *MongoDevice, andOr *string, w http.ResponseWriter, r *http.Request
 
 	session.SetMode(mgo.Monotonic, true)
 
-	result := []MongoDevice{}
+	result := []Device{}
 	if *andOr == "and" {
 
-		err = deviceCollect.Find(bson.M{"$and": []bson.M{bson.M{"hostname": qy.Hostname}, bson.M{"ipaddress": qy.IPAddress}, bson.M{"devicetype": qy.DeviceType}}}).All(&result)
-		fmt.Println(qy)
+		err = deviceCollect.Find(bson.M{"$and": []bson.M{bson.M{"hostname": md.Hostname}, bson.M{"ipaddress": md.IPAddress}, bson.M{"devicetype": md.DeviceType}}}).All(&result)
 	} else {
-		if qy.Hostname != "" {
-			err = deviceCollect.Find(bson.M{"hostname": bson.RegEx{Pattern: qy.Hostname, Options: "i"}}).All(&result)
+		if md.Hostname != "" {
+			err = deviceCollect.Find(bson.M{"hostname": bson.RegEx{Pattern: md.Hostname, Options: "i"}}).All(&result)
 		}
-		if qy.IPAddress != "" {
-			err = deviceCollect.Find(bson.M{"ipaddress": bson.RegEx{Pattern: qy.IPAddress, Options: "i"}}).All(&result)
+		if md.IPAddress != "" {
+			err = deviceCollect.Find(bson.M{"ipaddress": bson.RegEx{Pattern: md.IPAddress, Options: "i"}}).All(&result)
 		}
-		if qy.DeviceType != "" {
-			err = deviceCollect.Find(bson.M{"devicetype": bson.RegEx{Pattern: qy.DeviceType, Options: "i"}}).All(&result)
+		if md.DeviceType != "" {
+			err = deviceCollect.Find(bson.M{"devicetype": bson.RegEx{Pattern: md.DeviceType, Options: "i"}}).All(&result)
 		}
-
-		fmt.Println(qy)
 	}
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println("Printing Results: ", result)
 	return result
 }

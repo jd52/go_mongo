@@ -20,7 +20,7 @@ func QueryPostHandler(res http.ResponseWriter, req *http.Request) {
 		DeviceType: req.FormValue("deviceType"),
 	}
 	//
-	deviceList := database.Read(&queryDevice, &andOr, res, req)
+	deviceList := database.StorageRead(&queryDevice, &andOr)
 	err = tpl.ExecuteTemplate(res, "query.gohtml", deviceList)
 	if err != nil {
 		log.Fatalln(err)
