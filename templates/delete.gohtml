@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{{template "header"}}
+<title>Search Devices</title>
+<style>
+    nav li a:hover:not(.queryActive) {
+    background-color: #111;
+}
+
+nav .queryActive {
+    background-color: rgb(133, 235, 135);
+        color: #111;
+        font-style: italic;
+        font-weight: bold;
+}
+</style>
+
+<body>
+
+<div id="delete">
+    <main>
+        <h2>Search</h2>
+         <form method="POST" action="/delete">
+            <div id="deleteDevice">
+            <input type="text" name="hostname" id="fHostname" placeholder="Find Hostname" onfocusout="(this.value = '')" onkeyup="instantHNQuery(this.value)">
+            <input type="text" name="ipAddress" id="fipAddress" placeholder="Find IP Address" onfocusout="(this.value = '')" onkeyup="instantIPAQuery(this.value)">
+            <input type="text" name="deviceType" id="fDevicetype" placeholder="Find Type" onfocusout="(this.value = '')" onkeyup="instantDTQuery(this.value)">
+                <div style="display: none ">
+                    <input type="radio" name="anyOr" value="or" checked> Match Any
+                    <input type="radio" name="anyOr" value="and" > Match All
+                </div>
+            </div>
+            <input type="submit" value="Search" style="display: none ">
+
+            
+        </form>
+        <div id="deleteResponse">
+        <h1>Devices</h1>
+        <table>
+        <tr>
+            <th>Hostname</th>
+            <th>IP Address</th>
+            <th>Device Type</th>
+        </tr>
+            {{range .}}
+                    <tr>
+                    <td>{{.Hostname}}</td>
+                    <td>{{.IPAddress}}</td>
+                    <td>{{.DeviceType}}</td>
+                    </tr>
+            {{end}}
+        </table>
+    </div>
+    </main>
+</div>
+    <script>
+        function instantDTQuery(DT) {
+
+        var xhttpDT;
+        if (DT.length == 0) { 
+        document.getElementById("txtHint").innerHTML = "";
+        return;
+        }
+        xhttpDT = new XMLHttpRequest();
+        xhttpDT.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("queryResponse").innerHTML = this.responseText;
+            }
+        };
+        xhttpDT.open("POST", "/queryresponse", true);
+        xhttpDT.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+        
+        xhttpDT.send("deviceType="+DT);
+        }
+
+        function instantIPAQuery(IPA) {
+
+        var xhttpIPA;
+        if (IPA.length == 0) { 
+        document.getElementById("txtHint").innerHTML = "";
+        return;
+        }
+        xhttpIPA = new XMLHttpRequest();
+        xhttpIPA.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("queryResponse").innerHTML = this.responseText;
+            }
+        };
+        xhttpIPA.open("POST", "/queryresponse", true);
+        xhttpIPA.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+        
+        xhttpIPA.send("ipAddress="+IPA);
+        }
+        
+        function instantHNQuery(HN) {
+
+        var xhttpHN;
+        if (HN.length == 0) { 
+        document.getElementById("txtHint").innerHTML = "";
+        return;
+        }
+        xhttpHN = new XMLHttpRequest();
+        xhttpHN.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("queryResponse").innerHTML = this.responseText;
+            }
+        };
+        xhttpHN.open("POST", "/queryresponse", true);
+        xhttpHN.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+        
+        xhttpHN.send("hostname="+HN);
+        }
+    </script>
+</body>
+</html>

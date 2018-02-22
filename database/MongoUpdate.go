@@ -8,10 +8,8 @@ import (
 
 //Update function is currently a placeholder.
 func (md *MongoDevice) Update() {
-	session, err := mgo.Dial("10.132.0.5")
-	if err != nil {
-		panic(err)
-	}
+	var err error
+	session := MongoSession()
 	defer session.Close()
 
 	// Optional. Switch the session to a monotonic behavior.

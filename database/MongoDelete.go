@@ -8,11 +8,9 @@ import (
 
 //Delete function is currently a placeholder.
 func (md *MongoDevice) Delete() {
+	var err error
 
-	session, err := mgo.Dial("10.132.0.5")
-	if err != nil {
-		panic(err)
-	}
+	session := MongoSession()
 	defer session.Close()
 
 	// Optional. Switch the session to a monotonic behavior.

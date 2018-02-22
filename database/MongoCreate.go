@@ -17,12 +17,11 @@ type MongoDevice struct {
 //Create opens a session to the mongoDB database and adds a type
 //Device.
 func (md *MongoDevice) Create() {
+	var err error
 	//vars := mux.Vars(r)
 	//fmt.Println(vars["hostname"])
-	session, err := mgo.Dial("10.132.0.5")
-	if err != nil {
-		panic(err)
-	}
+
+	session := MongoSession()
 	defer session.Close()
 
 	// Optional. Switch the session to a monotonic behavior.
