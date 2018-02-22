@@ -9,6 +9,8 @@ type Crud interface {
 	Validate() (bool, error)
 }
 
+///TESTING PULLING A BRANCH
+
 //Device struct is used as a return vaule for necessary Database device converstions.
 type Device struct {
 	Hostname   string `bson:"hostname,omitempty"`
