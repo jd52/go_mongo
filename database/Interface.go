@@ -1,5 +1,7 @@
 package database
 
+import "gopkg.in/mgo.v2/bson"
+
 //Crud interface is used to implement the CRUD principle on a database
 type Crud interface {
 	Create()
@@ -14,9 +16,10 @@ type Crud interface {
 
 //Device struct is used as a return vaule for necessary Database device converstions.
 type Device struct {
-	Hostname   string `bson:"hostname,omitempty"`
-	IPAddress  string `bson:"ipaddress,omitempty"`
-	DeviceType string `bson:"devicetype,omitempty"`
+	Hostname   string        `bson:"hostname,omitempty"`
+	IPAddress  string        `bson:"ipaddress,omitempty"`
+	DeviceType string        `bson:"devicetype,omitempty"`
+	ID         bson.ObjectId `bson:"_id,omitempty"`
 }
 
 //StorageCreate  takes an argument of type Crud and runs the Create() method.
