@@ -12,6 +12,7 @@ type MongoDevice struct {
 	Hostname   string `bson:"hostname,omitempty"`
 	IPAddress  string `bson:"ipaddress,omitempty"`
 	DeviceType string `bson:"devicetype,omitempty"`
+	ID         string `bson:"_id,omitempty"`
 }
 
 //Create opens a session to the mongoDB database and adds a type
