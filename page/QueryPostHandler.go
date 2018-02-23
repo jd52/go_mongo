@@ -4,10 +4,12 @@ import (
 	"go_mongo/database"
 	"log"
 	"net/http"
+
+	"github.com/julienschmidt/httprouter"
 )
 
 //QueryPostHandler calls the query.gohtml after recieving a post. URL is localhost/query.
-func QueryPostHandler(res http.ResponseWriter, req *http.Request) {
+func QueryPostHandler(res http.ResponseWriter, req *http.Request, hrP httprouter.Params) {
 
 	err := req.ParseForm()
 	if err != nil {

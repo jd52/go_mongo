@@ -4,10 +4,12 @@ import (
 	"go_mongo/database"
 	"log"
 	"net/http"
+
+	"github.com/julienschmidt/httprouter"
 )
 
 //QueryResponseHandler is used for query.
-func QueryResponseHandler(res http.ResponseWriter, req *http.Request) {
+func QueryResponseHandler(res http.ResponseWriter, req *http.Request, hrP httprouter.Params) {
 	err := req.ParseForm()
 	if err != nil {
 		log.Fatalln(err)

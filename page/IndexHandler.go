@@ -4,6 +4,8 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+
+	"github.com/julienschmidt/httprouter"
 )
 
 var tpl *template.Template
@@ -13,7 +15,7 @@ func init() {
 }
 
 //IndexHandler calls the index.gohmtl. URL is localhost/index
-func IndexHandler(res http.ResponseWriter, req *http.Request) {
+func IndexHandler(res http.ResponseWriter, req *http.Request, hrP httprouter.Params) {
 	//fmt.Println("IndexHandler called")
 	rh := req.Method
 	if rh == "GET" {

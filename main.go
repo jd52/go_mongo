@@ -5,21 +5,21 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/gorilla/mux"
+	"github.com/julienschmidt/httprouter"
 )
 
 func main() {
 
-	r := mux.NewRouter()
+	router := httprouter.New()
 	//fmt.Println("Router created")
 	// Routes consist of a path and a handler function.
-	r.HandleFunc("/", page.IndexHandler)
-	r.HandleFunc("/index", page.IndexHandler)
-	r.HandleFunc("/devices", page.DeviceGetHandler).Methods("GET")
-	r.HandleFunc("/devices", page.DevicePostHandler).Methods("POST")
-	r.HandleFunc("/query", page.QueryGetHandler).Methods("GET")
-	r.HandleFunc("/query", page.QueryPostHandler).Methods("POST")
-	r.HandleFunc("/queryresponse", page.QueryResponseHandler).Methods("POST")
+	router.GET("/", page.IndexHandler)
+	router.GET("/index", page.IndexHandler)
+	router.GET("/devices", page.DeviceGetHandler)
+	router.POST("/devices", page.DevicePostHandler)
+	router.GET("/query", page.QueryGetHandler)
+	router.POST("/query", page.QueryPostHandler)
+	router.POST("/queryresponse", page.QueryResponseHandler)
 	//r.HandleFunc("/error", page.ErrorHandler).Methods("POST")
 
 	//PathPrefix allows local files to be served

@@ -5,11 +5,13 @@ import (
 	"go_mongo/database"
 	"log"
 	"net/http"
+
+	"github.com/julienschmidt/httprouter"
 )
 
 //DevicePostHandler calls the device.gohtml.  URL is localhost/device.
 //This page allows the creation of new items to the MongoDB "Device" Collection.
-func DevicePostHandler(res http.ResponseWriter, req *http.Request) {
+func DevicePostHandler(res http.ResponseWriter, req *http.Request, hrP httprouter.Params) {
 
 	err := req.ParseForm()
 	if err != nil {
@@ -37,7 +39,7 @@ func DevicePostHandler(res http.ResponseWriter, req *http.Request) {
 	validate, error := database.StorageValidate(&addD)
 
 	if error != nil {
-		ErrorHandler(error, res, req)
+		ErrorHandler(error, res, req, hrP)
 		return
 	}
 
