@@ -3,7 +3,6 @@ package logger
 import (
 	"io/ioutil"
 	"log"
-	"os"
 )
 
 /*
@@ -12,7 +11,7 @@ way it works is described below
 
 ActiveApp() Calls the LogError(*error, lvl)
 LogError(params)
-	Accepts the mem ref of the error and the string of lvl - next
+	Accepts the &error and the string lvl - next
 	Will call the NewLogger(*error, lvl ) function to return a new logger struct - next
 	Checks if the lvl is equal to [info, warn, error, panic, fatal, debug] - next
 	Once lvl is matached creates []byte from  lvl + *error.Error()
@@ -22,7 +21,7 @@ LogError(params)
 
 //NewLogger generates a new logger strcut
 func NewLogger(err error, lvl string) Logger {
-	newLogger := Logger{err: err, lvl: lvl}
+	newLogger := Logger{Err: err, Lvl: lvl}
 	return newLogger
 }
 
@@ -33,9 +32,9 @@ type MyLogger interface {
 
 //Logger is an stuct to build the logger
 type Logger struct {
-	err error
-	lvl string
-	msg string
+	Err error
+	Lvl string
+	Msg string
 }
 
 //writeLog is a method of writing received log data
@@ -48,51 +47,57 @@ func (s Logger) writeLog(FILE string, msg []byte) error {
 	return nil
 }
 
-func (s Logger) openFile(FILE string) (os.File, error) {
-	file, err := os.Open(FILE)
-	return *file, err
-}
-
-//LogError checks for errors and preforms action based on input of b
-func LogError(a *error, lvl string) {
-	lg := NewLogger(*a, lvl)
-	FILE := "/tmp/logs/log.txt"
-	if lvl == "INFO" {
-		msg := []byte("INFO" + lg.err.Error())
-		lg.writeLog(FILE, msg)
-		panic(*a)
+//chckLvl is used to evaluate the results of  &lvl
+func checkLvl(lg *Logger, err *error, lvl *string, FILE *string) (bool, error) {
+	if *lvl == "INFO" {
+		msg := []byte("INFO" + lg.Err.Error())
+		lg.writeLog(*FILE, msg)
+		panic(*err)
 	}
-	if lvl == "WARN" {
-		msg := []byte("WARN" + lg.err.Error())
-		lg.writeLog(FILE, msg)
-		panic(*a)
+	if *lvl == "WARN" {
+		msg := []byte("WARN" + lg.Err.Error())
+		lg.writeLog(*FILE, msg)
+		panic(*err)
 	}
-	if lvl == "DEBUG" {
-		msg := []byte("DEBUG" + lg.err.Error())
-		lg.writeLog(FILE, msg)
-		panic(*a)
+	if *lvl == "DEBUG" {
+		msg := []byte("DEBUG" + lg.Err.Error())
+		lg.writeLog(*FILE, msg)
+		panic(*err)
 	}
-	if lvl == "ERROR" {
-		msg := []byte("ERROR" + lg.err.Error())
-		lg.writeLog(FILE, msg)
-		panic(*a)
+	if *lvl == "ERROR" {
+		msg := []byte("ERROR" + lg.Err.Error())
+		lg.writeLog(*FILE, msg)
+		panic(*err)
 	}
-	if lvl == "FATAL" {
-		msg := []byte("FATAL" + lg.err.Error())
-		lg.writeLog(FILE, msg)
-		panic(*a)
+	if *lvl == "FATAL" {
+		msg := []byte("FATAL" + lg.Err.Error())
+		lg.writeLog(*FILE, msg)
+		panic(*err)
 	}
-	if lvl == "TRACE" {
-		msg := []byte("TRACE" + lg.err.Error())
-		lg.writeLog(FILE, msg)
-		panic(*a)
+	if *lvl == "TRACE" {
+		msg := []byte("TRACE" + lg.Err.Error())
+		lg.writeLog(*FILE, msg)
+		panic(*err)
 	}
-	if lvl == "panic" {
-		if a != nil {
-			panic(a)
+	if *lvl == "panic" {
+		if *err != nil {
+			panic(*err)
 		}
 	}
-	if lvl == "log_fatal" {
-		log.Fatal(*a)
+	if *lvl == "log_fatal" {
+		log.Fatal(*err)
 	}
+	if *lvl == "" {
+		return false, true
+	}
+	return false, false
+}
+
+//LogError checks for errors and preforms action based on received logging level
+//returns bool based on success of logger
+func LogError(err *error, lvl string) bool {
+	lg := NewLogger(*err, lvl)
+	file := "/tmp/logs/log.txt"
+	results, nerr := checkLvl(&lg, &lg.Err, &lvl, &file)
+	return results
 }
