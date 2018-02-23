@@ -13,16 +13,22 @@ func QueryPostHandler(res http.ResponseWriter, req *http.Request) {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	//andOr := req.FormValue("anyOr")
+
 	queryDevice := database.MongoDevice{
 		Hostname:   req.FormValue("hostname"),
 		IPAddress:  req.FormValue("ipAddress"),
 		DeviceType: req.FormValue("deviceType"),
+		ID:         req.FormValue("_id"),
 	}
-	//
+
+	if queryDevice.ID != "" {
+		database.StorageDelete(&queryDevice)
+	}
+
 	deviceList := database.StorageRead(&queryDevice)
 	err = tpl.ExecuteTemplate(res, "query.gohtml", deviceList)
 	if err != nil {
 		log.Fatalln(err)
 	}
+
 }

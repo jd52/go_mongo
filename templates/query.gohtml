@@ -14,6 +14,7 @@ nav .queryActive {
         font-style: italic;
         font-weight: bold;
 }
+th,td{text-align:center}
 </style>
 
 <body>
@@ -45,12 +46,14 @@ nav .queryActive {
         </tr>
             {{range .}}
                     <tr>
+                    <tr>Delete</tr>
                     <td>{{.Hostname}}</td>
                     <td>{{.IPAddress}}</td>
                     <td>{{.DeviceType}}</td>
                     </tr>
             {{end}}
         </table>
+        
     </div>
     </main>
 </div>

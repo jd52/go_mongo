@@ -1,5 +1,7 @@
 package database
 
+import "gopkg.in/mgo.v2/bson"
+
 //Crud interface is used to implement the CRUD principle on a database
 type Crud interface {
 	Create()
@@ -9,11 +11,15 @@ type Crud interface {
 	Validate() (bool, error)
 }
 
+///TESTING PULLING A BRANCH
+///TESTING A SECOND PULL
+
 //Device struct is used as a return vaule for necessary Database device converstions.
 type Device struct {
-	Hostname   string `bson:"hostname,omitempty"`
-	IPAddress  string `bson:"ipaddress,omitempty"`
-	DeviceType string `bson:"devicetype,omitempty"`
+	Hostname   string        `bson:"hostname,omitempty"`
+	IPAddress  string        `bson:"ipaddress,omitempty"`
+	DeviceType string        `bson:"devicetype,omitempty"`
+	ID         bson.ObjectId `bson:"_id,omitempty"`
 }
 
 //StorageCreate  takes an argument of type Crud and runs the Create() method.
@@ -39,4 +45,11 @@ func StorageDelete(i Crud) {
 //StorageValidate  takes an argument of type Crud and runs the Delete() method.
 func StorageValidate(i Crud) (bool, error) {
 	return i.Validate()
+}
+
+//FormatMongoID converts the received a string value in the format of ObjectIdHex("ID")
+//and the wrapper.
+func FormatMongoID(id string) string {
+	convert := id[13 : len(id)-2]
+	return convert
 }

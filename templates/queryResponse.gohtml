@@ -1,17 +1,25 @@
 <div id="queryResponse">
+    <style>
+        th,td{text-align: center;}
+    </style>
     <h1>Devices</h1>
+    <form method="POST" action="/query">
         <table>
         <tr>
+            <th>Delete</th>
             <th>Hostname</th>
             <th>IP Address</th>
-            <th>Device Type</th>
+            <th>Device Type</th>            
         </tr>
             {{range .}}
                     <tr>
+                    <td style="text-align: center;"><input type="checkbox" name="_id" value={{.ID}}></td>
                     <td>{{.Hostname}}</td>
                     <td>{{.IPAddress}}</td>
                     <td>{{.DeviceType}}</td>
                     </tr>
             {{end}}
         </table>
+        <input type="submit" value="Delete">
+    </form>
     </div>
