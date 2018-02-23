@@ -20,7 +20,7 @@ func (md *MongoDevice) Delete() {
 
 	//The id variable changes the received ID of type string and converts it to a
 	//bson hex.
-	id := bson.ObjectIdHex(md.ID)
+	id := bson.ObjectIdHex(FormatMongoID(md.ID))
 
 	err = session.DB("test").C("device").RemoveId(id)
 	if err != nil {

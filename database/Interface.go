@@ -46,3 +46,10 @@ func StorageDelete(i Crud) {
 func StorageValidate(i Crud) (bool, error) {
 	return i.Validate()
 }
+
+//FormatMongoID converts the received a string value in the format of ObjectIdHex("ID")
+//and the wrapper.
+func FormatMongoID(id string) string {
+	convert := id[13 : len(id)-2]
+	return convert
+}
