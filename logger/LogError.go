@@ -20,6 +20,7 @@ LogError(params)
 
 */
 
+//LogLevel is a struct to refrence Logging levels
 type LogLevel struct {
 	Info    string `json:"info"`
 	Warning string `json:"warning"`
