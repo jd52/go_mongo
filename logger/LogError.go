@@ -88,16 +88,16 @@ func checkLvl(lg *Logger, err *error, lvl *string, FILE *string) (bool, error) {
 		log.Fatal(*err)
 	}
 	if *lvl == "" {
-		return false, true
+		return false, nil
 	}
-	return false, false
+	return false, nil
 }
 
 //LogError checks for errors and preforms action based on received logging level
-//returns bool based on success of logger
-func LogError(err *error, lvl string) bool {
+//returns bool based on success of logger and standard error
+func LogError(err *error, lvl string) (bool, error) {
 	lg := NewLogger(*err, lvl)
 	file := "/tmp/logs/log.txt"
 	results, nerr := checkLvl(&lg, &lg.Err, &lvl, &file)
-	return results
+	return results, nerr
 }
