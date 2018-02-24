@@ -1,7 +1,6 @@
 package database
 
 import (
-	"fmt"
 	"go_mongo/logger"
 
 	"github.com/globalsign/mgo"
@@ -30,7 +29,8 @@ func (md *MongoDevice) Create() {
 
 	device := session.DB("test").C("device")
 	err = device.Insert(md)
-	results, _ := logger.LogError(&err, "test")
-	fmt.Println(results)
+	if err != nil {
+		logger.LogError(&err, "test")
+	}
 
 }
