@@ -5,16 +5,24 @@ import (
 )
 
 /*
-the Logger Package provides support to Write the received err to a log file the
-way it works is described below
+The Logger Package provides support to Write the received err or a custom message
+to a log file. Two main functions can be used directly with the pacakge.
+#####################
+LogError(err error, level string) - Used to log captured error message and returns an error if encountered
+LogErrorCustom(err error, level string, CustomMsg string) - used to log custom messages returns an error if encountered
+#####################
+To used the packaged as an abstracted instances
 
-ActiveApp() Calls the LogError(*error, lvl)
-LogError(params)
-	Accepts the &error and the string lvl - next
-	Will call the NewLogger(*error, lvl ) function to return a new logger struct - next
-	Checks if the lvl is equal to [info, warn, error, panic, fatal, debug] - next
-	Once lvl is matached creates []byte from  lvl + *error.Error()
-	writes the []byte to file
+#Import logger package
+#Declare Logger type
+ex: var lg Logger
+
+#Set LogFile
+ex: lg.SetLogFile("test1333.txt") returns error based on if the file was able to be opened
+
+#Write to Log
+ex: lg.WriteLog(s []byte) returns error based on if file is able to be written
+
 
 */
 
@@ -45,12 +53,12 @@ type LogLevel struct {
 }
 
 //WriteLog is an internal method of writing received log data
-func (s Logger) WriteLog(FILE *os.File, msg *[]byte) error {
+func (s Logger) WriteLog(msg *[]byte) error {
 	_, err := s.File.Write(*msg)
 	if err != nil {
 		return err
 	}
-	defer FILE.Close()
+	defer s.File.Close()
 	return err
 }
 
@@ -75,23 +83,34 @@ func (s Logger) chkFile(fileName *string) error {
 	return statErr
 }
 
-func (s Logger) openFile(fileName *string) (os.File, error) {
+func (s *Logger) openFile(fileName *string) (os.File, error) {
 	fileResult, fileErr := os.OpenFile(*fileName, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0777)
 	return *fileResult, fileErr
 }
 
 //SetLogFile is an method that allows the operator to change the default log name
-func (s Logger) SetLogFile(fileName *string) {
-	s.LogFile = *fileName
+func (s *Logger) SetLogFile(fileName string) error {
+	s.LogFile = fileName
+	file, err := os.OpenFile(s.LogFile, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0777)
+	if err != nil {
+		return err
+	}
+	s.File = *file
+	return err
 }
 
 //SetLogDir is an method that allows the operator to change the default log directory
-func (s Logger) SetLogDir(dir string) {
+func (s *Logger) SetLogDir(dir string) {
 	s.LogDir = dir
 }
 
+//SetFile is an method that allows the operator to set the os.File struct that will be used
+func (s *Logger) SetFile(file os.File) {
+	s.File = file
+}
+
 //GetCwDir is an method that allows the operator to set the current working director
-func (s Logger) GetCwDir() (string, error) {
+func (s *Logger) GetCwDir() (string, error) {
 	dir, err := os.Getwd()
 	if err != nil {
 		return "", err
@@ -103,7 +122,7 @@ func (s Logger) GetCwDir() (string, error) {
 
 //GetDir is an method that allows the operator to change the cwd and set the CwDir attribute
 //to the new directory
-func (s Logger) GetDir(dir *string) error {
+func (s *Logger) GetDir(dir *string) error {
 	err := os.Chdir(*dir)
 	if err != nil {
 		return err
@@ -113,17 +132,17 @@ func (s Logger) GetDir(dir *string) error {
 }
 
 //setLogdir is a internal method that sets the TempDir attribute
-func (s Logger) setLogdir() string {
+func (s *Logger) setLogdir() string {
 	TempDir := (s.CwDir + "/" + s.LogDir)
 	return TempDir
 }
 
-func (s Logger) setFilefqn() string {
+func (s *Logger) setFilefqn() string {
 	FileFQN := (s.CwDir + "/" + s.LogDir + "/" + s.LogFile)
 	return FileFQN
 }
 
-func (s Logger) setCustomMsg(msg string) string {
+func (s *Logger) setCustomMsg(msg string) string {
 	s.CustomMsg = msg
 	return s.CustomMsg
 }

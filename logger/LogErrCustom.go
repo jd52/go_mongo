@@ -1,22 +1,18 @@
 package logger
 
 import (
-	"fmt"
 	"os"
 )
 
 //LogErrCustom allows the operator to post a custom log message in place of the error
 //returns error
 func LogErrCustom(ERR *error, lvl string, customMsg string) error {
-	fmt.Println("LogErrCustom() Processing")
 	lg := NewLogger(*ERR, lvl)
 	lg.LogFile = "log.txt"
 	lg.LogDir = "temp"
 	lg.Caller = MyCaller()
 	lg.LogCustom = true
 	lg.CustomMsg = lg.setCustomMsg(customMsg)
-	fmt.Println(lg.CustomMsg)
-	fmt.Println(customMsg)
 	var err error
 
 	//Retrevies the Current Working Directory

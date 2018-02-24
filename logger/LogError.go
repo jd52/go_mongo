@@ -1,7 +1,6 @@
 package logger
 
 import (
-	"fmt"
 	"io/ioutil"
 	"os"
 	"time"
@@ -23,16 +22,13 @@ LogError(params)
 
 //getTempdir is an internal method that gets the cwd and
 func getTempdir() (string, error) {
-	fmt.Println("getTempdir() processing")
 	dir, wdErr := os.Getwd()
 	if wdErr != nil {
 		return "", wdErr
 	}
 
 	newDir := (dir + "/temp")
-	fmt.Println("New Direcotry")
-	fmt.Println(newDir)
-	fmt.Println("Created Directory")
+
 	os.Mkdir("temp", 0777)
 	return newDir, wdErr
 
@@ -53,17 +49,15 @@ func checkLvl(lg *Logger, ERR *error, lvl string, FILE *os.File) error {
 		timeNow := time.Now()
 		Currtime := timeNow.Format("2006-01-02 15:04:05")
 
-		// fmt.Println(callerFunc)
-		fmt.Println(lg.CustomMsg)
 		if lg.LogCustom == false {
 			msg := []byte("Level:" + lvl + " " + Currtime + " FUNC:" + lg.Caller + " MSG:" + lg.Err.Error() + "\n")
-			err := lg.WriteLog(FILE, &msg)
+			err := lg.WriteLog(&msg)
 			if err != nil {
 				return err
 			}
 		}
 		msg := []byte("Level:" + lvl + " " + Currtime + " FUNC:" + lg.Caller + " MSG:" + lg.CustomMsg + "\n")
-		err := lg.WriteLog(FILE, &msg)
+		err := lg.WriteLog(&msg)
 		if err != nil {
 			return err
 		}
