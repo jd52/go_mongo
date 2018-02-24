@@ -75,23 +75,23 @@ func (s Logger) chkFile(fileName *string) error {
 	return statErr
 }
 
-func (s Logger) openFile(fileName *string) (os.File, error) {
+func (s *Logger) openFile(fileName *string) (os.File, error) {
 	fileResult, fileErr := os.OpenFile(*fileName, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0777)
 	return *fileResult, fileErr
 }
 
 //SetLogFile is an method that allows the operator to change the default log name
-func (s Logger) SetLogFile(fileName *string) {
+func (s *Logger) SetLogFile(fileName *string) {
 	s.LogFile = *fileName
 }
 
 //SetLogDir is an method that allows the operator to change the default log directory
-func (s Logger) SetLogDir(dir string) {
+func (s *Logger) SetLogDir(dir string) {
 	s.LogDir = dir
 }
 
 //GetCwDir is an method that allows the operator to set the current working director
-func (s Logger) GetCwDir() (string, error) {
+func (s *Logger) GetCwDir() (string, error) {
 	dir, err := os.Getwd()
 	if err != nil {
 		return "", err
@@ -103,7 +103,7 @@ func (s Logger) GetCwDir() (string, error) {
 
 //GetDir is an method that allows the operator to change the cwd and set the CwDir attribute
 //to the new directory
-func (s Logger) GetDir(dir *string) error {
+func (s *Logger) GetDir(dir *string) error {
 	err := os.Chdir(*dir)
 	if err != nil {
 		return err
@@ -113,17 +113,17 @@ func (s Logger) GetDir(dir *string) error {
 }
 
 //setLogdir is a internal method that sets the TempDir attribute
-func (s Logger) setLogdir() string {
+func (s *Logger) setLogdir() string {
 	TempDir := (s.CwDir + "/" + s.LogDir)
 	return TempDir
 }
 
-func (s Logger) setFilefqn() string {
+func (s *Logger) setFilefqn() string {
 	FileFQN := (s.CwDir + "/" + s.LogDir + "/" + s.LogFile)
 	return FileFQN
 }
 
-func (s Logger) setCustomMsg(msg string) string {
+func (s *Logger) setCustomMsg(msg string) string {
 	s.CustomMsg = msg
 	return s.CustomMsg
 }
