@@ -51,13 +51,13 @@ func checkLvl(lg *Logger, ERR *error, lvl string, FILE *os.File) error {
 
 		if lg.LogCustom == false {
 			msg := []byte("Level:" + lvl + " " + Currtime + " FUNC:" + lg.Caller + " MSG:" + lg.Err.Error() + "\n")
-			err := lg.WriteLog(FILE, &msg)
+			err := lg.WriteLog(&msg)
 			if err != nil {
 				return err
 			}
 		}
 		msg := []byte("Level:" + lvl + " " + Currtime + " FUNC:" + lg.Caller + " MSG:" + lg.CustomMsg + "\n")
-		err := lg.WriteLog(FILE, &msg)
+		err := lg.WriteLog(&msg)
 		if err != nil {
 			return err
 		}
