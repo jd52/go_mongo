@@ -9,7 +9,7 @@ import (
 )
 
 //Read returns user from the users Collection
-func (us *User) Read() bool{
+func (us *User) Read() bool {
 
 	var err error
 	session := MongoSession()
@@ -19,10 +19,8 @@ func (us *User) Read() bool{
 
 	session.SetMode(mgo.Monotonic, true)
 
-	result := User{}
-
 	if us.Username != "" {
-		err = deviceCollect.Find(bson.M{"username": bson.RegEx{Pattern: us.Username, Options: "i"}}).All(&result)
+		err = deviceCollect.Find(bson.M{"username": bson.RegEx{Pattern: us.Username, Options: "i"}}).One(&us)
 		if err != nil {
 			return true
 		}

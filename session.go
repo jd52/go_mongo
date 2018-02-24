@@ -17,7 +17,6 @@ func getUser(w http.ResponseWriter, req *http.Request) database.User {
 			Name:  "gomoje.comsession",
 			Value: sID.String(),
 		}
-		fmt.Println(c)
 
 	}
 
@@ -33,6 +32,7 @@ func getUser(w http.ResponseWriter, req *http.Request) database.User {
 		u.Username = s.Username
 		u.Read()
 	}
+	fmt.Println(u)
 	return u
 }
 
@@ -41,11 +41,11 @@ func alreadyLoggedIn(req *http.Request) bool {
 	if err != nil {
 		return false
 	}
-	
+
 	var s database.Session
-	
+
 	s.SessionID = c.Value
 	ok := s.Read()
-	
+
 	return ok
 }

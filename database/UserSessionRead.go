@@ -20,7 +20,7 @@ func (se *Session) Read() bool{
 	session.SetMode(mgo.Monotonic, true)
 
 	if se.SessionID != "" {
-		err = deviceCollect.Find(bson.M{"sessionid": bson.RegEx{Pattern: se.SessionID, Options: "i"}}).All(&se)
+		err = deviceCollect.Find(bson.M{"sessionid": bson.RegEx{Pattern: se.SessionID, Options: "i"}}).One(&se)
 		if err != nil {
 			return false
 		}
