@@ -1,0 +1,93 @@
+New File
+LogLevl: testFunc: go_mongo/logger.LogErrorMSG: request Content-Type isn't multipart/form-data
+LogLevl: testFunc: go_mongo/logger.LogErrorMSG: request Content-Type isn't multipart/form-data
+LogLevl: testFunc: go_mongo/logger.LogErrorMSG: request Content-Type isn't multipart/form-data
+LogLevl: testFunc: go_mongo/logger.LogErrorMSG: request Content-Type isn't multipart/form-data
+LogLevl: testFunc: go_mongo/logger.LogErrorMSG: request Content-Type isn't multipart/form-data
+LogLevl: testFunc: go_mongo/logger.LogErrorMSG: request Content-Type isn't multipart/form-data
+LogLevl: testFunc: go_mongo/logger.LogErrorMSG: no reachable servers
+LogLevl: testFunc: go_mongo/logger.LogErrorMSG: no reachable servers
+LogLevl: testFunc: go_mongo/logger.LogErrorMSG: no reachable servers
+LogLevl: testFunc: go_mongo/logger.LogErrorMSG: no reachable servers
+LogLevl: test Func: go_mongo/logger.LogError MSG: request Content-Type isn't multipart/form-data
+LogLevl: test Func: go_mongo/logger.LogError MSG: request Content-Type isn't multipart/form-data
+LogLevl: test Func: go_mongo/logger.LogError MSG: request Content-Type isn't multipart/form-data
+LogLevl: test Func: go_mongo/logger.LogError MSG: no reachable servers
+LogLevl: test Func: go_mongo/logger.LogError MSG: no reachable servers
+LogLevl: test Func: go_mongo/logger.LogError MSG: no reachable servers
+LogLevl: test Func: go_mongo/logger.LogError MSG: request Content-Type isn't multipart/form-data
+LogLevl: test Func: go_mongo/logger.LogError MSG: no reachable servers
+LogLevl:test Func:go_mongo/logger.LogError MSG:request Content-Type isn't multipart/form-data
+LogLevl:test Func:go_mongo/logger.LogError MSG:request Content-Type isn't multipart/form-data
+LogLevl:test Func:go_mongo/logger.LogError MSG:request Content-Type isn't multipart/form-data
+LogLevl:test Func:go_mongo/logger.LogError MSG:request Content-Type isn't multipart/form-data
+LogLevl:test Func:go_mongo/logger.LogError MSG:no reachable servers
+LogLevl:test Func:go_mongo/logger.LogError MSG:no reachable servers
+LogLevl:test Func:go_mongo/logger.LogError MSG:no reachable servers
+LogLevl:test Func:go_mongo/logger.LogError MSG:no reachable servers
+Level:test FUNC:go_mongo/logger.LogError MSG:request Content-Type isn't multipart/form-data
+Level:test FUNC:go_mongo/logger.LogError MSG:request Content-Type isn't multipart/form-data
+Level:test FUNC:go_mongo/logger.LogError MSG:request Content-Type isn't multipart/form-data
+Level:test FUNC:go_mongo/logger.LogError MSG:request Content-Type isn't multipart/form-data
+Level:test FUNC:go_mongo/logger.LogError MSG:request Content-Type isn't multipart/form-data
+Level:test FUNC:go_mongo/logger.LogError MSG:request Content-Type isn't multipart/form-data
+Level:test FUNC:go_mongo/logger.LogError MSG:no reachable servers
+Level:test FUNC:go_mongo/logger.LogError MSG:no reachable servers
+Level:test FUNC:go_mongo/logger.LogError MSG:no reachable servers
+Level:test FUNC:go_mongo/logger.LogError MSG:no reachable servers
+Level:test FUNC:go_mongo/logger.LogError MSG:no reachable servers
+Level:test FUNC:go_mongo/logger.LogError MSG:no reachable servers
+Level:test FUNC:go_mongo/logger.LogError MSG:request Content-Type isn't multipart/form-data
+Level:test FUNC:go_mongo/logger.LogError MSG:request Content-Type isn't multipart/form-data
+Level:test FUNC:go_mongo/logger.LogError MSG:request Content-Type isn't multipart/form-data
+Level:test FUNC:go_mongo/logger.LogError MSG:request Content-Type isn't multipart/form-data
+Level:test FUNC:go_mongo/logger.LogError MSG:no reachable servers
+Level:test FUNC:go_mongo/logger.LogError MSG:request Content-Type isn't multipart/form-data
+Level:test FUNC:go_mongo/logger.LogError MSG:request Content-Type isn't multipart/form-data
+Level:test FUNC:go_mongo/logger.LogError MSG:no reachable servers
+Level:test FUNC:go_mongo/logger.LogError MSG:no reachable servers
+Level:test FUNC:go_mongo/logger.LogError MSG:no reachable servers
+Level:test FUNC:go_mongo/logger.LogError MSG:no reachable servers
+Level:test FUNC:go_mongo/logger.LogError MSG:no reachable servers
+Level:test FUNC:go_mongo/logger.LogError MSG:request Content-Type isn't multipart/form-data
+Level:test FUNC:go_mongo/logger.LogError MSG:request Content-Type isn't multipart/form-data
+Level:test FUNC:go_mongo/logger.LogError MSG:request Content-Type isn't multipart/form-data
+Level:test FUNC:go_mongo/logger.LogError MSG:no reachable servers
+Level:test FUNC:go_mongo/logger.LogError MSG:no reachable servers
+Level:test FUNC:go_mongo/logger.LogError MSG:request Content-Type isn't multipart/form-data
+Level:test FUNC:go_mongo/logger.LogError MSG:no reachable servers
+Level:test FUNC:go_mongo/logger.LogError MSG:request Content-Type isn't multipart/form-data
+Level:test FUNC:go_mongo/logger.LogError MSG:no reachable servers
+Level:test FUNC:go_mongo/logger.LogError MSG:request Content-Type isn't multipart/form-data
+Level:test FUNC:go_mongo/logger.LogError MSG:no reachable servers
+Time 2018-02-24 12:26:36 Level:test FUNC:go_mongo/logger.LogError MSG:request Content-Type isn't multipart/form-data
+Time 2018-02-24 12:26:37 Level:test FUNC:go_mongo/logger.LogError MSG:request Content-Type isn't multipart/form-data
+Time 2018-02-24 12:26:37 Level:test FUNC:go_mongo/logger.LogError MSG:request Content-Type isn't multipart/form-data
+Time 2018-02-24 12:26:47 Level:test FUNC:go_mongo/logger.LogError MSG:no reachable servers
+Time 2018-02-24 12:26:47 Level:test FUNC:go_mongo/logger.LogError MSG:no reachable servers
+Time 2018-02-24 12:26:47 Level:test FUNC:go_mongo/logger.LogError MSG:no reachable servers
+Time 2018-02-24 12:26:47 Level:test FUNC:go_mongo/logger.LogError MSG:request Content-Type isn't multipart/form-data
+Level: test2018-02-24 12:27:36 FUNC:go_mongo/logger.LogError MSG:request Content-Type isn't multipart/form-data
+Level: test2018-02-24 12:27:36 FUNC:go_mongo/logger.LogError MSG:request Content-Type isn't multipart/form-data
+Level: test2018-02-24 12:27:36 FUNC:go_mongo/logger.LogError MSG:request Content-Type isn't multipart/form-data
+Level: test2018-02-24 12:27:46 FUNC:go_mongo/logger.LogError MSG:no reachable servers
+Level: test2018-02-24 12:27:47 FUNC:go_mongo/logger.LogError MSG:no reachable servers
+Level: test2018-02-24 12:27:47 FUNC:go_mongo/logger.LogError MSG:no reachable servers
+Level: test2018-02-24 12:27:47 FUNC:go_mongo/logger.LogError MSG:request Content-Type isn't multipart/form-data
+Level:test 2018-02-24 12:28:22 FUNC:go_mongo/logger.LogError MSG:request Content-Type isn't multipart/form-data
+Level:test 2018-02-24 12:28:22 FUNC:go_mongo/logger.LogError MSG:request Content-Type isn't multipart/form-data
+Level:test 2018-02-24 12:28:22 FUNC:go_mongo/logger.LogError MSG:request Content-Type isn't multipart/form-data
+Level:test 2018-02-24 12:28:32 FUNC:go_mongo/logger.LogError MSG:no reachable servers
+Level:test 2018-02-24 12:28:32 FUNC:go_mongo/logger.LogError MSG:no reachable servers
+Level:test 2018-02-24 12:28:32 FUNC:go_mongo/logger.LogError MSG:no reachable servers
+Level:test 2018-02-24 12:28:32 FUNC:go_mongo/logger.LogError MSG:request Content-Type isn't multipart/form-data
+Level:test 2018-02-24 12:36:01 FUNC:go_mongo/logger.LogError MSG:request Content-Type isn't multipart/form-data
+Level:test 2018-02-24 12:36:01 FUNC:go_mongo/logger.LogError MSG:request Content-Type isn't multipart/form-data
+Level:test 2018-02-24 12:36:02 FUNC:go_mongo/logger.LogError MSG:request Content-Type isn't multipart/form-data
+Level:test 2018-02-24 12:36:02 FUNC:go_mongo/logger.LogError MSG:request Content-Type isn't multipart/form-data
+Level:test 2018-02-24 12:36:03 FUNC:go_mongo/logger.LogError MSG:request Content-Type isn't multipart/form-data
+Level:test 2018-02-24 12:36:11 FUNC:go_mongo/logger.LogError MSG:no reachable servers
+Level:test 2018-02-24 12:36:12 FUNC:go_mongo/logger.LogError MSG:no reachable servers
+Level:test 2018-02-24 12:36:13 FUNC:go_mongo/logger.LogError MSG:no reachable servers
+Level:test 2018-02-24 12:36:13 FUNC:go_mongo/logger.LogError MSG:no reachable servers
+Level:test 2018-02-24 12:36:13 FUNC:go_mongo/logger.LogError MSG:no reachable servers
