@@ -31,6 +31,7 @@ type Logger struct {
 	CustomMsg string
 	LogCustom bool
 	Caller    string
+	File      os.File
 }
 
 //LogLevel is a struct to refrence Logging levels
@@ -43,9 +44,9 @@ type LogLevel struct {
 	Debug   string `json:"debug"`
 }
 
-//writeLog is an internal method of writing received log data
-func (s Logger) writeLog(FILE *os.File, msg *[]byte) error {
-	_, err := FILE.Write(*msg)
+//WriteLog is an internal method of writing received log data
+func (s Logger) WriteLog(FILE *os.File, msg *[]byte) error {
+	_, err := s.File.Write(*msg)
 	if err != nil {
 		return err
 	}
