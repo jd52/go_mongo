@@ -24,6 +24,7 @@ func DevicePostHandler(res http.ResponseWriter, req *http.Request) {
 	}
 	f, _, fileErr := req.FormFile("bulkFile")
 	if fileErr != nil {
+		logger.LogErrCustom(&err, "test", "This is my Custom Message Test")
 		logger.LogError(&fileErr, "test")
 	}
 

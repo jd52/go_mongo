@@ -50,13 +50,21 @@ func createLogFile(filename *string) error {
 func checkLvl(lg *Logger, ERR *error, lvl string, FILE *os.File) error {
 	var err error
 	if lvl == "test" {
-		callerFunc := MyCaller()
+		// callerFunc := MyCaller()
 		timeNow := time.Now()
 
 		Currtime := timeNow.Format("2006-01-02 15:04:05")
 
-		fmt.Println(callerFunc)
-		msg := []byte("Level:" + lvl + " " + Currtime + " FUNC:" + callerFunc + " MSG:" + lg.Err.Error() + "\n")
+		// fmt.Println(callerFunc)
+		fmt.Println(lg.CustomMsg)
+		if lg.LogCustom == false {
+			msg := []byte("Level:" + lvl + " " + Currtime + " FUNC:" + lg.Caller + " MSG:" + lg.Err.Error() + "\n")
+			err := lg.writeLog(FILE, &msg)
+			if err != nil {
+				return err
+			}
+		}
+		msg := []byte("Level:" + lvl + " " + Currtime + " FUNC:" + lg.Caller + " MSG:" + lg.CustomMsg + "\n")
 		err := lg.writeLog(FILE, &msg)
 		if err != nil {
 			return err
@@ -68,11 +76,12 @@ func checkLvl(lg *Logger, ERR *error, lvl string, FILE *os.File) error {
 }
 
 //LogError checks for errors and preforms action based on received logging level
-//returns bool based on success of logger and standard error
+//returns error
 func LogError(ERR *error, lvl string) error {
-
 	lg := NewLogger(*ERR, lvl)
+	lg.Caller = MyCaller()
 	lg.LogFile = "log.txt"
+	lg.LogCustom = false
 	lg.LogDir = "temp"
 
 	var err error

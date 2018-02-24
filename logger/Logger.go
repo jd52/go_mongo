@@ -20,14 +20,17 @@ LogError(params)
 
 //Logger is an stuct to build the logger
 type Logger struct {
-	Err     error
-	Lvl     string
-	Msg     string
-	LogFile string
-	LogDir  string
-	CwDir   string
-	TempDir string
-	FileFQN string
+	Err       error
+	Lvl       string
+	Msg       string
+	LogFile   string
+	LogDir    string
+	CwDir     string
+	TempDir   string
+	FileFQN   string
+	CustomMsg string
+	LogCustom bool
+	Caller    string
 }
 
 //LogLevel is a struct to refrence Logging levels
@@ -117,4 +120,9 @@ func (s Logger) setLogdir() string {
 func (s Logger) setFilefqn() string {
 	FileFQN := (s.CwDir + "/" + s.LogDir + "/" + s.LogFile)
 	return FileFQN
+}
+
+func (s Logger) setCustomMsg(msg string) string {
+	s.CustomMsg = msg
+	return s.CustomMsg
 }
