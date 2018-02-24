@@ -1,0 +1,18 @@
+Level:test 2018-02-24 13:22:33 FUNC: MSG:This is my Custom Message Test
+Level:test 2018-02-24 13:22:33 FUNC:go_mongo/page.DevicePostHandler MSG:request Content-Type isn't multipart/form-data
+Level:test 2018-02-24 13:22:33 FUNC: MSG:This is my Custom Message Test
+Level:test 2018-02-24 13:22:33 FUNC:go_mongo/page.DevicePostHandler MSG:request Content-Type isn't multipart/form-data
+Level:test 2018-02-24 13:22:44 FUNC:go_mongo/database.MongoSession MSG:no reachable servers
+Level:test 2018-02-24 13:22:44 FUNC:go_mongo/database.MongoSession MSG:no reachable servers
+Level:test 2018-02-24 13:22:44 FUNC: MSG:This is my Custom Message Test
+Level:test 2018-02-24 13:22:44 FUNC:go_mongo/page.DevicePostHandler MSG:request Content-Type isn't multipart/form-data
+Level:test 2018-02-24 13:22:54 FUNC:go_mongo/database.MongoSession MSG:no reachable servers
+Level:test 2018-02-24 13:23:46 FUNC:go_mongo/page.DevicePostHandler MSG:This is my Custom Message Test
+Level:test 2018-02-24 13:23:46 FUNC:go_mongo/page.DevicePostHandler MSG:request Content-Type isn't multipart/form-data
+Level:test 2018-02-24 13:23:46 FUNC:go_mongo/page.DevicePostHandler MSG:This is my Custom Message Test
+Level:test 2018-02-24 13:23:46 FUNC:go_mongo/page.DevicePostHandler MSG:request Content-Type isn't multipart/form-data
+Level:test 2018-02-24 13:23:46 FUNC:go_mongo/page.DevicePostHandler MSG:This is my Custom Message Test
+Level:test 2018-02-24 13:23:46 FUNC:go_mongo/page.DevicePostHandler MSG:request Content-Type isn't multipart/form-data
+Level:test 2018-02-24 13:23:56 FUNC:go_mongo/database.MongoSession MSG:no reachable servers
+Level:test 2018-02-24 13:23:57 FUNC:go_mongo/database.MongoSession MSG:no reachable servers
+Level:test 2018-02-24 13:23:57 FUNC:go_mongo/database.MongoSession MSG:no reachable servers
