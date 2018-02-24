@@ -18,8 +18,6 @@ type MongoDevice struct {
 //Device.
 func (md *MongoDevice) Create() {
 	var err error
-	//vars := mux.Vars(r)
-	//fmt.Println(vars["hostname"])
 
 	session := MongoSession()
 	defer session.Close()
