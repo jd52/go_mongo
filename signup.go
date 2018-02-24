@@ -35,8 +35,13 @@ func signup(w http.ResponseWriter, req *http.Request, hrP httprouter.Params) {
 		var u database.User
 
 		// get form values
-		un := req.FormValue("username")
-		p := req.FormValue("password")
+		u.Username = req.FormValue("username")
+		bcPass, err := bcrypt.GenerateFromPassword([]byte(u.Password), bcrypt.MinCost)
+		if err != nil {
+			http.Error(w, "Internal server error", http.StatusInternalServerError)
+			return
+		}
+		u.Password = bcPass
 
 		// username taken?
 		if _, ok := u.Read(); ok {
@@ -45,21 +50,19 @@ func signup(w http.ResponseWriter, req *http.Request, hrP httprouter.Params) {
 		}
 
 		// create session
+		var s database.Session
 		sID, _ := uuid.NewV4()
 		c := &http.Cookie{
 			Name:  "gomoje.comsession",
 			Value: sID.String(),
 		}
 		http.SetCookie(w, c)
-		dbSessions[c.Value] = un
+		s.Session = c.Value
+		s.Username = u.Username
+		err := s.Create
 
 		// store user in dbUsers
-		bs, err := bcrypt.GenerateFromPassword([]byte(p), bcrypt.MinCost)
-		if err != nil {
-			http.Error(w, "Internal server error", http.StatusInternalServerError)
-			return
-		}
-		u = database.User{Username: un,Password: bs}
+
 		u.Create()
 
 		// redirect

@@ -1,14 +1,14 @@
 package main
 
 import (
-	"go_mongo/database"
 	"fmt"
+	"go_mongo/database"
 	"net/http"
 
 	"github.com/satori/go.uuid"
 )
 
-func getUser(w http.ResponseWriter, req *http.Request) user {
+func getUser(w http.ResponseWriter, req *http.Request) database.User {
 	// get cookie
 	c, err := req.Cookie("gomoje.comsession")
 	if err != nil {
@@ -20,13 +20,17 @@ func getUser(w http.ResponseWriter, req *http.Request) user {
 		fmt.Println(c)
 
 	}
-	//Next line may not be required, commenting it
-	// http.SetCookie(w, c)
+
+	http.SetCookie(w, c)
 
 	// if the user exists already, get user
-	var u user
-	if un, ok := [c.Value]; ok {
-		u = dbUsers[un]
+	var u database.User
+	var s database.Session
+
+	s.Session = c.Value
+	if se, ok := s.Read; ok {
+		u.Username = se.Username.String()
+		u = u.Read
 	}
 	return u
 }
@@ -36,7 +40,8 @@ func alreadyLoggedIn(req *http.Request) bool {
 	if err != nil {
 		return false
 	}
+	u := database.User
 	un := dbSessions[c.Value]
-	_, ok := database.User.Read
+	_, ok := u.Read
 	return ok
 }

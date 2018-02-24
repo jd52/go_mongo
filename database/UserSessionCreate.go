@@ -3,15 +3,13 @@ package database
 import (
 	"log"
 
-	uuid "github.com/satori/go.uuid"
-
 	"github.com/globalsign/mgo"
 )
 
 //Session struct stores an authenticated username to its matching session uuid
 type Session struct {
-	Username string    `bson:"username"`
-	Session  uuid.UUID `bson:"session"`
+	Username string `bson:"username"`
+	Session  string `bson:"session"`
 }
 
 //Create opens a session to the mongoDB database and adds a type

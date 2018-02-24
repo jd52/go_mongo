@@ -9,7 +9,7 @@ import (
 )
 
 //Read returns all hostnames from the Device Collection
-func (se *Session) Read() (Session,error) {
+func (se *Session) Read() (Session,bool) {
 
 	var err error
 	session := MongoSession()
@@ -21,14 +21,14 @@ func (se *Session) Read() (Session,error) {
 
 	result := Session{}
 
-	if se.Username != "" {
-		err = deviceCollect.Find(bson.M{"username": bson.RegEx{Pattern: se.Username, Options: "i"}}).All(&result)
+	if se.Session != "" {
+		err = deviceCollect.Find(bson.M{"session": bson.RegEx{Pattern: se.Session, Options: "i"}}).All(&result)
 		if err != nil {
-			return result,err
+			return result,false
 		}
 	}
 	if err != nil {
 		log.Fatal(err)
 	}
-	return result,nil
+	return result,true
 }

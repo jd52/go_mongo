@@ -8,7 +8,7 @@ import (
 	"github.com/globalsign/mgo"
 )
 
-//Read returns all hostnames from the Device Collection
+//Read returns user from the users Collection
 func (us *User) Read() (User, bool) {
 
 	var err error
