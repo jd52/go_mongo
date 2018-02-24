@@ -57,9 +57,10 @@ func LogErrCustom(ERR *error, lvl string, customMsg string) error {
 	if err != nil {
 		return err
 	}
+	lg.File = file
 
 	//Validates received Level
-	err = checkLvl(&lg, &lg.Err, lvl, &file)
+	err = checkLvl(&lg, &lg.Err, lvl, &lg.File)
 	if err != nil {
 		return err
 	}
