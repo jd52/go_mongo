@@ -31,6 +31,7 @@ func (md *MongoDevice) Create() {
 	err = device.Insert(md)
 	if err != nil {
 		logger.LogError(&err, "test")
+
 	}
 
 }
