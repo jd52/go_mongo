@@ -40,15 +40,6 @@ func Protected(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	fmt.Fprint(w, "Protected!\n")
 }
 
-var dbUsers = map[string]user{}      // user ID, user
-var dbSessions = map[string]string{} // session ID, user ID
-
-type user struct {
-	UserName string
-	Password []byte
-	First    string
-	Last     string
-}
 
 func main() {
 

@@ -9,9 +9,8 @@ import (
 //User takes three strings, "Hostname", "IPAddress", and "Device".  Used
 //to added new devices to the database
 type User struct {
-	Username   string `bson:"username"`
-	EmailAddress  string `bson:"emailaddress,omitempty"`
-	Password string `bson:"password"`
+	Username string `bson:"username"`
+	Password []byte `bson:"password"`
 }
 
 //Create opens a session to the mongoDB database and adds a type

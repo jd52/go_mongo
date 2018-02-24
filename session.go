@@ -1,6 +1,7 @@
 package main
 
 import (
+	"go_mongo/database"
 	"fmt"
 	"net/http"
 
@@ -24,7 +25,7 @@ func getUser(w http.ResponseWriter, req *http.Request) user {
 
 	// if the user exists already, get user
 	var u user
-	if un, ok := dbSessions[c.Value]; ok {
+	if un, ok := [c.Value]; ok {
 		u = dbUsers[un]
 	}
 	return u
@@ -36,6 +37,6 @@ func alreadyLoggedIn(req *http.Request) bool {
 		return false
 	}
 	un := dbSessions[c.Value]
-	_, ok := dbUsers[un]
+	_, ok := database.User.Read
 	return ok
 }

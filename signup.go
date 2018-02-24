@@ -1,6 +1,7 @@
 package main
 
 import (
+	"go_mongo/database"
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
@@ -31,16 +32,14 @@ func signup(w http.ResponseWriter, req *http.Request, hrP httprouter.Params) {
 	// process form submission
 	if req.Method == http.MethodPost {
 
-		var u user
+		var u database.User
 
 		// get form values
 		un := req.FormValue("username")
 		p := req.FormValue("password")
-		f := req.FormValue("firstname")
-		l := req.FormValue("lastname")
 
 		// username taken?
-		if _, ok := dbUsers[un]; ok {
+		if _, ok := u.Read(); ok {
 			http.Error(w, "Username already taken", http.StatusForbidden)
 			return
 		}
@@ -60,8 +59,8 @@ func signup(w http.ResponseWriter, req *http.Request, hrP httprouter.Params) {
 			http.Error(w, "Internal server error", http.StatusInternalServerError)
 			return
 		}
-		u = user{un, bs, f, l}
-		dbUsers[un] = u
+		u = database.User{Username: un,Password: bs}
+		u.Create()
 
 		// redirect
 		http.Redirect(w, req, "/index2", http.StatusSeeOther)
