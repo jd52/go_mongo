@@ -50,22 +50,20 @@ func createLogFile(filename *string) error {
 func checkLvl(lg *Logger, ERR *error, lvl string, FILE *os.File) error {
 	var err error
 	if lvl == "test" {
-		// callerFunc := MyCaller()
 		timeNow := time.Now()
-
 		Currtime := timeNow.Format("2006-01-02 15:04:05")
 
 		// fmt.Println(callerFunc)
 		fmt.Println(lg.CustomMsg)
 		if lg.LogCustom == false {
 			msg := []byte("Level:" + lvl + " " + Currtime + " FUNC:" + lg.Caller + " MSG:" + lg.Err.Error() + "\n")
-			err := lg.writeLog(FILE, &msg)
+			err := lg.WriteLog(FILE, &msg)
 			if err != nil {
 				return err
 			}
 		}
 		msg := []byte("Level:" + lvl + " " + Currtime + " FUNC:" + lg.Caller + " MSG:" + lg.CustomMsg + "\n")
-		err := lg.writeLog(FILE, &msg)
+		err := lg.WriteLog(FILE, &msg)
 		if err != nil {
 			return err
 		}
@@ -124,9 +122,10 @@ func LogError(ERR *error, lvl string) error {
 	if err != nil {
 		return err
 	}
+	lg.File = file
 
 	//Validates received Level
-	err = checkLvl(&lg, &lg.Err, lvl, &file)
+	err = checkLvl(&lg, &lg.Err, lvl, &lg.File)
 	if err != nil {
 		return err
 	}
