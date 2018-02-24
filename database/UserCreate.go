@@ -6,11 +6,12 @@ import (
 	"github.com/globalsign/mgo"
 )
 
-//User takes three strings, "Hostname" and "Password".  Used
+//User takes three strings, "Username" and "Password".  Used
 //to added new users to the database
 type User struct {
 	Username string `bson:"username"`
 	Password []byte `bson:"password"`
+	UserExist bool `bson:"userexist"`
 }
 
 //Create opens a session to the mongoDB database and adds a New User.

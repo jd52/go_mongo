@@ -44,7 +44,7 @@ func signup(w http.ResponseWriter, req *http.Request, hrP httprouter.Params) {
 		u.Password = bcPass
 
 		// username taken?
-		if _, ok := u.Read(); ok {
+		if u.Read() {
 			http.Error(w, "Username already taken", http.StatusForbidden)
 			return
 		}
@@ -57,12 +57,11 @@ func signup(w http.ResponseWriter, req *http.Request, hrP httprouter.Params) {
 			Value: sID.String(),
 		}
 		http.SetCookie(w, c)
-		s.Session = c.Value
+		s.SessionID = c.Value
 		s.Username = u.Username
-		err := s.Create
+		s.Create()
 
 		// store user in dbUsers
-
 		u.Create()
 
 		// redirect

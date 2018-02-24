@@ -27,10 +27,11 @@ func getUser(w http.ResponseWriter, req *http.Request) database.User {
 	var u database.User
 	var s database.Session
 
-	s.Session = c.Value
-	if se, ok := s.Read; ok {
-		u.Username = se.Username.String()
-		u = u.Read
+	s.SessionID = c.Value
+
+	if s.Read() {
+		u.Username = s.Username
+		u.Read()
 	}
 	return u
 }
@@ -40,8 +41,11 @@ func alreadyLoggedIn(req *http.Request) bool {
 	if err != nil {
 		return false
 	}
-	u := database.User
-	un := dbSessions[c.Value]
-	_, ok := u.Read
+	
+	var s database.Session
+	
+	s.SessionID = c.Value
+	ok := s.Read()
+	
 	return ok
 }

@@ -9,7 +9,8 @@ import (
 //Session struct stores an authenticated username to its matching session uuid
 type Session struct {
 	Username string `bson:"username"`
-	Session  string `bson:"session"`
+	SessionID  string `bson:"sessionid"`
+	SessionExist bool `bson:"sessionexist"`
 }
 
 //Create opens a session to the mongoDB database and adds a type

@@ -8,8 +8,8 @@ import (
 	"github.com/globalsign/mgo"
 )
 
-//Read returns all hostnames from the Device Collection
-func (se *Session) Read() (Session,bool) {
+//Read returns session from the sessions Collection
+func (se *Session) Read() bool{
 
 	var err error
 	session := MongoSession()
@@ -19,16 +19,14 @@ func (se *Session) Read() (Session,bool) {
 
 	session.SetMode(mgo.Monotonic, true)
 
-	result := Session{}
-
-	if se.Session != "" {
-		err = deviceCollect.Find(bson.M{"session": bson.RegEx{Pattern: se.Session, Options: "i"}}).All(&result)
+	if se.SessionID != "" {
+		err = deviceCollect.Find(bson.M{"sessionid": bson.RegEx{Pattern: se.SessionID, Options: "i"}}).All(&se)
 		if err != nil {
-			return result,false
+			return false
 		}
 	}
 	if err != nil {
 		log.Fatal(err)
 	}
-	return result,true
+	return true
 }
