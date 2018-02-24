@@ -1,9 +1,10 @@
 package logger
 
 import (
-	"errors"
 	"fmt"
+	"io/ioutil"
 	"os"
+	"time"
 )
 
 /*
@@ -20,62 +21,106 @@ LogError(params)
 
 */
 
-//LogLevel is a struct to refrence Logging levels
-type LogLevel struct {
-	Info    string `json:"info"`
-	Warning string `json:"warning"`
-	Err     string `json:"error"`
-	Panic   string `json:"panic"`
-	Fatal   string `json:"fatal"`
-	Debug   string `json:"debug"`
+//getTempdir is an internal method that gets the cwd and
+func getTempdir() (string, error) {
+	fmt.Println("getTempdir() processing")
+	dir, wdErr := os.Getwd()
+	if wdErr != nil {
+		return "", wdErr
+	}
+
+	newDir := (dir + "/temp")
+	fmt.Println("New Direcotry")
+	fmt.Println(newDir)
+	fmt.Println("Created Directory")
+	os.Mkdir("temp", 0777)
+	return newDir, wdErr
+
+}
+
+//CreateLogFile is a helper function used to create new log files if once is not present
+func createLogFile(filename *string) error {
+	newWords := []byte("New File\n")
+	err := ioutil.WriteFile(*filename, newWords, 0666)
+	return err
+
 }
 
 //chckLvl is an internal func supporting LogError() used to evaluate the results of &lvl
-func checkLvl(lg *Logger, err *error, lvl string, FILE *os.File) (bool, error) {
-	logLevels := []string{"info", "warning", "error", "panic", "fatal", "debug"}
-
-	for _, levels := range logLevels {
-		fmt.Println(levels)
-	}
-	// = []string{"info", "warning", "error", "panic", "fatal", "debug"}
+func checkLvl(lg *Logger, ERR *error, lvl string, FILE *os.File) error {
+	var err error
 	if lvl == "test" {
-		msg := []byte("TEST: " + lg.Err.Error() + "\n")
+		callerFunc := MyCaller()
+		timeNow := time.Now()
+
+		Currtime := timeNow.Format("2006-01-02 15:04:05")
+
+		fmt.Println(callerFunc)
+		msg := []byte("Level:" + lvl + " " + Currtime + " FUNC:" + callerFunc + " MSG:" + lg.Err.Error() + "\n")
 		err := lg.writeLog(FILE, &msg)
-		return false, err
+		if err != nil {
+			return err
+		}
+		return err
 	}
-	//  if *lvl == "panic" {
-	// 	if *err != nil {
-	// 		panic(*err)
-	// 	}
-	// } else if *lvl == "log_fatal" {
-	// 	log.Fatal(*err)
-	// } else if *lvl == "" {
-	// 	return false, nil
-	// }
-	return false, nil
+
+	return err
 }
 
 //LogError checks for errors and preforms action based on received logging level
 //returns bool based on success of logger and standard error
-func LogError(err *error, lvl string) (bool, error) {
-	lg := NewLogger(*err, lvl)
-	dir := lg.getTempdir()
-	file := (dir + "/log.txt")
-	DefaultError := errors.New("LogError() unable to process log")
+func LogError(ERR *error, lvl string) error {
 
-	var results bool
-	results = lg.chkFile(&file)
+	lg := NewLogger(*ERR, lvl)
+	lg.LogFile = "log.txt"
+	lg.LogDir = "temp"
 
-	if results == true {
-		fmt.Println("LogError() working")
-		file, _ := lg.openFile(&file)
-		chkBool, chkErr := checkLvl(&lg, &lg.Err, lvl, &file)
-		if chkBool == true {
-			return chkBool, chkErr
-		}
+	var err error
 
-		return false, DefaultError
+	//Retrevies the Current Working Directory
+	lg.CwDir, err = lg.GetCwDir()
+	if err != nil {
+		return err
 	}
 
-	return false, *err
+	//Sets the log directory based on the lg.LogFile Decleration
+	lg.TempDir = lg.setLogdir()
+
+	//Validates that the log directory exsists, if not creates the temp dir
+	_, err = os.Stat(lg.TempDir)
+	if err != nil {
+		tempDir, tempErr := getTempdir()
+		if tempErr != nil {
+			return tempErr
+		}
+		lg.TempDir = tempDir
+	}
+
+	//Sets the Fully Qualified File Name(FQFN) of the Log Dir and Log File
+	lg.FileFQN = lg.setFilefqn()
+
+	//Validates the the FQFN exsists, f not it creates the File based on the lg.LogFile decleration
+	_, err = os.Stat(lg.FileFQN)
+	if err != nil {
+		err = createLogFile(&lg.FileFQN)
+		if err != nil {
+			return err
+		}
+
+		return err
+	}
+
+	//Opens the log file for Writing
+	file, err := lg.openFile(&lg.FileFQN)
+	if err != nil {
+		return err
+	}
+
+	//Validates received Level
+	err = checkLvl(&lg, &lg.Err, lvl, &file)
+	if err != nil {
+		return err
+	}
+	return err
+
 }
