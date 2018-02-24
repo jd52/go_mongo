@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{{template "header"}}
+
+<style>
+
+</style>
+<title>{{.Hostname}}</title>
+
+<body>
+
+<div id="info">
+    <main>
+        <h1>Update Device</h1>
+            <table>
+                <tr>
+                    <th>IP Address</th>
+                    <th>Hostname</th>
+                    <th>Device Type</th>
+                </tr>            
+                <tr>
+                    <td>{{.IPAddress}}</td>
+                    <td>{{.Hostname}}</td>
+                    <td>{{.DeviceType}}</td>
+                </tr>
+            </table>
+    </main>
+</div>
+
+
+</body>
+</html>

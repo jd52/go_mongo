@@ -22,6 +22,7 @@ func QueryPostHandler(res http.ResponseWriter, req *http.Request) {
 	}
 
 	if queryDevice.ID != "" {
+
 		database.StorageDelete(&queryDevice)
 	}
 
