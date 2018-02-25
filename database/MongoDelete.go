@@ -30,4 +30,5 @@ func (md *MongoDevice) Delete() {
 	if err != nil {
 		fmt.Println(err)
 	}
+	return
 }
