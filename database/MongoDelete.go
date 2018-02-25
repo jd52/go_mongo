@@ -18,8 +18,9 @@ func (md *MongoDevice) Delete() {
 	// Optional. Switch the session to a monotonic behavior.
 	session.SetMode(mgo.Monotonic, true)
 
-	//The id variable changes the received ID of type string and converts it to a
-	//bson hex.
+	// The received md.ID needs to be converted to Hex before it can be used by
+	// the func (c *Collection) RemoveAll(selector interface{}).  This conversion
+	// is done by FormatMongoID.
 	id := bson.ObjectIdHex(FormatMongoID(md.ID))
 
 	err = session.DB("test").C("device").RemoveId(id)
