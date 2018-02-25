@@ -1,9 +1,7 @@
 package logger
 
 import (
-	"io/ioutil"
 	"os"
-	"time"
 )
 
 /*
@@ -20,52 +18,7 @@ LogError(params)
 
 */
 
-//getTempdir is an internal method that gets the cwd and
-func getTempdir() (string, error) {
-	dir, wdErr := os.Getwd()
-	if wdErr != nil {
-		return "", wdErr
-	}
-
-	newDir := (dir + "/temp")
-
-	os.Mkdir("temp", 0777)
-	return newDir, wdErr
-
-}
-
-//CreateLogFile is a helper function used to create new log files if once is not present
-func createLogFile(filename *string) error {
-	newWords := []byte("New File\n")
-	err := ioutil.WriteFile(*filename, newWords, 0666)
-	return err
-
-}
-
-//chckLvl is an internal func supporting LogError() used to evaluate the results of &lvl
-func checkLvl(lg *Logger, ERR *error, lvl string, FILE *os.File) error {
-	var err error
-	if lvl == "test" {
-		timeNow := time.Now()
-		Currtime := timeNow.Format("2006-01-02 15:04:05")
-
-		if lg.LogCustom == false {
-			msg := []byte("Level:" + lvl + " " + Currtime + " FUNC:" + lg.Caller + " MSG:" + lg.Err.Error() + "\n")
-			err := lg.WriteLog(&msg)
-			if err != nil {
-				return err
-			}
-		}
-		msg := []byte("Level:" + lvl + " " + Currtime + " FUNC:" + lg.Caller + " MSG:" + lg.CustomMsg + "\n")
-		err := lg.WriteLog(&msg)
-		if err != nil {
-			return err
-		}
-		return err
-	}
-
-	return err
-}
+//
 
 //LogError checks for errors and preforms action based on received logging level
 //returns error
