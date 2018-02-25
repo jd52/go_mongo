@@ -33,7 +33,7 @@ func (ec *ErrCollector) SwallowErr(rerr error) {
 
 	// e.ErrList = append(e.ErrList, e.Err)
 	ec.MyErrs = append(ec.MyErrs, FRESH)
-	routeError(ec)
+	errRouter(ec)
 	return
 }
 
