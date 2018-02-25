@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"go_mongo/page"
 	"html/template"
@@ -40,9 +41,9 @@ func Protected(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	fmt.Fprint(w, "Protected!\n")
 }
 
-
 func main() {
-
+	tlsFlag := flag.Bool("tls", false, "Set tls=true to use ListenAndServeTLS. Program defaults to HTTP without the flag.")
+	flag.Parse()
 	user := "gordon"
 	pass := "secret!"
 
@@ -65,9 +66,11 @@ func main() {
 
 	//Serviles allows all files in the public folder to be served
 	router.ServeFiles("/public/*filepath", http.Dir("./public"))
-
+	fmt.Println(*tlsFlag)
 	// Bind to a port and pass our router in
-	//log.Fatal(http.ListenAndServeTLS(":8080", "/etc/letsencrypt/live/gomoje.com/fullchain.pem", "/etc/letsencrypt/live/gomoje.com/privkey.pem", r))
-	log.Fatal(http.ListenAndServe(":8080", router))
-
+	if *tlsFlag {
+		log.Fatal(http.ListenAndServeTLS(":8080", "/etc/letsencrypt/live/gomoje.com/fullchain.pem", "/etc/letsencrypt/live/gomoje.com/privkey.pem", router))
+	} else {
+		log.Fatal(http.ListenAndServe(":8080", router))
+	}
 }
