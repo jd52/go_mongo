@@ -12,6 +12,8 @@ import (
 func (md *MongoDevice) Delete() {
 	var err error
 
+	// Creates a session to the mongoDB using the preconfigurations found in
+	// database.MongoSession.
 	session := MongoSession()
 	defer session.Close()
 
@@ -20,9 +22,10 @@ func (md *MongoDevice) Delete() {
 
 	// The received md.ID needs to be converted to Hex before it can be used by
 	// the func (c *Collection) RemoveAll(selector interface{}).  This conversion
-	// is done by FormatMongoID.
+	// is done by database.FormatMongoID.
 	id := bson.ObjectIdHex(FormatMongoID(md.ID))
 
+	// Uses the mongoDB session to remove documents solely by the mongoDB "_id".
 	err = session.DB("test").C("device").RemoveId(id)
 	if err != nil {
 		fmt.Println(err)
