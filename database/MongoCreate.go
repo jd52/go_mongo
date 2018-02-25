@@ -1,7 +1,9 @@
 package database
 
 import (
+	"go_mongo/errorCollector"
 	"go_mongo/logger"
+	"io"
 
 	"github.com/globalsign/mgo"
 )
@@ -30,6 +32,8 @@ func (md *MongoDevice) Create() {
 
 	device := session.DB("test").C("device")
 	err = device.Insert(md)
+	var TESTING io.Writer
+	errorCollector.NewSafeWriter(TESTING)
 	if err != nil {
 		logger.LogError(&err, "test")
 
