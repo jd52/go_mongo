@@ -16,15 +16,13 @@ type SafeWriter struct {
 //Err returns a en error message
 func (sw *SafeWriter) Err() error { return sw.err }
 
-func (sw *SafeWriter) Write(p error) (n int, err error) {
+func (sw *SafeWriter) Write(p []byte) (n int, err error) {
 	// var myCaller = logger.MyCaller()
 
 	// myCaller := logger.MyCaller()
 	if sw.err != nil {
 		return 0, err
 	}
-	errString := p.Error()
-	NetString := []byte(errString)
-	n, sw.err = sw.w.Write(NetString)
+	n, sw.err = sw.w.Write(p)
 	return n, sw.err
 }
