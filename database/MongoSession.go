@@ -9,7 +9,7 @@ import (
 //MongoSession returns a call to a mongoDB
 func MongoSession() *mgo.Session {
 
-	session, err := mgo.Dial("10.132.0.5")
+	session, err := mgo.Dial("127.0.0.1")
 	if err != nil {
 		logger.LogError(&err, "test")
 	}

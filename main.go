@@ -20,6 +20,7 @@ func main() {
 	r.HandleFunc("/query", page.QueryGetHandler).Methods("GET")
 	r.HandleFunc("/query", page.QueryPostHandler).Methods("POST")
 	r.HandleFunc("/queryresponse", page.QueryResponseHandler).Methods("POST")
+	r.HandleFunc("/info/{hostname}", page.UpdatePostHandler).Methods("POST")
 	//r.HandleFunc("/error", page.ErrorHandler).Methods("POST")
 
 	//PathPrefix allows local files to be served

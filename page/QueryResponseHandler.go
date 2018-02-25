@@ -8,6 +8,7 @@ import (
 
 //QueryResponseHandler is used for query.
 func QueryResponseHandler(res http.ResponseWriter, req *http.Request) {
+
 	err := req.ParseForm()
 	if err != nil {
 		log.Fatalln(err)
