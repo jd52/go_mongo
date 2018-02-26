@@ -1,8 +1,11 @@
 package errorCollector
 
 import (
+	"bufio"
+	"bytes"
 	"fmt"
 	"go_mongo/logger"
+	"io"
 	"time"
 )
 
@@ -10,31 +13,44 @@ import (
 type ErrCollector struct {
 	MyErrs  []myErr
 	ColMode string
-}
-
-type myErr struct {
-	TIME      string
-	err       error
-	ErrString string
-	Caller    string
+	Buffer  *bytes.Buffer
+	Writer  *bufio.Writer
 }
 
 //SwallowErr receives the incoming and sends it to the error router
 func (ec *ErrCollector) SwallowErr(rerr error) {
-	var FRESH myErr
+
+	var MyErr myErr
+	var COLLECT []byte
 	currtime := time.Now().Format("2006-01-02 15:04:05")
+
+	ec.Buffer = GenErrBuf(COLLECT)
+	// fmt.Println(ec.Buffer.Cap())
 	if rerr == nil {
 		return
 	}
-	FRESH.TIME = currtime
-	FRESH.err = rerr
-	FRESH.ErrString = rerr.Error()
-	FRESH.Caller = logger.MyCaller()
+	MyErr.TIME = currtime
+	MyErr.err = rerr
+	MyErr.ErrString = rerr.Error()
+	MyErr.Caller = logger.MyCaller()
 
 	// e.ErrList = append(e.ErrList, e.Err)
-	ec.MyErrs = append(ec.MyErrs, FRESH)
+	ec.MyErrs = append(ec.MyErrs, MyErr)
+	ec.Buffer.WriteTo(MyErr)
+
 	errRouter(ec)
 	return
+}
+
+//GetErrString allows the operatore to return a string version of the error message
+func (ec *ErrCollector) GetErrString() string {
+	errString := ec.MyErrs[len(ec.MyErrs)-1].err.Error()
+	return errString
+}
+
+func (ec *ErrCollector) GetBuffRemain() int {
+	return ec.Buffer.Len()
+
 }
 
 //GetErrs allows the operator to return a list of errors listed in the cache
@@ -45,4 +61,11 @@ func (ec *ErrCollector) GetErrs() string {
 		fmt.Println(errs)
 	}
 	return NS
+}
+
+func (ec *ErrCollector) SetErrBuf() {
+	var MyWr io.Writer
+	MyWrE := bufio.NewWriter(MyWr)
+	ec.Writer = MyWrE
+
 }
