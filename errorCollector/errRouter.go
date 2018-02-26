@@ -3,7 +3,7 @@ package errorCollector
 //the Router takes the last entry of the ErrorCollectors error caller and routes based on the condition specefied,
 //Default operation will utilzed the default handler
 func errRouter(e *ErrCollector) {
-	if e.MyErrs[len(e.MyErrs)-1].Caller == "main.main" {
+	if e.MyErrs[len(e.MyErrs)-1].Caller == "main.eee" {
 		testHandler(*e)
 		return
 	}
