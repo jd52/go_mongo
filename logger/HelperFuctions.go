@@ -30,7 +30,6 @@ func createLogFile(filename *string) error {
 
 //chckLvl is an internal func supporting LogError() used to evaluate the results of &lvl
 func checkLvl(lg *Logger, ERR *error, lvl string, FILE *os.File) error {
-	var err error
 	switch lvl {
 	case "test":
 		timeNow := time.Now()
@@ -175,6 +174,4 @@ func checkLvl(lg *Logger, ERR *error, lvl string, FILE *os.File) error {
 		return err
 
 	}
-
-	return err
 }
