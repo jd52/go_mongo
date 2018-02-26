@@ -1,0 +1,1 @@
+PANIC - TIME: 2018-02-26 FUNC: go_mongo/page.DevicePostHandler ERROR:request Content-Type isn't multipart/form-data

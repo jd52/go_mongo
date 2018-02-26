@@ -3,7 +3,7 @@ package page
 import (
 	"fmt"
 	"go_mongo/database"
-	"go_mongo/logger"
+	"go_mongo/errorCollector"
 	"log"
 	"net/http"
 )
@@ -23,10 +23,9 @@ func DevicePostHandler(res http.ResponseWriter, req *http.Request) {
 		DeviceType: req.FormValue("deviceType"),
 	}
 	f, _, fileErr := req.FormFile("bulkFile")
-	if fileErr != nil {
-		logger.LogErrCustom(&err, "test", "This is my Custom Message Test")
-		logger.LogError(&fileErr, "test")
-	}
+	var UnderTaker errorCollector.ErrCollector
+	UnderTaker.SwallowErr(fileErr)
+	// fmt.Println(UnderTaker.MyErrs[0].ErrString)
 
 	if fileErr != nil {
 		fmt.Println("in devicehandler if")
