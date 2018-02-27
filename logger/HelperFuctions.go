@@ -30,8 +30,8 @@ func createLogFile(filename *string) error {
 
 //chckLvl is an internal func supporting LogError() used to evaluate the results of &lvl
 func checkLvl(lg *Logger, ERR *error, lvl string, FILE *os.File) error {
-	var err error
-	if lvl == "test" {
+	switch lvl {
+	case "test":
 		timeNow := time.Now()
 		Currtime := timeNow.Format("2006-01-02 15:04:05")
 
@@ -48,7 +48,130 @@ func checkLvl(lg *Logger, ERR *error, lvl string, FILE *os.File) error {
 			return err
 		}
 		return err
-	}
 
-	return err
+	case "info":
+		timeNow := time.Now()
+		Currtime := timeNow.Format("2006-01-02 15:04:05")
+
+		if lg.LogCustom == false {
+			msg := []byte("Level:" + lvl + " " + Currtime + " FUNC:" + lg.Caller + " MSG:" + lg.Err.Error() + "\n")
+			err := lg.WriteLog(&msg)
+			if err != nil {
+				return err
+			}
+		}
+		msg := []byte("Level:" + lvl + " " + Currtime + " FUNC:" + lg.Caller + " MSG:" + lg.CustomMsg + "\n")
+		err := lg.WriteLog(&msg)
+		if err != nil {
+			return err
+		}
+		return err
+	case "warning":
+		timeNow := time.Now()
+		Currtime := timeNow.Format("2006-01-02 15:04:05")
+
+		if lg.LogCustom == false {
+			msg := []byte("Level:" + lvl + " " + Currtime + " FUNC:" + lg.Caller + " MSG:" + lg.Err.Error() + "\n")
+			err := lg.WriteLog(&msg)
+			if err != nil {
+				return err
+			}
+		}
+		msg := []byte("Level:" + lvl + " " + Currtime + " FUNC:" + lg.Caller + " MSG:" + lg.CustomMsg + "\n")
+		err := lg.WriteLog(&msg)
+		if err != nil {
+			return err
+		}
+		return err
+
+	case "debug":
+		timeNow := time.Now()
+		Currtime := timeNow.Format("2006-01-02 15:04:05")
+
+		if lg.LogCustom == false {
+			msg := []byte("Level:" + lvl + " " + Currtime + " FUNC:" + lg.Caller + " MSG:" + lg.Err.Error() + "\n")
+			err := lg.WriteLog(&msg)
+			if err != nil {
+				return err
+			}
+		}
+		msg := []byte("Level:" + lvl + " " + Currtime + " FUNC:" + lg.Caller + " MSG:" + lg.CustomMsg + "\n")
+		err := lg.WriteLog(&msg)
+		if err != nil {
+			return err
+		}
+		return err
+	case "error":
+		timeNow := time.Now()
+		Currtime := timeNow.Format("2006-01-02 15:04:05")
+
+		if lg.LogCustom == false {
+			msg := []byte("Level:" + lvl + " " + Currtime + " FUNC:" + lg.Caller + " MSG:" + lg.Err.Error() + "\n")
+			err := lg.WriteLog(&msg)
+			if err != nil {
+				return err
+			}
+		}
+		msg := []byte("Level:" + lvl + " " + Currtime + " FUNC:" + lg.Caller + " MSG:" + lg.CustomMsg + "\n")
+		err := lg.WriteLog(&msg)
+		if err != nil {
+			return err
+		}
+		return err
+
+	case "panic":
+		timeNow := time.Now()
+		Currtime := timeNow.Format("2006-01-02 15:04:05")
+
+		if lg.LogCustom == false {
+			msg := []byte("Level:" + lvl + " " + Currtime + " FUNC:" + lg.Caller + " MSG:" + lg.Err.Error() + "\n")
+			err := lg.WriteLog(&msg)
+			if err != nil {
+				return err
+			}
+		}
+		msg := []byte("Level:" + lvl + " " + Currtime + " FUNC:" + lg.Caller + " MSG:" + lg.CustomMsg + "\n")
+		err := lg.WriteLog(&msg)
+		if err != nil {
+			return err
+		}
+		return err
+
+	case "fatal":
+		timeNow := time.Now()
+		Currtime := timeNow.Format("2006-01-02 15:04:05")
+
+		if lg.LogCustom == false {
+			msg := []byte("Level:" + lvl + " " + Currtime + " FUNC:" + lg.Caller + " MSG:" + lg.Err.Error() + "\n")
+			err := lg.WriteLog(&msg)
+			if err != nil {
+				return err
+			}
+		}
+		msg := []byte("Level:" + lvl + " " + Currtime + " FUNC:" + lg.Caller + " MSG:" + lg.CustomMsg + "\n")
+		err := lg.WriteLog(&msg)
+		if err != nil {
+			return err
+		}
+		return err
+
+	default:
+		timeNow := time.Now()
+		Currtime := timeNow.Format("2006-01-02 15:04:05")
+
+		if lg.LogCustom == false {
+			msg := []byte("Level:" + lvl + " " + Currtime + " FUNC:" + lg.Caller + " MSG:" + lg.Err.Error() + "\n")
+			err := lg.WriteLog(&msg)
+			if err != nil {
+				return err
+			}
+		}
+		msg := []byte("Level:" + lvl + " " + Currtime + " FUNC:" + lg.Caller + " MSG:" + lg.CustomMsg + "\n")
+		err := lg.WriteLog(&msg)
+		if err != nil {
+			return err
+		}
+		return err
+
+	}
 }

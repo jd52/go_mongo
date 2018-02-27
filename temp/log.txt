@@ -141,3 +141,12 @@ Level:test 2018-02-26 23:00:54 FUNC:go_mongo/database.MongoSession MSG:no reacha
 Level:test 2018-02-26 23:01:09 FUNC:go_mongo/database.MongoSession MSG:no reachable servers
 Level:test 2018-02-26 23:01:10 FUNC:go_mongo/database.MongoSession MSG:no reachable servers
 Level:test 2018-02-26 23:01:12 FUNC:go_mongo/database.MongoSession MSG:no reachable servers
+Level:test 2018-02-26 23:21:52 FUNC:go_mongo/database.MongoSession MSG:no reachable servers
+Level:test 2018-02-26 23:21:53 FUNC:go_mongo/database.MongoSession MSG:no reachable servers
+Level:test 2018-02-26 23:22:17 FUNC:go_mongo/database.MongoSession MSG:no reachable servers
+Level:test 2018-02-26 23:22:17 FUNC:go_mongo/database.MongoSession MSG:no reachable servers
+Level:test 2018-02-26 23:22:27 FUNC:go_mongo/database.MongoSession MSG:no reachable servers
+Level:test 2018-02-26 23:29:47 FUNC:go_mongo/database.MongoSession MSG:no reachable servers
+Level:test 2018-02-26 23:29:50 FUNC:go_mongo/database.MongoSession MSG:no reachable servers
+Level:test 2018-02-26 23:29:51 FUNC:go_mongo/database.MongoSession MSG:no reachable servers
+Level:test 2018-02-26 23:29:52 FUNC:go_mongo/database.MongoSession MSG:no reachable servers
