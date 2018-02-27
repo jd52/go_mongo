@@ -17,8 +17,8 @@ type ErrCollector struct {
 	Writer  *bufio.Writer
 }
 
-//SwallowErr receives the incoming and sends it to the error router
-func (ec *ErrCollector) SwallowErr(rerr error) {
+//ConsumeError receives the incoming and sends it to the error router
+func (ec *ErrCollector) ConsumeError(rerr error) {
 
 	var MyErr myErr
 	var COLLECT []byte
@@ -36,6 +36,7 @@ func (ec *ErrCollector) SwallowErr(rerr error) {
 
 	// e.ErrList = append(e.ErrList, e.Err)
 	ec.MyErrs = append(ec.MyErrs, MyErr)
+
 	ec.Buffer.WriteTo(MyErr)
 
 	errRouter(ec)
@@ -58,6 +59,7 @@ func (ec *ErrCollector) GetErrs() string {
 	return NS
 }
 
+//SetErrBuf allows the operator to set the current buffer for the collected errors
 func (ec *ErrCollector) SetErrBuf() {
 	var MyWr io.Writer
 	MyWrE := bufio.NewWriter(MyWr)
