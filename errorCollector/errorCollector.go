@@ -48,11 +48,6 @@ func (ec *ErrCollector) GetErrString() string {
 	return errString
 }
 
-func (ec *ErrCollector) GetBuffRemain() int {
-	return ec.Buffer.Len()
-
-}
-
 //GetErrs allows the operator to return a list of errors listed in the cache
 func (ec *ErrCollector) GetErrs() string {
 	var NS string
