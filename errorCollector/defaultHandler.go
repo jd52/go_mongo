@@ -3,33 +3,56 @@ package errorCollector
 import (
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"time"
 )
 
 func defaultHandler(e ErrCollector) {
-	if e.MyErrs[len(e.MyErrs)-1].err != nil {
-		currtime := time.Now().Format("2006-01-02")
-		errString := fmt.Sprintf("PANIC - TIME: %s FUNC: %s ERROR:%s", currtime, e.MyErrs[len(e.MyErrs)-1].Caller, e.MyErrs[len(e.MyErrs)-1].ErrString)
-		tempDir, _ := os.Getwd()
-		panicFile := fmt.Sprintf("%s/dumps/%s_%s", tempDir, currtime, "PANIC_FILE")
+	lastErr := len(e.MyErrs) - 1
 
+	if e.MyErrs[lastErr].err != nil {
+		currtime := time.Now().Format("2006-01-02")
+		errString := fmt.Sprintf("PANIC - TIME: %s FUNC: %s ERROR:%s\n", currtime, e.MyErrs[len(e.MyErrs)-1].Caller, e.MyErrs[len(e.MyErrs)-1].ErrString)
+		tempDir, _ := os.Getwd()
+		panicFileName := fmt.Sprintf("%s/dumps/%s_%s", tempDir, currtime, "PANIC_FILE")
+
+		//Validates that the dump folder is present on the disk, if not it will create the directory and file needed
+		//for the  panic dump file.
 		_, err := os.Stat("dumps")
 		if err != nil {
 			err = os.Mkdir("dumps", 0777)
 			if err != nil {
 				panic(errors.New("Default Handler Unable to Create Directory"))
 			}
-			fmt.Println("Stat Failed")
+
+			e.PanicFile, err = os.OpenFile(panicFileName, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0777)
+			if err != nil {
+				panic(errors.New("Default Handler Unable to Create File"))
+			}
+
+			num, err := e.PanicFile.Write([]byte(errString))
+			fmt.Println(num)
+			if err != nil {
+				panic(errors.New("Default Handler Unable to Write File"))
+			}
+			fmt.Printf("PANIC - TRACE_FILE:\n\t%s\n", e.PanicFile.Name())
+			defer e.PanicFile.Close()
+			return
 		}
 
-		err = ioutil.WriteFile(panicFile, []byte(errString), 0666)
+		e.PanicFile, err = os.OpenFile(panicFileName, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0777)
+		if err != nil {
+			panic(errors.New("Default Handler Unable to Create File"))
+		}
+
+		num, err := e.PanicFile.Write([]byte(errString))
+		fmt.Println(num)
 		if err != nil {
 			panic(errors.New("Default Handler Unable to Write File"))
 		}
-
-		fmt.Printf("PANIC - TRACE_FILE:\n\t%s\n", panicFile)
+		fmt.Printf("PANIC - TRACE_FILE:\n\t%s\n", e.PanicFile.Name())
+		defer e.PanicFile.Close()
+		return
 
 	}
 }
