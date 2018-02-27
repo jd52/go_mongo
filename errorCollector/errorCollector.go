@@ -6,15 +6,17 @@ import (
 	"fmt"
 	"go_mongo/logger"
 	"io"
+	"os"
 	"time"
 )
 
 //ErrCollector allows the operator to create a collector that will be used to point to a err handler
 type ErrCollector struct {
-	MyErrs  []myErr
-	ColMode string
-	Buffer  *bytes.Buffer
-	Writer  *bufio.Writer
+	MyErrs    []myErr
+	ColMode   string
+	PanicFile *os.File
+	Buffer    *bytes.Buffer
+	Writer    *bufio.Writer
 }
 
 //ConsumeError receives the incoming and sends it to the error router
