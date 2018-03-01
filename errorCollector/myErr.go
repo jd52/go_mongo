@@ -11,3 +11,7 @@ type myErr struct {
 func (ec myErr) Write(p []byte) (n int, err error) {
 	return len(p), err
 }
+
+func (ec myErr) Read(p []byte) (n int, err error) {
+	return len(p), err
+}

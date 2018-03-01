@@ -23,11 +23,8 @@ type ErrCollector struct {
 func (ec *ErrCollector) ConsumeError(rerr error) {
 
 	var MyErr myErr
-	var COLLECT []byte
 	currtime := time.Now().Format("2006-01-02 15:04:05")
 
-	ec.Buffer = GenErrBuf(COLLECT)
-	// fmt.Println(ec.Buffer.Cap())
 	if rerr == nil {
 		return
 	}
@@ -36,10 +33,7 @@ func (ec *ErrCollector) ConsumeError(rerr error) {
 	MyErr.ErrString = rerr.Error()
 	MyErr.Caller = logger.MyCaller()
 
-	// e.ErrList = append(e.ErrList, e.Err)
 	ec.MyErrs = append(ec.MyErrs, MyErr)
-
-	ec.Buffer.WriteTo(MyErr)
 
 	errRouter(ec)
 	return
