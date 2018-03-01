@@ -1,7 +1,8 @@
 package errorCollector
 
 func defaultHandler(e ErrCollector) {
-	switch e.MyErrs[len(e.MyErrs)-1] {
+	lastErr := e.MyErrs[len(e.MyErrs)-1]
+	switch lastErr.err != nil {
 	default:
 		panicErrCollector(e)
 
