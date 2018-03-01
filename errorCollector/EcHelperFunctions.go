@@ -11,8 +11,8 @@ import (
 //experiences  a error that it cant not handle correctly
 //This Function MUST BE PRESENT at the end of every CustomerHandler that is created
 func panicErrCollector(e ErrCollector) {
-	lastErr := len(e.MyErrs) - 1
-	if e.MyErrs[lastErr].err != nil {
+	lastErr := e.MyErrs[len(e.MyErrs)-1]
+	if lastErr.err != nil {
 		currtime := time.Now().Format("2006-01-02")
 		errString := fmt.Sprintf("PANIC - TIME: %s FUNC: %s ERROR:%s\n", currtime, e.MyErrs[len(e.MyErrs)-1].Caller, e.MyErrs[len(e.MyErrs)-1].ErrString)
 		tempDir, _ := os.Getwd()
