@@ -40,6 +40,14 @@ Level:test 2018-02-24 16:58:28 FUNC:go_mongo/database.MongoSession MSG:no reacha
 Level:test 2018-02-24 16:58:28 FUNC:go_mongo/database.MongoSession MSG:no reachable servers
 Level:test 2018-02-24 16:58:35 FUNC:go_mongo/database.MongoSession MSG:no reachable servers
 Level:test 2018-02-24 16:58:35 FUNC:go_mongo/database.MongoSession MSG:no reachable servers
+
+Level:test 2018-02-27 19:43:20 FUNC:go_mongo/database.MongoSession MSG:no reachable servers
+Level:test 2018-02-27 19:43:20 FUNC:go_mongo/database.MongoSession MSG:no reachable servers
+Level:test 2018-02-27 19:43:20 FUNC:go_mongo/database.MongoSession MSG:no reachable servers
+Level:test 2018-02-27 19:43:21 FUNC:go_mongo/database.MongoSession MSG:no reachable servers
+Level:test 2018-02-27 19:43:21 FUNC:go_mongo/database.MongoSession MSG:no reachable servers
+Level:test 2018-02-27 19:43:21 FUNC:go_mongo/database.MongoSession MSG:no reachable servers
+
 Level:test 2018-02-26 22:02:30 FUNC:go_mongo/page.DevicePostHandler MSG:This is my Custom Message Test
 Level:test 2018-02-26 22:02:30 FUNC:go_mongo/page.DevicePostHandler MSG:request Content-Type isn't multipart/form-data
 Level:test 2018-02-26 22:02:32 FUNC:go_mongo/page.DevicePostHandler MSG:This is my Custom Message Test
@@ -149,4 +157,4 @@ Level:test 2018-02-26 23:22:27 FUNC:go_mongo/database.MongoSession MSG:no reacha
 Level:test 2018-02-26 23:29:47 FUNC:go_mongo/database.MongoSession MSG:no reachable servers
 Level:test 2018-02-26 23:29:50 FUNC:go_mongo/database.MongoSession MSG:no reachable servers
 Level:test 2018-02-26 23:29:51 FUNC:go_mongo/database.MongoSession MSG:no reachable servers
-Level:test 2018-02-26 23:29:52 FUNC:go_mongo/database.MongoSession MSG:no reachable servers
+

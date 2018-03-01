@@ -22,15 +22,12 @@ func QueryPostHandler(res http.ResponseWriter, req *http.Request) {
 		DeviceType: req.FormValue("deviceType"),
 		ID:         req.FormValue("_id"),
 	}
+	multi := req.Form["_id"]
 
 	// Checks to see if the delete checkbox has been selected.  If it has been
 	// selected, then queryDevice.ID will not be empty.
 	if queryDevice.ID != "" {
-		multi := req.Form["_id"]
-		for _, id := range multi {
-			deleteM := database.MongoDevice{ID: id}
-			database.StorageDelete(&deleteM)
-		}
+		database.MongoDelete(multi)
 	}
 
 	// If the delete checkbox has not been selected, a simple query to the mongoDB
